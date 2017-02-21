@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { NOTES, ALTERATIONS, MODES } from '../types/Tone';
+
 const style = {
     container: {
         width: '100%',
@@ -21,39 +23,103 @@ const className = {
 };
 
 export class ToneSelection extends React.Component {
+    componentWillMount() {
+        this.setState({
+            note: null,
+            alteration: null,
+            mode: null
+        });
+    }
+
+    selectNote(note) {
+        this.setState({
+            note: note
+        });
+    }
+
+    selectAlteration(alteration) {
+        this.setState({
+            alteration: alteration
+        });
+    }
+
+    selectMode(mode) {
+        this.setState({
+            mode: mode
+        });
+    }
+
+    getNotes() {
+        return NOTES.map(note => {
+            return (
+                <button key={note.id}
+                        type="button"
+                        className={'btn btn-secondary' + (this.state.note && this.state.note.id === note.id ? ' active' : '')}
+                        style={style.btnTone}
+                        onClick={this.selectNote.bind(this, note)}>
+                    {note.label}
+                </button>
+            );
+        })
+    }
+
+    getAlterations() {
+        return ALTERATIONS.map(alteration => {
+            return (
+                <button key={alteration.id}
+                        type="button"
+                        className={'btn btn-secondary' + (this.state.alteration && this.state.alteration.id === alteration.id ? ' active' : '')}
+                        style={style.btnTone}
+                        onClick={this.selectAlteration.bind(this, alteration)}>
+                    {alteration.label}
+                </button>
+            );
+        })
+    }
+
+    getModes() {
+        return MODES.map(mode => {
+            return (
+                <button key={mode.id}
+                        type="button"
+                        className={'btn btn-secondary' + (this.state.mode && this.state.mode.id === mode.id ? ' active' : '')}
+                        style={style.btnTone}
+                        onClick={this.selectMode.bind(this, mode)}>
+                    {mode.label}
+                </button>
+            );
+        })
+    }
+
     render() {
         return (
             <div className="row">
                 <div className={className.col}>
                     <div className="btn-group" style={style.container}>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>A</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>B</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>C</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>D</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>E</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>F</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>G</button>
+                        {this.getNotes()}
                     </div>
                 </div>
 
                 <div className={className.col}>
                     <div className="btn-group" style={style.container}>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>&#9837;</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>&#9838;</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>&#9839;</button>
+                        {this.getAlterations()}
                     </div>
                 </div>
 
                 <div className={className.col}>
                     <div className="btn-group" style={style.container}>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>minor</button>
-                        <button type="button" className="btn btn-secondary" style={style.btnTone}>major</button>
+                        {this.getModes()}
                     </div>
                 </div>
 
                 <div className={className.col}>
                     <div style={style.container}>
-                        <button className="btn btn-primary" style={style.btnHarmonize}>Let's harmonize &#9836;</button>
+                        <button
+                            className="btn btn-primary"
+                            style={style.btnHarmonize}
+                            disabled={!this.state.note || !this.state.alteration || !this.state.mode}>
+                            Let's harmonize ♬
+                        </button>
                     </div>
                 </div>
             </div>
