@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 
 import { Container } from './Container';
-import { ToneSelection } from './ToneSelection';
+import { ToneSelection } from './tone/selection/ToneSelection';
 import { About } from './About';
 
 export class App extends React.Component {

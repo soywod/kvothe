@@ -19,7 +19,7 @@ class Mode {
     }
 }
 
-export const NOTES = [
+export const notes = [
     new Note(0, 'A'),
     new Note(1, 'B'),
     new Note(2, 'C'),
@@ -29,13 +29,13 @@ export const NOTES = [
     new Note(6, 'G'),
 ];
 
-export const ALTERATIONS = [
+export const alterations = [
     new Alteration(0, '♭'),
     new Alteration(1, '♮'),
     new Alteration(2, '♯'),
 ];
 
-export const MODES = [
+export const modes = [
     new Mode(0, 'Minor'),
     new Mode(1, 'Major'),
 ];
