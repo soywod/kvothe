@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { tone } from '../shared/style';
-import { modes } from '../../../../types/Tone';
+import { style } from '../shared/style';
+import { Mode } from '../../../../types/Mode';
 
 export class ModeSelection extends React.Component {
     componentWillMount() {
@@ -16,14 +16,14 @@ export class ModeSelection extends React.Component {
     }
 
     modesTpl() {
-        return modes.map(mode => {
+        return Object.keys(Mode).map(key => {
             return (
-                <button key={mode.id}
+                <button key={key}
                         type="button"
-                        className={'btn btn-secondary' + (this.state.mode && this.state.mode.id === mode.id ? ' active' : '')}
-                        style={tone.button}
-                        onClick={this.onClick.bind(this, mode)}>
-                    {mode.label}
+                        className={'btn btn-secondary' + (this.state.mode && this.state.mode === key ? ' active' : '')}
+                        style={style.button}
+                        onClick={this.onClick.bind(this, key)}>
+                    {Mode[key]}
                 </button>
             );
         })
@@ -31,8 +31,8 @@ export class ModeSelection extends React.Component {
 
     render() {
         return (
-            <div className={tone.className.column}>
-                <div className="btn-group" style={tone.buttonGroup}>
+            <div className={style.className.column}>
+                <div className="btn-group" style={style.buttonGroup}>
                     {this.modesTpl()}
                 </div>
             </div>

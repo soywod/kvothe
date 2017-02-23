@@ -14,7 +14,7 @@ export class Nav extends React.Component {
 
     render() {
         return (
-            <nav className="navbar navbar-toggleable-sm navbar-light" style={style.nav}>
+            <nav className="navbar navbar-toggleable-sm navbar-light bg-faded" style={style.nav}>
                 <Link className="navbar-brand" to="/">Achord</Link>
 
                 <div className="navbar-collapse collapse">

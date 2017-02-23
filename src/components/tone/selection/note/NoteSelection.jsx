@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { tone } from '../shared/style';
-import { notes } from '../../../../types/Tone';
+import { style } from '../shared/style';
+import { Note } from '../../../../types/Note';
 
 export class NoteSelection extends React.Component {
     componentWillMount() {
@@ -16,23 +16,23 @@ export class NoteSelection extends React.Component {
     }
 
     notesTpl() {
-        return notes.map(note => {
+        return Object.keys(Note).map(key => {
             return (
-                <button key={note.id}
+                <button key={key}
                         type="button"
-                        className={'btn btn-secondary' + (this.state.note && this.state.note.id === note.id ? ' active' : '')}
-                        style={tone.button}
-                        onClick={this.onClick.bind(this, note)}>
-                    {note.label}
+                        className={'btn btn-secondary' + (this.state.note && this.state.note === key ? ' active' : '')}
+                        style={style.button}
+                        onClick={this.onClick.bind(this, key)}>
+                    {Note[key]}
                 </button>
             );
-        })
+        });
     }
 
     render() {
         return (
-            <div className={tone.className.column}>
-                <div className="btn-group" style={tone.buttonGroup}>
+            <div className={style.className.column}>
+                <div className="btn-group" style={style.buttonGroup}>
                     {this.notesTpl()}
                 </div>
             </div>

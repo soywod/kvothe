@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { tone } from '../shared/style';
-import { alterations } from '../../../../types/Tone';
+import { style } from '../shared/style';
+import { Alteration } from '../../../../types/Alteration';
 
 export class AlterationSelection extends React.Component {
     componentWillMount() {
@@ -16,14 +16,14 @@ export class AlterationSelection extends React.Component {
     }
 
     alterationsTpl() {
-        return alterations.map(alteration => {
+        return Object.keys(Alteration).map(key => {
             return (
-                <button key={alteration.id}
+                <button key={key}
                         type="button"
-                        className={'btn btn-secondary' + (this.state.alteration && this.state.alteration.id === alteration.id ? ' active' : '')}
-                        style={tone.button}
-                        onClick={this.onClick.bind(this, alteration)}>
-                    {alteration.label}
+                        className={'btn btn-secondary' + (this.state.alteration && this.state.alteration === key ? ' active' : '')}
+                        style={style.button}
+                        onClick={this.onClick.bind(this, key)}>
+                    {Alteration[key]}
                 </button>
             );
         })
@@ -31,8 +31,8 @@ export class AlterationSelection extends React.Component {
 
     render() {
         return (
-            <div className={tone.className.column}>
-                <div className="btn-group" style={tone.buttonGroup}>
+            <div className={style.className.column}>
+                <div className="btn-group" style={style.buttonGroup}>
                     {this.alterationsTpl()}
                 </div>
             </div>

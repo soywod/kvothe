@@ -1,4 +1,4 @@
-export const tone = {
+export const style = {
     button: {
         flex: 1
     },
