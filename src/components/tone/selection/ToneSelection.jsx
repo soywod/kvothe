@@ -79,6 +79,12 @@ export class ToneSelection extends React.Component {
         );
     }
 
+    renderScale(scale) {
+        return scale
+            .map(tone => Note[tone.note] + (tone.alteration !== 'NATURAL' ? Alteration[tone.alteration] : ''))
+            .join(' - ');
+    }
+
     renderHarmonization() {
         return (
             <div>
@@ -108,11 +114,7 @@ export class ToneSelection extends React.Component {
                         <tr>
                             <td>Major scale</td>
                             <td>
-                                {
-                                    this.state.scale.major
-                                        .map(tone => Note[tone.note] + (tone.alteration !== 'NATURAL' ? Alteration[tone.alteration] : ''))
-                                        .join(' - ')
-                                }
+                                {this.renderScale(this.state.scale.major)}
                             </td>
                         </tr>
                     </tbody>
