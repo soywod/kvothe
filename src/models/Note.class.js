@@ -1,244 +1,475 @@
-import NoteEnum from './Note.enum';
-import AltEnum from './Alt.enum';
+import { NoteEnum } from './Note.enum';
+import { AltEnum } from './Alt.enum';
 
-class Note {
-    constructor(key, alt) {
-        this.key = key;
-        this.alt = alt;
+class Tone {
+    constructor(note, alt) {
+        this.note = note;
+        this.alt  = alt;
     }
 
     toString() {
-        return this.key + (this.alt !== AltEnum.SHARP ? this.alt : '');
+        return NoteEnum[this.note] + (this.alt !== 'NATURAL' ? AltEnum[this.alt] : '');
     }
 }
 
-class FlatA extends Note {
+export class FlatA extends Tone {
     constructor() {
-        super(NoteEnum.A, AltEnum.FLAT);
+        super('A', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE, new FlatA, new FlatD];
-        this.next = [new NaturalA];
-        this.relativeMinor = new NaturalF;
-        this.twin = new SharpG;
+    keySignature() {
+        return [new FlatB, new FlatE, new FlatA, new FlatD];
+    }
+
+    next() {
+        return [new NaturalA];
+    }
+
+    relativeMinor() {
+        return new NaturalF;
+    }
+
+    twin() {
+        return new SharpG;
     }
 }
 
-class NaturalA extends Note {
+export class NaturalA extends Tone {
     constructor() {
-        super(NoteEnum.A, AltEnum.NATURAL);
+        super('A', 'NATURAL');
+    }
 
-        this.keySignature = [new SharpF, new SharpC, new SharpG];
-        this.next = [new SharpA, new FlatB];
-        this.relativeMinor = new SharpF;
-        this.twin = null;
+    keySignature() {
+        return [new SharpF, new SharpC, new SharpG];
+    }
+
+    next() {
+        return [new SharpA, new FlatB];
+    }
+
+    relativeMinor() {
+        return new SharpF;
+    }
+
+    twin() {
+        return null;
     }
 }
 
-class SharpA extends Note {
+export class SharpA extends Tone {
     constructor() {
-        super(NoteEnum.A, AltEnum.SHARP);
+        super('A', 'SHARP');
+    }
 
-        this.keySignature = null;
-        this.next = [new NaturalB, new FlatC];
-        this.relativeMinor = null;
-        this.twin = new FlatB;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new NaturalB, new FlatC];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new FlatB;
     }
 }
 
-class FlatB extends Note {
+export class FlatB extends Tone {
     constructor() {
-        super(NoteEnum.B, AltEnum.FLAT);
+        super('B', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE];
-        this.next = [new NaturalB, new FlatC];
-        this.relativeMinor = new NaturalG;
-        this.twin = new SharpA;
+    keySignature() {
+        return [new FlatB, new FlatE];
+    }
+
+    next() {
+        return [new NaturalB, new FlatC];
+    }
+
+    relativeMinor() {
+        return new NaturalG;
+    }
+
+    twin() {
+        return new SharpA;
     }
 }
 
-class NaturalB extends Note {
+export class NaturalB extends Tone {
     constructor() {
-        super(NoteEnum.B, AltEnum.NATURAL);
+        super('B', 'NATURAL');
+    }
 
-        this.keySignature = [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA];
-        this.next = [new SharpB, new NaturalC];
-        this.relativeMinor = new SharpG;
-        this.twin = new FlatC;
+    keySignature() {
+        return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA];
+    }
+
+    next() {
+        return [new SharpB, new NaturalC];
+    }
+
+    relativeMinor() {
+        return new SharpG;
+    }
+
+    twin() {
+        return new FlatC;
     }
 }
 
-class SharpB extends Note {
+export class SharpB extends Tone {
     constructor() {
-        super(NoteEnum.B, AltEnum.SHARP);
+        super('B', 'SHARP');
+    }
 
-        this.keySignature = null;
-        this.next = [new SharpC, new FlatD];
-        this.relativeMinor = null;
-        this.twin = new NaturalC;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new SharpC, new FlatD];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new NaturalC;
     }
 }
 
-class FlatC extends Note {
+export class FlatC extends Tone {
     constructor() {
-        super(NoteEnum.C, AltEnum.FLAT);
+        super('C', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC, new FlatF];
-        this.next = [new NaturalC];
-        this.relativeMinor = new FlatA;
-        this.twin = new NaturalB;
+    keySignature() {
+        return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC, new FlatF];
+    }
+
+    next() {
+        return [new NaturalC];
+    }
+
+    relativeMinor() {
+        return new FlatA;
+    }
+
+    twin() {
+        return new NaturalB;
     }
 }
 
-class NaturalC extends Note {
+export class NaturalC extends Tone {
     constructor() {
-        super(NoteEnum.C, AltEnum.NATURAL);
+        super('C', 'NATURAL');
+    }
 
-        this.keySignature = [];
-        this.next = [new SharpC, new FlatD];
-        this.relativeMinor = new NaturalA;
-        this.twin = SharpB;
+    keySignature() {
+        return [];
+    }
+
+    next() {
+        return [new SharpC, new FlatD];
+    }
+
+    relativeMinor() {
+        return new NaturalA;
+    }
+
+    twin() {
+        return new SharpB;
     }
 }
 
-class SharpC extends Note {
+export class SharpC extends Tone {
     constructor() {
-        super(NoteEnum.C, AltEnum.SHARP);
+        super('C', 'SHARP');
+    }
 
-        this.keySignature = [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE, new SharpB];
-        this.next = [new NaturalD];
-        this.relativeMinor = new SharpA;
-        this.twin = FlatD;
+    keySignature() {
+        return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE, new SharpB];
+    }
+
+    next() {
+        return [new NaturalD];
+    }
+
+    relativeMinor() {
+        return new SharpA;
+    }
+
+    twin() {
+        return new FlatD;
     }
 }
 
-class FlatD extends Note {
+export class FlatD extends Tone {
     constructor() {
-        super(NoteEnum.D, AltEnum.FLAT);
+        super('D', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG];
-        this.next = new FlatB;
-        this.relativeMinor = [new NaturalD];
-        this.twin = SharpC;
+    keySignature() {
+        return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG];
+    }
+
+    next() {
+        return new FlatB;
+    }
+
+    relativeMinor() {
+        return [new NaturalD];
+    }
+
+    twin() {
+        return new SharpC;
     }
 }
 
-class NaturalD extends Note {
+export class NaturalD extends Tone {
     constructor() {
-        super(NoteEnum.D, AltEnum.NATURAL);
+        super('D', 'NATURAL');
+    }
 
-        this.keySignature = [new SharpF, new SharpC];
-        this.next = [new SharpD, new FlatE];
-        this.relativeMinor = new NaturalB;
-        this.twin = null;
+    keySignature() {
+        return [new SharpF, new SharpC];
+    }
+
+    next() {
+        return [new SharpD, new FlatE];
+    }
+
+    relativeMinor() {
+        return new NaturalB;
+    }
+
+    twin() {
+        return null;
     }
 }
 
-class SharpD extends Note {
+export class SharpD extends Tone {
     constructor() {
-        super(NoteEnum.D, AltEnum.SHARP);
+        super('D', 'SHARP');
+    }
 
-        this.keySignature = null;
-        this.next = [new NaturalE, new FlatF];
-        this.relativeMinor = null;
-        this.twin = new FlatE;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new NaturalE, new FlatF];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new FlatE;
     }
 }
 
-class FlatE extends Note {
+export class FlatE extends Tone {
     constructor() {
-        super(NoteEnum.E, AltEnum.FLAT);
+        super('E', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE, new FlatA];
-        this.next = [new NaturalE, new FlatF];
-        this.relativeMinor = new NaturalC;
-        this.twin = new SharpD;
+    keySignature() {
+        return [new FlatB, new FlatE, new FlatA];
+    }
+
+    next() {
+        return [new NaturalE, new FlatF];
+    }
+
+    relativeMinor() {
+        return new NaturalC;
+    }
+
+    twin() {
+        return new SharpD;
     }
 }
 
-class NaturalE extends Note {
+export class NaturalE extends Tone {
     constructor() {
-        super(NoteEnum.E, AltEnum.NATURAL);
+        super('E', 'NATURAL');
+    }
 
-        this.keySignature = [new SharpF, new SharpC, new SharpG, new SharpD];
-        this.next = [new SharpE, new NaturalF];
-        this.relativeMinor = new SharpC;
-        this.twin = new FlatF;
+    keySignature() {
+        return [new SharpF, new SharpC, new SharpG, new SharpD];
+    }
+
+    next() {
+        return [new SharpE, new NaturalF];
+    }
+
+    relativeMinor() {
+        return new SharpC;
+    }
+
+    twin() {
+        return new FlatF;
     }
 }
 
-class SharpE extends Note {
+export class SharpE extends Tone {
     constructor() {
-        super(NoteEnum.E, AltEnum.SHARP);
+        super('E', 'SHARP');
+    }
 
-        this.keySignature = null;
-        this.next = [new SharpF, new FlatG];
-        this.relativeMinor = null;
-        this.twin = new NaturalF;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new SharpF, new FlatG];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new NaturalF;
     }
 }
 
-class FlatF extends Note {
+export class FlatF extends Tone {
     constructor() {
-        super(NoteEnum.F, AltEnum.FLAT);
+        super('F', 'FLAT');
+    }
 
-        this.keySignature = null;
-        this.next = [new NaturalF];
-        this.relativeMinor = null;
-        this.twin = new NaturalE;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new NaturalF];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new NaturalE;
     }
 }
 
-class NaturalF extends Note {
+export class NaturalF extends Tone {
     constructor() {
-        super(NoteEnum.F, AltEnum.NATURAL);
+        super('F', 'NATURAL');
+    }
 
-        this.keySignature = [new FlatB];
-        this.next = [new SharpF, new NaturalG];
-        this.relativeMinor = new NaturalD;
-        this.twin = new FlatG;
+    keySignature() {
+        return [new FlatB];
+    }
+
+    next() {
+        return [new SharpF, new NaturalG];
+    }
+
+    relativeMinor() {
+        return new NaturalD;
+    }
+
+    twin() {
+        return new FlatG;
     }
 }
 
-class SharpF extends Note {
+export class SharpF extends Tone {
     constructor() {
-        super(NoteEnum.F, AltEnum.SHARP);
+        super('F', 'SHARP');
+    }
 
-        this.keySignature = [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE];
-        this.next = [new SharpG, new FlatA];
-        this.relativeMinor = new SharpD;
-        this.twin = new NaturalG;
+    keySignature() {
+        return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE];
+    }
+
+    next() {
+        return [new SharpG, new FlatA];
+    }
+
+    relativeMinor() {
+        return new SharpD;
+    }
+
+    twin() {
+        return new NaturalG;
     }
 }
 
-class FlatG extends Note {
+export class FlatG extends Tone {
     constructor() {
-        super(NoteEnum.G, AltEnum.FLAT);
+        super('G', 'FLAT');
+    }
 
-        this.keySignature = [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC];
-        this.next = [new NaturalG];
-        this.relativeMinor = new FlatE;
-        this.twin = new NaturalF;
+    keySignature() {
+        return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC];
+    }
+
+    next() {
+        return [new NaturalG];
+    }
+
+    relativeMinor() {
+        return new FlatE;
+    }
+
+    twin() {
+        return new NaturalF;
     }
 }
 
-class NaturalG extends Note {
+export class NaturalG extends Tone {
     constructor() {
-        super(NoteEnum.G, AltEnum.NATURAL);
+        super('G', 'NATURAL');
+    }
 
-        this.keySignature = [new SharpF];
-        this.next = [new SharpG, new FlatA];
-        this.relativeMinor = new NaturalE;
-        this.twin = null;
+    keySignature() {
+        return [new SharpF];
+    }
+
+    next() {
+        return [new SharpG, new FlatA];
+    }
+
+    relativeMinor() {
+        return new NaturalE;
+    }
+
+    twin() {
+        return null;
     }
 }
 
-class SharpG extends Note {
+export class SharpG extends Tone {
     constructor() {
-        super(NoteEnum.G, AltEnum.SHARP);
+        super('G', 'SHARP');
+    }
 
-        this.keySignature = null;
-        this.next = [new NaturalA];
-        this.relativeMinor = null;
-        this.twin = new FlatA;
+    keySignature() {
+        return null;
+    }
+
+    next() {
+        return [new NaturalA];
+    }
+
+    relativeMinor() {
+        return null;
+    }
+
+    twin() {
+        return new FlatA;
     }
 }

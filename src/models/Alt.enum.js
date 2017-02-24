@@ -1,7 +1,5 @@
-const Alt = {
+export const AltEnum = {
     FLAT: '♭',
     NATURAL: '♮',
     SHARP: '♯',
 };
-
-export default Alt;

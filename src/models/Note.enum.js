@@ -1,4 +1,4 @@
-const Note = {
+export const NoteEnum = {
     A: 'A',
     B: 'B',
     C: 'C',
@@ -7,5 +7,3 @@ const Note = {
     F: 'F',
     G: 'G',
 };
-
-export default Note;
