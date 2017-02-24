@@ -11,13 +11,14 @@ const config = {
     devtool  : 'inline-source-map',
     entry    : './src/index',
     output   : {
-        filename: '[hash:8].js',
-        path    : require('path').join(__dirname, '..', 'dist')
+        path      : require('path').join(__dirname, '..', 'dist'),
+        filename  : '[hash:8].js',
+        publicPath: '/'
     },
     devServer: {
+        hot               : true,
         inline            : true,
-        historyApiFallback: true,
-        hot               : true
+        historyApiFallback: true
     },
     resolve  : {
         alias     : {
@@ -37,16 +38,15 @@ const config = {
                 }
             },
             {
-                test   : /\.css$/,
-                loader : 'style-loader!css-loader',
-                exclude: /node_modules/
+                test  : /\.css$/,
+                loader: 'style-loader!css-loader'
             }
         ]
     },
     plugins  : [
         new HotModuleReloadPlugin(),
         new NamedModulePlugin(),
-        new HtmlPlugin({template: './src/template.ejs'}),
+        new HtmlPlugin({template: './src/template.ejs'})
     ]
 };
 

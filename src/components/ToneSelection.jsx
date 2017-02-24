@@ -65,7 +65,7 @@ export const ToneSelectionComponent = props => (
                         style={style.harmonizeButton}
                         disabled={!props.ready}
                         onClick={() => props.onHarmonize()}>
-                        {props.ready ? `Let's harmonize (${props.tone.toString()})` : 'Waiting for pick ...'}
+                        {props.ready ? `Let's harmonize (${props.tone.toString()})` : 'Waiting for a pick ...'}
                     </button>
                 </div>
             </div>
@@ -74,9 +74,9 @@ export const ToneSelectionComponent = props => (
 );
 
 ToneSelectionComponent.propTypes = {
-    note: React.PropTypes.string,
-    alt : React.PropTypes.string,
-    ready : React.PropTypes.bool,
+    note : React.PropTypes.string,
+    alt  : React.PropTypes.string,
+    ready: React.PropTypes.bool,
     tone : React.PropTypes.object,
 
     onSelectNote: React.PropTypes.func.isRequired,

@@ -1,5 +1,14 @@
+import * as Note from './Note.class';
 import { NoteEnum } from './Note.enum';
 import { AltEnum } from './Alt.enum';
+
+export const getToneInstance = (note, alt) => {
+    if (!note || !alt) {
+        return null;
+    }
+
+    return Reflect.construct(Note[alt.charAt(0).toUpperCase() + alt.slice(1).toLowerCase() + note.toUpperCase()], []);
+};
 
 class Tone {
     constructor(note, alt) {
