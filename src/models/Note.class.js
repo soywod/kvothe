@@ -31,7 +31,7 @@ export class FlatA extends Tone {
     }
 
     next() {
-        return [new NaturalA];
+        return new NaturalA;
     }
 
     relativeMinor() {
@@ -53,7 +53,7 @@ export class NaturalA extends Tone {
     }
 
     next() {
-        return [new SharpA, new FlatB];
+        return new SharpA;
     }
 
     relativeMinor() {
@@ -71,15 +71,15 @@ export class SharpA extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new NaturalB, new FlatC];
+        return new NaturalB;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {
@@ -97,7 +97,7 @@ export class FlatB extends Tone {
     }
 
     next() {
-        return [new NaturalB, new FlatC];
+        return new NaturalB;
     }
 
     relativeMinor() {
@@ -119,7 +119,7 @@ export class NaturalB extends Tone {
     }
 
     next() {
-        return [new SharpB, new NaturalC];
+        return new SharpB;
     }
 
     relativeMinor() {
@@ -137,15 +137,15 @@ export class SharpB extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new SharpC, new FlatD];
+        return new SharpC;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {
@@ -163,7 +163,7 @@ export class FlatC extends Tone {
     }
 
     next() {
-        return [new NaturalC];
+        return new NaturalC;
     }
 
     relativeMinor() {
@@ -185,7 +185,7 @@ export class NaturalC extends Tone {
     }
 
     next() {
-        return [new SharpC, new FlatD];
+        return new SharpC;
     }
 
     relativeMinor() {
@@ -207,7 +207,7 @@ export class SharpC extends Tone {
     }
 
     next() {
-        return [new NaturalD];
+        return new NaturalD;
     }
 
     relativeMinor() {
@@ -229,11 +229,11 @@ export class FlatD extends Tone {
     }
 
     next() {
-        return new FlatB;
+        return new NaturalD;
     }
 
     relativeMinor() {
-        return [new NaturalD];
+        return new FlatB;
     }
 
     twin() {
@@ -251,7 +251,7 @@ export class NaturalD extends Tone {
     }
 
     next() {
-        return [new SharpD, new FlatE];
+        return new SharpD;
     }
 
     relativeMinor() {
@@ -269,15 +269,15 @@ export class SharpD extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new NaturalE, new FlatF];
+        return new NaturalE;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {
@@ -295,7 +295,7 @@ export class FlatE extends Tone {
     }
 
     next() {
-        return [new NaturalE, new FlatF];
+        return new NaturalE;
     }
 
     relativeMinor() {
@@ -317,7 +317,7 @@ export class NaturalE extends Tone {
     }
 
     next() {
-        return [new SharpE, new NaturalF];
+        return new SharpE;
     }
 
     relativeMinor() {
@@ -335,15 +335,15 @@ export class SharpE extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new SharpF, new FlatG];
+        return new SharpF;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {
@@ -357,15 +357,15 @@ export class FlatF extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new NaturalF];
+        return new NaturalF;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {
@@ -383,7 +383,7 @@ export class NaturalF extends Tone {
     }
 
     next() {
-        return [new SharpF, new NaturalG];
+        return new SharpF;
     }
 
     relativeMinor() {
@@ -391,7 +391,7 @@ export class NaturalF extends Tone {
     }
 
     twin() {
-        return new FlatG;
+        return new SharpE;
     }
 }
 
@@ -405,7 +405,7 @@ export class SharpF extends Tone {
     }
 
     next() {
-        return [new SharpG, new FlatA];
+        return new NaturalG;
     }
 
     relativeMinor() {
@@ -413,7 +413,7 @@ export class SharpF extends Tone {
     }
 
     twin() {
-        return new NaturalG;
+        return new FlatG;
     }
 }
 
@@ -427,7 +427,7 @@ export class FlatG extends Tone {
     }
 
     next() {
-        return [new NaturalG];
+        return new NaturalG;
     }
 
     relativeMinor() {
@@ -449,7 +449,7 @@ export class NaturalG extends Tone {
     }
 
     next() {
-        return [new SharpG, new FlatA];
+        return new SharpG;
     }
 
     relativeMinor() {
@@ -467,15 +467,15 @@ export class SharpG extends Tone {
     }
 
     keySignature() {
-        return null;
+        return this.twin().keySignature();
     }
 
     next() {
-        return [new NaturalA];
+        return new NaturalA;
     }
 
     relativeMinor() {
-        return null;
+        return this.twin().relativeMinor();
     }
 
     twin() {

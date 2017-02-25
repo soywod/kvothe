@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-import { NoteEnum } from '../models/Note.enum';
-import { AltEnum } from '../models/Alt.enum';
+import * as Scale from '../models/Scale';
 
 const style = {
     title   : {
@@ -37,14 +36,24 @@ export const HarmonizationComponent = props => (
                 <td style={style.cell}>Relative minor</td>
                 <td className="text-right">
                     <span className="badge badge-primary" style={style.toneCell}>
-                        {getRelativeMinor(props.tone).toString()}
+                        {props.tone.relativeMinor().toString()}
                     </span>
                 </td>
             </tr>
             <tr>
                 <td style={style.cell}>Key signature</td>
                 <td className="text-right">
-                    {getKeySignature(props.tone)}
+                    {props.tone.keySignature().map(tone => (
+                        <span key={tone.note} className="badge badge-primary" style={style.toneCell}>
+                            {tone.toString()}
+                        </span>
+                    ))}
+                </td>
+            </tr>
+            <tr>
+                <td style={style.cell}>Major scale</td>
+                <td className="text-right">
+                    {getMajorScale(props.tone)}
                 </td>
             </tr>
             </tbody>
@@ -52,20 +61,34 @@ export const HarmonizationComponent = props => (
     </div>
 );
 
-const getRelativeMinor = tone => {
-    return tone.relativeMinor() || tone.twin().relativeMinor();
-};
+const getMajorScale = tone => {
+    let cursor                    = Scale.P1;
+    let currentTone               = tone;
+    let scale                     = [];
+    let isCurrentToneAlreadyTaken = false;
 
-const getKeySignature = tone => {
-    const keySignature = tone.keySignature() || tone.twin().keySignature();
+    const mainAlt = currentTone.keySignature().length ? currentTone.keySignature()[0].alt : '';
 
-    return keySignature.map(t => {
-        return (
-            <span key={t.note} className="badge badge-primary" style={style.toneCell}>
-                {t.toString()}
-            </span>
-        );
-    });
+    for (; cursor <= Scale.M7; cursor = cursor << 1) {
+        if ((cursor & Scale.MAJOR) > 0) {
+            if (
+                (mainAlt === 'SHARP' && currentTone.alt === 'FLAT')
+                || (mainAlt === 'FLAT' && currentTone.alt === 'SHARP')
+                || scale.some(t => t.note === currentTone.note)) {
+                currentTone = currentTone.twin() || currentTone;
+            }
+
+            scale.push(currentTone);
+        }
+
+        currentTone = currentTone.next();
+    }
+
+    return scale.map(tone => (
+        <span key={tone.note + tone.alt} className="badge badge-primary" style={style.toneCell}>
+            {tone.toString()}
+        </span>
+    ))
 };
 
 HarmonizationComponent.propTypes = {
