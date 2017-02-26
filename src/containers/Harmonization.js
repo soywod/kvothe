@@ -15,7 +15,8 @@ const mapStateToProps = (state, props) => {
     const alt = tone.keySignature().length ? tone.keySignature()[0].alt : 'NATURAL';
 
     return {
-        tone: (tone.alt !== 'NATURAL' && tone.alt !== alt ? tone.twin() : tone)
+        //tone: (tone.alt !== 'NATURAL' && tone.alt !== alt ? tone.twin() : tone)
+        tone
     };
 };
 

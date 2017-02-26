@@ -30,7 +30,11 @@ export class FlatA extends Tone {
         return [new FlatB, new FlatE, new FlatA, new FlatD];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalA;
+    }
+
+    nextSharp() {
         return new NaturalA;
     }
 
@@ -52,7 +56,11 @@ export class NaturalA extends Tone {
         return [new SharpF, new SharpC, new SharpG];
     }
 
-    next() {
+    nextFlat() {
+        return new FlatB;
+    }
+
+    nextSharp() {
         return new SharpA;
     }
 
@@ -74,7 +82,11 @@ export class SharpA extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalB;
+    }
+
+    nextSharp() {
         return new NaturalB;
     }
 
@@ -96,7 +108,11 @@ export class FlatB extends Tone {
         return [new FlatB, new FlatE];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalB;
+    }
+
+    nextSharp() {
         return new NaturalB;
     }
 
@@ -118,8 +134,12 @@ export class NaturalB extends Tone {
         return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA];
     }
 
-    next() {
-        return new SharpB;
+    nextFlat() {
+        return new NaturalC;
+    }
+
+    nextSharp() {
+        return new NaturalC;
     }
 
     relativeMinor() {
@@ -140,7 +160,11 @@ export class SharpB extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new FlatD;
+    }
+
+    nextSharp() {
         return new SharpC;
     }
 
@@ -162,7 +186,11 @@ export class FlatC extends Tone {
         return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC, new FlatF];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalC;
+    }
+
+    nextSharp() {
         return new NaturalC;
     }
 
@@ -184,7 +212,11 @@ export class NaturalC extends Tone {
         return [];
     }
 
-    next() {
+    nextFlat() {
+        return new FlatD;
+    }
+
+    nextSharp() {
         return new SharpC;
     }
 
@@ -206,7 +238,11 @@ export class SharpC extends Tone {
         return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE, new SharpB];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalD;
+    }
+
+    nextSharp() {
         return new NaturalD;
     }
 
@@ -228,7 +264,11 @@ export class FlatD extends Tone {
         return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalD;
+    }
+
+    nextSharp() {
         return new NaturalD;
     }
 
@@ -250,7 +290,11 @@ export class NaturalD extends Tone {
         return [new SharpF, new SharpC];
     }
 
-    next() {
+    nextFlat() {
+        return new FlatE;
+    }
+
+    nextSharp() {
         return new SharpD;
     }
 
@@ -272,7 +316,11 @@ export class SharpD extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalE;
+    }
+
+    nextSharp() {
         return new NaturalE;
     }
 
@@ -294,7 +342,11 @@ export class FlatE extends Tone {
         return [new FlatB, new FlatE, new FlatA];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalE;
+    }
+
+    nextSharp() {
         return new NaturalE;
     }
 
@@ -316,8 +368,12 @@ export class NaturalE extends Tone {
         return [new SharpF, new SharpC, new SharpG, new SharpD];
     }
 
-    next() {
-        return new SharpE;
+    nextFlat() {
+        return new NaturalF;
+    }
+
+    nextSharp() {
+        return new NaturalF;
     }
 
     relativeMinor() {
@@ -338,7 +394,11 @@ export class SharpE extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new FlatG;
+    }
+
+    nextSharp() {
         return new SharpF;
     }
 
@@ -360,7 +420,11 @@ export class FlatF extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalF;
+    }
+
+    nextSharp() {
         return new NaturalF;
     }
 
@@ -382,7 +446,11 @@ export class NaturalF extends Tone {
         return [new FlatB];
     }
 
-    next() {
+    nextFlat() {
+        return new FlatG;
+    }
+
+    nextSharp() {
         return new SharpF;
     }
 
@@ -404,7 +472,11 @@ export class SharpF extends Tone {
         return [new SharpF, new SharpC, new SharpG, new SharpD, new SharpA, new SharpE];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalG;
+    }
+
+    nextSharp() {
         return new NaturalG;
     }
 
@@ -426,7 +498,11 @@ export class FlatG extends Tone {
         return [new FlatB, new FlatE, new FlatA, new FlatD, new FlatG, new FlatC];
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalG;
+    }
+
+    nextSharp() {
         return new NaturalG;
     }
 
@@ -448,7 +524,11 @@ export class NaturalG extends Tone {
         return [new SharpF];
     }
 
-    next() {
+    nextFlat() {
+        return new FlatA;
+    }
+
+    nextSharp() {
         return new SharpG;
     }
 
@@ -470,7 +550,11 @@ export class SharpG extends Tone {
         return this.twin().keySignature();
     }
 
-    next() {
+    nextFlat() {
+        return new NaturalA;
+    }
+
+    nextSharp() {
         return new NaturalA;
     }
 

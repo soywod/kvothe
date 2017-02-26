@@ -62,34 +62,91 @@ export const HarmonizationComponent = props => (
 );
 
 const getMajorScale = tone => {
-    let cursor                    = Scale.P1;
-    let currentTone               = tone;
-    let scale                     = [];
-    let isCurrentToneAlreadyTaken = false;
+    let cursor      = Scale.P1;
+    let currentTone = tone;
+    let scale       = [];
 
     const mainAlt = currentTone.keySignature().length ? currentTone.keySignature()[0].alt : '';
 
     for (; cursor <= Scale.M7; cursor = cursor << 1) {
         if ((cursor & Scale.MAJOR) > 0) {
-            if (
-                (mainAlt === 'SHARP' && currentTone.alt === 'FLAT')
-                || (mainAlt === 'FLAT' && currentTone.alt === 'SHARP')
-                || scale.some(t => t.note === currentTone.note)) {
-                currentTone = currentTone.twin() || currentTone;
-            }
+            /*
+             if (scale.some(t => t.note === currentTone.note)) {
+             currentTone = currentTone.twin() || currentTone;
+             }
+
+             if (mainAlt === 'SHARP' && currentTone.alt === 'FLAT' || mainAlt === 'FLAT' && currentTone.alt === 'SHARP') {
+             currentTone = currentTone.twin() || currentTone;
+             }
+             */
 
             scale.push(currentTone);
         }
 
-        currentTone = currentTone.next();
+        currentTone = currentTone.nextSharp();
     }
 
-    return scale.map(tone => (
+    return findScale(scale).map(tone => (
         <span key={tone.note + tone.alt} className="badge badge-primary" style={style.toneCell}>
             {tone.toString()}
         </span>
     ))
 };
+
+function findScale(scaleToTest) {
+    const firstResults = [];
+    const lastResults  = [];
+    let cursor         = 1;
+
+    for (let i = 0; i <= Math.pow(2, scaleToTest.length); i++) {
+        let tmp = scaleToTest.map((tone, index) => (i & Math.pow(2, index)) === Math.pow(2, index) ? tone.twin() || tone : tone);
+        if (isValid(tmp)) {
+            firstResults.push(tmp);
+        }
+    }
+
+    for (let i = 0; i < firstResults.length; i++) {
+        const scale         = firstResults[i];
+        const firstNoteSame = scale[0].note === scaleToTest[0].note;
+
+        let hasNoDuplicates = true;
+
+        for (let j = 0; j < scale.length; j++) {
+            const tone = scale[j];
+
+            if (scale.some((t, index) => j !== index && tone.note === t.note)) {
+                hasNoDuplicates = false;
+                break;
+            }
+        }
+
+        if (firstNoteSame && hasNoDuplicates) {
+            return scale;
+        }
+        else if (hasNoDuplicates) {
+            lastResults.unshift(scale);
+        }
+        else if (firstNoteSame) {
+            lastResults.push(scale);
+        }
+    }
+
+    return lastResults[0];
+}
+
+function isValid(arr) {
+    let i = 0;
+
+    while (i < arr.length) {
+        if (arr.some((tone, index) => tone.alt === 'FLAT' && arr[i].alt === 'SHARP' || tone.alt === 'SHARP' && arr[i].alt === 'FLAT')) {
+            return false;
+        }
+
+        i++;
+    }
+
+    return true;
+}
 
 HarmonizationComponent.propTypes = {
     tone: React.PropTypes.object,
