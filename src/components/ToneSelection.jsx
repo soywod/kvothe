@@ -25,7 +25,7 @@ const classNames = {
 };
 
 export const ToneSelectionComponent = props => (
-    <ReactCSSTransitionGroup transitionName="example"
+    <ReactCSSTransitionGroup transitionName="section"
                              transitionEnterTimeout={300}
                              transitionAppear={true}
                              transitionAppearTimeout={300}
