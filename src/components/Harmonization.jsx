@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import * as Scale from '../models/Scale';
 
@@ -21,7 +22,11 @@ const classNames = {
 };
 
 export const HarmonizationComponent = props => (
-    <div>
+    <ReactCSSTransitionGroup transitionName="section"
+                             transitionEnterTimeout={0}
+                             transitionAppear={true}
+                             transitionAppearTimeout={0}
+                             transitionLeaveTimeout={0}>
         <h1>
             <Link to="/"><i className="fa fa-arrow-left"/></Link>
             &nbsp;
@@ -58,7 +63,7 @@ export const HarmonizationComponent = props => (
             </tr>
             </tbody>
         </table>
-    </div>
+    </ReactCSSTransitionGroup>
 );
 
 const getMajorScale = tone => {

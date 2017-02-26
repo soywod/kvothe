@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { NoteEnum } from '../models/Note.enum';
 import { AltEnum } from '../models/Alt.enum';
@@ -24,7 +25,11 @@ const classNames = {
 };
 
 export const ToneSelectionComponent = props => (
-    <div>
+    <ReactCSSTransitionGroup transitionName="example"
+                             transitionEnterTimeout={300}
+                             transitionAppear={true}
+                             transitionAppearTimeout={300}
+                             transitionLeaveTimeout={300}>
         <h1 className="text-center">Choose your tone ♬</h1>
 
         <br/>
@@ -70,7 +75,7 @@ export const ToneSelectionComponent = props => (
                 </div>
             </div>
         </div>
-    </div>
+    </ReactCSSTransitionGroup>
 );
 
 ToneSelectionComponent.propTypes = {
