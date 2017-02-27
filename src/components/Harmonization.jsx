@@ -17,16 +17,13 @@ const style = {
     }
 };
 
-const classNames = {
-    responsiveCol: 'offset-sm-2 col-sm-8 offset-md-3 col-md-6 offset-xl-4 col-xl-4'
-};
-
 export const HarmonizationComponent = props => (
     <ReactCSSTransitionGroup transitionName="section"
-                             transitionEnterTimeout={0}
-                             transitionAppear={true}
-                             transitionAppearTimeout={0}
-                             transitionLeaveTimeout={0}>
+        transitionEnterTimeout={0}
+        transitionAppear={true}
+        transitionAppearTimeout={0}
+        transitionLeaveTimeout={0}>
+
         <h1>
             <Link to="/"><i className="fa fa-arrow-left"/></Link>
             &nbsp;
