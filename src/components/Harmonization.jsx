@@ -5,28 +5,31 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as Scale from '../models/Scale';
 
 const style = {
-    title   : {
+    title: {
         marginTop: 45
     },
     toneCell: {
-        fontSize  : 20,
+        fontSize: 20,
         marginLeft: 5
     },
-    cell    : {
+    cell: {
         verticalAlign: 'middle'
     }
 };
 
 export const HarmonizationComponent = props => (
     <ReactCSSTransitionGroup transitionName="section"
-        transitionEnterTimeout={0}
-        transitionAppear={true}
-        transitionAppearTimeout={0}
-        transitionLeaveTimeout={0}>
+                             transitionEnterTimeout={0}
+                             transitionAppear={true}
+                             transitionAppearTimeout={0}
+                             transitionLeaveTimeout={0}>
 
         <h1>
-            <Link to="/"><i className="fa fa-arrow-left"/></Link>
-            &nbsp;
+            <Link to="/" className="btn btn-link">
+                <i className="fa fa-arrow-left"/>
+                BACK
+            </Link>
+            {' '}
             {props.tone.toString()} harmonization
         </h1>
 
@@ -34,39 +37,39 @@ export const HarmonizationComponent = props => (
 
         <table className="table table-bordered">
             <tbody>
-            <tr>
-                <td style={style.cell}>Relative minor</td>
-                <td className="text-right">
+                <tr>
+                    <td style={style.cell}>Relative minor</td>
+                    <td className="text-right">
                     <span className="badge badge-primary" style={style.toneCell}>
                         {props.tone.relativeMinor().toString()}
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td style={style.cell}>Key signature</td>
-                <td className="text-right">
-                    {props.tone.keySignature().map(tone => (
-                        <span key={tone.note} className="badge badge-primary" style={style.toneCell}>
+                    </td>
+                </tr>
+                <tr>
+                    <td style={style.cell}>Key signature</td>
+                    <td className="text-right">
+                        {props.tone.keySignature().map(tone => (
+                            <span key={tone.note} className="badge badge-primary" style={style.toneCell}>
                             {tone.toString()}
                         </span>
-                    ))}
-                </td>
-            </tr>
-            <tr>
-                <td style={style.cell}>Major scale</td>
-                <td className="text-right">
-                    {getMajorScale(props.tone)}
-                </td>
-            </tr>
+                        ))}
+                    </td>
+                </tr>
+                <tr>
+                    <td style={style.cell}>Major scale</td>
+                    <td className="text-right">
+                        {getMajorScale(props.tone)}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </ReactCSSTransitionGroup>
 );
 
 const getMajorScale = tone => {
-    let cursor      = Scale.P1;
+    let cursor = Scale.P1;
     let currentTone = tone;
-    let scale       = [];
+    let scale = [];
 
     const mainAlt = currentTone.keySignature().length ? currentTone.keySignature()[0].alt : '';
 
@@ -97,8 +100,8 @@ const getMajorScale = tone => {
 
 function findScale(scaleToTest) {
     const firstResults = [];
-    const lastResults  = [];
-    let cursor         = 1;
+    const lastResults = [];
+    let cursor = 1;
 
     for (let i = 0; i <= Math.pow(2, scaleToTest.length); i++) {
         let tmp = scaleToTest.map((tone, index) => (i & Math.pow(2, index)) === Math.pow(2, index) ? tone.twin() || tone : tone);
@@ -108,7 +111,7 @@ function findScale(scaleToTest) {
     }
 
     for (let i = 0; i < firstResults.length; i++) {
-        const scale         = firstResults[i];
+        const scale = firstResults[i];
         const firstNoteSame = scale[0].note === scaleToTest[0].note;
 
         let hasNoDuplicates = true;
@@ -152,4 +155,6 @@ function isValid(arr) {
 
 HarmonizationComponent.propTypes = {
     tone: React.PropTypes.object,
+
+    onBack: React.PropTypes.func.isRequired
 };

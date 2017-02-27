@@ -8,7 +8,7 @@ import { About } from './About';
 
 export const App = () => (
     <Router history={browserHistory}>
-        <Route path='/' component={Container}>
+        <Route path="/" component={Container}>
             <IndexRoute component={ToneSelectionContainer}/>
             <Route path="/about" component={About}/>
             <Route path="/:note/:alt" component={HarmonizationContainer}/>

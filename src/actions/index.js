@@ -8,6 +8,14 @@ export const selectAlt = alt => ({
     alt
 });
 
-export const harmonize = () => ({
-    type : 'HARMONIZE'
+export const back = () => ({
+    type: 'BACK'
 });
+
+export const fetchTone = (note, alt) => {
+    return {
+        type: 'FETCH_TONE',
+        note,
+        alt,
+    }
+};

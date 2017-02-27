@@ -2,14 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { HarmonizationComponent } from '../components/Harmonization';
+import { back, fetchTone } from '../actions/index';
 import { getToneInstance } from '../models/Note.class';
 
-const mapStateToProps = (state, props) => ({
-    // tone: state.tone
-    tone: getToneInstance(props.params.note, props.params.alt)
-});
+const mapStateToProps = (state, props) => {
+    const tone = getToneInstance(props.params.note, props.params.alt);
+
+    return {
+        note: tone.note,
+        alt: tone.alt,
+        tone
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    dispatch(fetchTone(props.params.note, props.params.alt));
+
+    return {
+        onBack: () => dispatch(back())
+    };
+};
 
 export const HarmonizationContainer = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(HarmonizationComponent);
