@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const style = {
-    nav: {
-        marginBottom: '45px'
-    }
+	nav: {
+		marginBottom: '45px'
+	}
 };
 
 export class Nav extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <nav className="navbar navbar-toggleable-sm navbar-light bg-faded" style={style.nav}>
+	constructor(props) {
+		super(props);
+	}
+	
+	render() {
+		return (
+			<nav className="navbar navbar-toggleable-sm navbar-light bg-faded" style={style.nav}>
                 <Link className="navbar-brand" to="/">Achord</Link>
 
                 <div className="navbar-collapse collapse">
@@ -23,6 +23,6 @@ export class Nav extends React.Component {
                     </div>
                 </div>
             </nav>
-        );
-    }
+		);
+	}
 }

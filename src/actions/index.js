@@ -1,21 +1,21 @@
 export const selectNote = note => ({
-    type: 'SELECT_NOTE',
-    note
+	type: 'SELECT_NOTE',
+	note
 });
 
-export const selectAlt = alt => ({
-    type: 'SELECT_ALT',
-    alt
+export const selectScale = scale => ({
+	type: 'SELECT_SCALE',
+	scale
 });
 
 export const back = () => ({
-    type: 'BACK'
+	type: 'BACK'
 });
 
 export const fetchTone = (note, alt) => {
-    return {
-        type: 'FETCH_TONE',
-        note,
-        alt,
-    }
+	return {
+		type: 'FETCH_TONE',
+		note,
+		alt,
+	}
 };

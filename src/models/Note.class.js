@@ -1,6 +1,6 @@
 import * as Note from './Note.class';
-import { NoteEnum } from './Note.enum';
-import { AltEnum } from './Alt.enum';
+import { NoteEnum } from './Note.const';
+import { AltEnum } from './Alt.const';
 
 //TODO update next function to be recursive
 export const getToneInstance = (note, alt) => {
