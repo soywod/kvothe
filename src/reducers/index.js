@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import { browserHistory } from 'react-router';
-import { getToneInstance } from '../models/Note.class';
 
+import { getToneInstance } from '../models/Note.class';
 import { note } from './note';
+import { scale } from './scale';
 
 const old = (state = {}, action) => {
 	switch (action.type) {
@@ -32,22 +33,23 @@ const old = (state = {}, action) => {
 		 tone : state.tone
 		 };
 		 }
+		 
+		 
+		 case 'SELECT_SCALE': {
+		 const note  = state.note;
+		 const alt   = state.alt;
+		 const scale = action.scale;
+		 
+		 browserHistory.push(`/${note.toLowerCase()}/${alt.toLowerCase()}/${scale.toLocaleString()}`);
+		 
+		 return {
+		 note,
+		 alt,
+		 scale,
+		 tone: state.tone
+		 };
+		 }
 		 */
-		
-		case 'SELECT_SCALE': {
-			const note  = state.note;
-			const alt   = state.alt;
-			const scale = action.scale;
-			
-			browserHistory.push(`/${note.toLowerCase()}/${alt.toLowerCase()}/${scale.toLocaleString()}`);
-			
-			return {
-				note,
-				alt,
-				scale,
-				tone: state.tone
-			};
-		}
 		
 		case 'BACK': {
 			browserHistory.push('/');
@@ -77,4 +79,4 @@ const old = (state = {}, action) => {
 	}
 };
 
-export const reducers = combineReducers({old, note});
+export const reducers = combineReducers({old, note, scale});

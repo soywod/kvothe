@@ -13,32 +13,32 @@ export const NoteSelectionComponent = props => (
 		transitionAppear={true}
 		transitionAppearTimeout={300}
 		transitionLeaveTimeout={300}>
-
-    <h1 className="text-center">
-        Pick a note
-    </h1>
-
-    <br/>
-
-    <div style={styles.flexCenter}>
-      <NoteNameContainer name={Note.A}/>
-      <NoteNameContainer name={Note.B}/>
-      <NoteNameContainer name={Note.C}/>
-    </div>
+		
+		<h1 className="text-center">
+			Pick a note
+		</h1>
+		
+		<br/>
 		
 		<div style={styles.flexCenter}>
-      <NoteNameContainer name={Note.D}/>
-      <NoteNameContainer name={Note.E}/>
-      <NoteNameContainer name={Note.F}/>
-    </div>
+			<NoteNameContainer name={Note.A}/>
+			<NoteNameContainer name={Note.B}/>
+			<NoteNameContainer name={Note.C}/>
+		</div>
 		
 		<div style={styles.flexCenter}>
-      <NoteAltContainer alt={Alt.FLAT}/>
-      <NoteNameContainer name={Note.G}/>
-      <NoteAltContainer alt={Alt.SHARP}/>
-    </div>
+			<NoteNameContainer name={Note.D}/>
+			<NoteNameContainer name={Note.E}/>
+			<NoteNameContainer name={Note.F}/>
+		</div>
 		
-  </ReactCSSTransitionGroup>
+		<div style={styles.flexCenter}>
+			<NoteAltContainer alt={Alt.FLAT}/>
+			<NoteNameContainer name={Note.G}/>
+			<NoteAltContainer alt={Alt.SHARP}/>
+		</div>
+	
+	</ReactCSSTransitionGroup>
 );
 
 const styles = {

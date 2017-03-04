@@ -4,7 +4,7 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 import { Container } from './Container';
 import { NoteSelectionComponent } from './NoteSelection';
 import { HarmonizationContainer } from '../containers/Harmonization';
-import { ScaleSelectionContainer } from '../containers/ScaleSelection';
+import { ScaleSelectionComponent } from './ScaleSelection';
 import { About } from './About';
 
 export const App = () => (
@@ -12,7 +12,7 @@ export const App = () => (
 		<Route path="/" component={Container}>
 			<IndexRoute component={NoteSelectionComponent}/>
 			<Route path="/about" component={About}/>
-			<Route path="/:note/:alt" component={ScaleSelectionContainer}/>
+			<Route path="/:note/:alt" component={ScaleSelectionComponent}/>
 			<Route path="/:note/:alt/:scale" component={HarmonizationContainer}/>
 		</Route>
 	</Router>
