@@ -1,34 +1,37 @@
-import * as Note from './Note.class';
-import { NoteEnum } from './Note.const';
-import { AltEnum } from './Alt.const';
+import * as NoteClass from './Note.class';
 
-//TODO update next function to be recursive
-export const getToneInstance = (note, alt) => {
-	if (!note || !alt) {
+import { A, B, C, D, E, F, G } from './Note.const';
+import { FLAT, NATURAL, SHARP } from './Alt.const';
+
+export const getNoteInstance = (name, alt) => {
+	if (!name || !alt) {
 		return null;
 	}
 	
-	return Reflect.construct(Note[alt.charAt(0).toUpperCase() + alt.slice(1).toLowerCase() + note.toUpperCase()], []);
+	return Reflect.construct(
+		NoteClass[alt.charAt(0).toUpperCase() + alt.slice(1) + name.toUpperCase()],
+		[]
+	);
 };
 
-class Tone {
-	constructor(note, alt) {
-		this.note = note;
+class Note {
+	constructor(name, alt) {
+		this.name = name;
 		this.alt  = alt;
 	}
 	
 	toString() {
-		return NoteEnum[this.note] + (this.alt !== 'NATURAL' ? AltEnum[this.alt] : '');
+		return this.name + this.alt;
 	}
 }
 
-export class FlatA extends Tone {
+export class FlatA extends Note {
 	constructor() {
-		super('A', 'FLAT');
+		super(A, FLAT);
 	}
 	
 	next(cursor = 0) {
-		return cursor ? (new NaturalA).next(cursor - 1) : new NaturalA;
+		return cursor ? (new NaturalA).next(cursor - 1) : new FlatA;
 	}
 	
 	twin() {
@@ -36,9 +39,9 @@ export class FlatA extends Tone {
 	}
 }
 
-export class NaturalA extends Tone {
+export class NaturalA extends Note {
 	constructor() {
-		super('A', 'NATURAL');
+		super(A, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -50,9 +53,9 @@ export class NaturalA extends Tone {
 	}
 }
 
-export class SharpA extends Tone {
+export class SharpA extends Note {
 	constructor() {
-		super('A', 'SHARP');
+		super(A, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -64,9 +67,9 @@ export class SharpA extends Tone {
 	}
 }
 
-export class FlatB extends Tone {
+export class FlatB extends Note {
 	constructor() {
-		super('B', 'FLAT');
+		super(B, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -78,9 +81,9 @@ export class FlatB extends Tone {
 	}
 }
 
-export class NaturalB extends Tone {
+export class NaturalB extends Note {
 	constructor() {
-		super('B', 'NATURAL');
+		super(B, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -92,9 +95,9 @@ export class NaturalB extends Tone {
 	}
 }
 
-export class SharpB extends Tone {
+export class SharpB extends Note {
 	constructor() {
-		super('B', 'SHARP');
+		super(B, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -106,9 +109,9 @@ export class SharpB extends Tone {
 	}
 }
 
-export class FlatC extends Tone {
+export class FlatC extends Note {
 	constructor() {
-		super('C', 'FLAT');
+		super(C, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -120,9 +123,9 @@ export class FlatC extends Tone {
 	}
 }
 
-export class NaturalC extends Tone {
+export class NaturalC extends Note {
 	constructor() {
-		super('C', 'NATURAL');
+		super(C, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -134,9 +137,9 @@ export class NaturalC extends Tone {
 	}
 }
 
-export class SharpC extends Tone {
+export class SharpC extends Note {
 	constructor() {
-		super('C', 'SHARP');
+		super(C, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -148,9 +151,9 @@ export class SharpC extends Tone {
 	}
 }
 
-export class FlatD extends Tone {
+export class FlatD extends Note {
 	constructor() {
-		super('D', 'FLAT');
+		super(D, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -162,9 +165,9 @@ export class FlatD extends Tone {
 	}
 }
 
-export class NaturalD extends Tone {
+export class NaturalD extends Note {
 	constructor() {
-		super('D', 'NATURAL');
+		super(D, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -176,9 +179,9 @@ export class NaturalD extends Tone {
 	}
 }
 
-export class SharpD extends Tone {
+export class SharpD extends Note {
 	constructor() {
-		super('D', 'SHARP');
+		super(D, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -190,9 +193,9 @@ export class SharpD extends Tone {
 	}
 }
 
-export class FlatE extends Tone {
+export class FlatE extends Note {
 	constructor() {
-		super('E', 'FLAT');
+		super(E, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -204,9 +207,9 @@ export class FlatE extends Tone {
 	}
 }
 
-export class NaturalE extends Tone {
+export class NaturalE extends Note {
 	constructor() {
-		super('E', 'NATURAL');
+		super(E, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -218,9 +221,9 @@ export class NaturalE extends Tone {
 	}
 }
 
-export class SharpE extends Tone {
+export class SharpE extends Note {
 	constructor() {
-		super('E', 'SHARP');
+		super(E, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -232,9 +235,9 @@ export class SharpE extends Tone {
 	}
 }
 
-export class FlatF extends Tone {
+export class FlatF extends Note {
 	constructor() {
-		super('F', 'FLAT');
+		super(F, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -246,9 +249,9 @@ export class FlatF extends Tone {
 	}
 }
 
-export class NaturalF extends Tone {
+export class NaturalF extends Note {
 	constructor() {
-		super('F', 'NATURAL');
+		super(F, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -260,9 +263,9 @@ export class NaturalF extends Tone {
 	}
 }
 
-export class SharpF extends Tone {
+export class SharpF extends Note {
 	constructor() {
-		super('F', 'SHARP');
+		super(F, SHARP);
 	}
 	
 	next(cursor = 0) {
@@ -274,9 +277,9 @@ export class SharpF extends Tone {
 	}
 }
 
-export class FlatG extends Tone {
+export class FlatG extends Note {
 	constructor() {
-		super('G', 'FLAT');
+		super(G, FLAT);
 	}
 	
 	next(cursor = 0) {
@@ -288,9 +291,9 @@ export class FlatG extends Tone {
 	}
 }
 
-export class NaturalG extends Tone {
+export class NaturalG extends Note {
 	constructor() {
-		super('G', 'NATURAL');
+		super(G, NATURAL);
 	}
 	
 	next(cursor = 0) {
@@ -302,9 +305,9 @@ export class NaturalG extends Tone {
 	}
 }
 
-export class SharpG extends Tone {
+export class SharpG extends Note {
 	constructor() {
-		super('G', 'SHARP');
+		super(G, SHARP);
 	}
 	
 	next(cursor = 0) {

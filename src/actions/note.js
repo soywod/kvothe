@@ -1,9 +1,9 @@
 export const selectName = name => ({
-	type: 'SELECT_NAME',
+	type: 'SELECT_NOTE_NAME',
 	name
 });
 
 export const selectAlt = alt => ({
-	type: 'SELECT_ALT',
+	type: 'SELECT_NOTE_ALT',
 	alt
 });

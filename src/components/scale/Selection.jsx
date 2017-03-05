@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import * as Scale from '../models/Scale.const';
-import { ScaleNameContainer } from '../containers/scale/Name'
+import * as Scale from '../../models/Scale.const';
+import { ScaleNameContainer } from '../../containers/scale/Name'
 
 export const ScaleSelectionComponent = props => (
 	<ReactCSSTransitionGroup
@@ -13,7 +13,7 @@ export const ScaleSelectionComponent = props => (
 		transitionLeaveTimeout={300}>
 		
 		<h1 className="text-center">
-			Pick a scale
+			Pick a scale formula
 		</h1>
 		
 		<br/>

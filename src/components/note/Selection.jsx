@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { NoteNameContainer } from '../containers/note/Name';
-import { NoteAltContainer } from '../containers/note/Alt';
-import * as Note from '../models/Note.const';
-import * as Alt from '../models/Alt.const';
+import { NoteNameContainer } from '../../containers/note/Name';
+import { NoteAltContainer } from '../../containers/note/Alt';
+import * as Note from '../../models/Note.const';
+import * as Alt from '../../models/Alt.const';
 
 export const NoteSelectionComponent = props => (
 	<ReactCSSTransitionGroup

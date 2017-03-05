@@ -1,8 +1,8 @@
 import { browserHistory } from 'react-router';
 
-export const scale = (state = {}, action) => {
+const scale = (state = {}, action) => {
 	switch (action.type) {
-		case 'SELECT_SCALE': {
+		case 'SELECT_SCALE_NAME': {
 			const name = action.name;
 			
 			browserHistory.push(`${window.location.pathname}${name}`);
@@ -17,3 +17,5 @@ export const scale = (state = {}, action) => {
 		}
 	}
 };
+
+export default scale;

@@ -1,9 +1,9 @@
 import { browserHistory } from 'react-router';
 import * as Alt from '../models/Alt.const';
 
-export const note = (state = {}, action) => {
+const note = (state = {}, action) => {
 	switch (action.type) {
-		case 'SELECT_NAME': {
+		case 'SELECT_NOTE_NAME': {
 			const name = action.name;
 			const alt  = state.alt;
 			
@@ -15,7 +15,7 @@ export const note = (state = {}, action) => {
 			};
 		}
 		
-		case 'SELECT_ALT': {
+		case 'SELECT_NOTE_ALT': {
 			return {
 				name: state.name,
 				alt : action.alt === state.alt ? Alt.NATURAL : action.alt
@@ -27,3 +27,5 @@ export const note = (state = {}, action) => {
 		}
 	}
 };
+
+export default note;

@@ -1,19 +1,24 @@
 import React from 'react';
-import { IndexRoute, Router, Route, browserHistory } from 'react-router';
+import {
+	IndexRoute,
+	Router,
+	Route,
+	browserHistory
+} from 'react-router';
 
 import { Container } from './Container';
-import { NoteSelectionComponent } from './NoteSelection';
-import { HarmonizationContainer } from '../containers/Harmonization';
-import { ScaleSelectionComponent } from './ScaleSelection';
-import { About } from './About';
+import { NoteSelectionComponent } from './note/Selection';
+import { ScaleSelectionComponent } from './scale/Selection';
+import { ScaleModesContainer } from '../containers/scale/Modes';
 
-export const App = () => (
+const App = () => (
 	<Router history={browserHistory}>
 		<Route path="/" component={Container}>
 			<IndexRoute component={NoteSelectionComponent}/>
-			<Route path="/about" component={About}/>
 			<Route path="/:note/:alt" component={ScaleSelectionComponent}/>
-			<Route path="/:note/:alt/:scale" component={HarmonizationContainer}/>
+			<Route path="/:note/:alt/:scale" component={ScaleModesContainer}/>
 		</Route>
 	</Router>
 );
+
+export default App;
