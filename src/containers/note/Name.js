@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectName } from "../../actions/note";
+import { setNoteName, navigateToScaleSelection } from "../../actions/note";
 import { NoteNameComponent } from '../../components/note/Name';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	selectName: name => dispatch(selectName(name))
+	setNoteName: name => dispatch(setNoteName(name)) && dispatch(navigateToScaleSelection())
 });
 
 export const NoteNameContainer = connect(

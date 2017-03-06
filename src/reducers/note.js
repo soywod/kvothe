@@ -3,23 +3,30 @@ import * as Alt from '../models/Alt.const';
 
 const note = (state = {}, action) => {
 	switch (action.type) {
-		case 'SELECT_NOTE_NAME': {
-			const name = action.name;
-			const alt  = state.alt;
-			
-			browserHistory.push(`/${name}/${alt}`);
-			
+		case 'SET_NOTE_NAME': {
 			return {
-				name,
-				alt
+				name: action.name,
+				alt : state.alt
 			};
 		}
 		
-		case 'SELECT_NOTE_ALT': {
+		case 'SET_NOTE_ALT': {
+			return {
+				name: state.name,
+				alt : action.alt
+			};
+		}
+		
+		case 'TOGGLE_NOTE_ALT': {
 			return {
 				name: state.name,
 				alt : action.alt === state.alt ? Alt.NATURAL : action.alt
 			};
+		}
+		
+		case 'NAVIGATE_TO_SCALE_SELECTION': {
+			browserHistory.push(`/${state.name}/${state.alt}`);
+			return state;
 		}
 		
 		default: {

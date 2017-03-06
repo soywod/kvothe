@@ -3,13 +3,14 @@ import { browserHistory } from 'react-router';
 const scale = (state = {}, action) => {
 	switch (action.type) {
 		case 'SELECT_SCALE_NAME': {
-			const name = action.name;
-			
-			browserHistory.push(`${window.location.pathname}/${name}`);
-			
 			return {
-				name
+				name: action.name
 			};
+		}
+		
+		case 'NAVIGATE_TO_MODE_LIST': {
+			browserHistory.push(`${window.location.pathname}/${state.name}`);
+			return state;
 		}
 		
 		default: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectAlt } from "../../actions/note";
+import { toggleNoteAlt } from "../../actions/note";
 import { NoteAltComponent } from '../../components/note/Alt';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	selectAlt: alt => dispatch(selectAlt(alt))
+	toggleNoteAlt: alt => dispatch(toggleNoteAlt(alt))
 });
 
 export const NoteAltContainer = connect(

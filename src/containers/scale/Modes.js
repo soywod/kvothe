@@ -3,25 +3,32 @@ import { connect } from 'react-redux';
 
 import { getNoteInstance } from '../../models/Note.class';
 import { ScaleModesComponent } from '../../components/scale/Modes';
+import { setNoteName, setNoteAlt } from '../../actions/note';
+import { selectScaleName } from '../../actions/scale';
 import * as Scale from '../../models/Scale.const';
 import * as Alt from '../../models/Alt.const';
 
-const mapStateToProps = state => {
-	const note            = getNoteInstance(state.note.name, state.note.alt);
-	const formulaRef      = Scale.FORMULA[state.scale.name];
+const mapStateToProps = (_, props) => {
+	const note            = getNoteInstance(props.params.noteName, props.params.noteAlt);
+	const formulaRef      = Scale.FORMULA[props.params.scaleName];
 	const allFormulaModes = buildAllFormulaModes(formulaRef);
 	const allScales       = allFormulaModes.map(formula => buildScale(note, formula));
 	
 	return {
-		note     : state.note,
-		scaleName: state.scale.name,
+		noteName : props.params.noteName,
+		noteAlt  : props.params.noteAlt,
+		scaleName: props.params.scaleName,
 		scales   : allScales
 	};
 };
 
-const mapDispatchToProps = dispatch => ({
-	//
-});
+const mapDispatchToProps = (dispatch, props) => {
+	dispatch(setNoteName(props.params.noteName));
+	dispatch(setNoteAlt(props.params.noteAlt));
+	dispatch(selectScaleName(props.params.scaleName));
+	
+	return {};
+};
 
 const buildAllFormulaModes = formula => {
 	return formula.map((interval, index) => tweakFormula(formula, index))
@@ -44,22 +51,6 @@ const buildScale = (note, formula) => {
 	
 	return optimizeScale(scale);
 };
-
-/*
- const buildScaleOodd = (tone, formula) => {
- let scale = [];
- 
- for (let interval of formula) {
- scale.push(tone.next(interval))
- }
- 
- return optimizeScale(scale).map((t, i) => (
- <span key={i} className="badge badge-primary" style={style.toneCell}>
- {t.toString()}
- </span>
- ));
- };
- */
 
 const optimizeScale = (scaleRef) => {
 	const firstResults = [];

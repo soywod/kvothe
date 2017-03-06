@@ -6,7 +6,7 @@ export const ScaleNameComponent = props => (
 			type="button"
 			className={'btn btn-lg btn-secondary' + (props.name === props.stateName ? ' active' : '')}
 			style={styles.button}
-			onClick={() => props.selectName(props.name)}>
+			onClick={() => props.selectScaleName(props.name)}>
 			{props.name}
 		</button>
 	</div>
@@ -16,7 +16,7 @@ ScaleNameComponent.propTypes = {
 	name     : React.PropTypes.string.isRequired,
 	stateName: React.PropTypes.string,
 	
-	selectName: React.PropTypes.func.isRequired
+	selectScaleName: React.PropTypes.func.isRequired
 };
 
 const styles = {
