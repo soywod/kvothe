@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 	stateName: state.scale.name
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, params) => ({
 	selectName: name => dispatch(selectName(name))
 });
 

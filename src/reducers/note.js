@@ -7,7 +7,7 @@ const note = (state = {}, action) => {
 			const name = action.name;
 			const alt  = state.alt;
 			
-			browserHistory.push(`/${name}/${alt}/`);
+			browserHistory.push(`/${name}/${alt}`);
 			
 			return {
 				name,

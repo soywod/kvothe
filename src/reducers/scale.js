@@ -5,7 +5,7 @@ const scale = (state = {}, action) => {
 		case 'SELECT_SCALE_NAME': {
 			const name = action.name;
 			
-			browserHistory.push(`${window.location.pathname}${name}/`);
+			browserHistory.push(`${window.location.pathname}/${name}`);
 			
 			return {
 				name
