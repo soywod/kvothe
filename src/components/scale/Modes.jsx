@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const renderScales = scales => scales.map((scale, index) => (
@@ -27,6 +28,10 @@ export const ScaleModesComponent = props => (
 		transitionLeaveTimeout={300}>
 		
 		<h1 className="text-center">
+			<Link to={`/${props.note.name}/${props.note.alt}/`}>
+				<i className="fa fa-arrow-left"/>
+			</Link>
+			{' '}
 			{props.note.name}
 			{props.note.alt}
 			{' '}

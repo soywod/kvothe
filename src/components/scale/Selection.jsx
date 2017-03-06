@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import * as Scale from '../../models/Scale.const';
@@ -13,6 +14,10 @@ export const ScaleSelectionComponent = props => (
 		transitionLeaveTimeout={300}>
 		
 		<h1 className="text-center">
+			<Link to="/">
+				<i className="fa fa-arrow-left"/>
+			</Link>
+			{' '}
 			Pick a scale formula
 		</h1>
 		
