@@ -1,5 +1,6 @@
 import React from 'react';
 
+import t from '../../i18n/en';
 import { styles } from './styles';
 
 export const NoteAltComponent = props => (
@@ -8,7 +9,7 @@ export const NoteAltComponent = props => (
 		className={'btn btn-lg ' + (props.alt === props.stateAlt ? 'btn-primary' : 'btn-secondary')}
 		style={styles.button}
 		onClick={() => props.toggleNoteAlt(props.alt)}>
-    {props.alt}
+    {t(props.alt)}
   </button>
 );
 

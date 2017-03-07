@@ -1,7 +1,7 @@
 import React from 'react';
 
+import t from '../../i18n/en';
 import { styles } from './styles';
-import * as Alt from '../../models/Alt.const';
 
 export const NoteNameComponent = props => (
 	<button
@@ -9,8 +9,8 @@ export const NoteNameComponent = props => (
 		className={'btn btn-lg btn-secondary' + (props.name === props.stateName ? ' active' : '')}
 		style={styles.button}
 		onClick={() => props.setNoteName(props.name)}>
-		{props.name}
-		{props.stateAlt !== Alt.NATURAL ? props.stateAlt : ''}
+		{t(props.name)}
+		<sub>{t(props.stateAlt)}</sub>
 	</button>
 );
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import t from '../../i18n/en';
+
 export const ScaleNameComponent = props => (
 	<div>
 		<button
@@ -7,7 +9,7 @@ export const ScaleNameComponent = props => (
 			className={'btn btn-lg btn-secondary' + (props.name === props.stateName ? ' active' : '')}
 			style={styles.button}
 			onClick={() => props.selectScaleName(props.name)}>
-			{props.name}
+			{t(props.name)}
 		</button>
 	</div>
 );

@@ -19,10 +19,6 @@ class Note {
 		this.name = name;
 		this.alt  = alt;
 	}
-	
-	toString() {
-		return this.name + this.alt;
-	}
 }
 
 export class FlatA extends Note {

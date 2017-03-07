@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import t from '../../i18n/en';
+
 const renderScales = scales => scales.map((scale, index) => (
 	<tr key={index}>
 		{renderNotes(scale, index + 1)}
@@ -12,8 +14,9 @@ const renderNotes = (scale, mode) => ([
 	<td key={mode} style={styles.cell}>Mode {mode}</td>,
 	<td key={`${mode}-2`} className="text-right" style={styles.cell}>
 		{scale.map((note, index) => (
-			<span key={note.toString()} className="badge badge-primary" style={styles.note}>
-		    {note.toString()}
+			<span key={note.name + note.alt} className="badge badge-primary" style={styles.note}>
+		    {t(note.name)}
+		    <sub>{t(note.alt)}</sub>
 		  </span>
 		))}
 	</td>
@@ -32,10 +35,10 @@ export const ScaleModesComponent = props => (
 				<i className="fa fa-arrow-left"/>
 			</Link>
 			{' '}
-			{props.noteName}
-			{props.noteAlt}
+			{t(props.noteName)}
+			<sub>{t(props.noteAlt)}</sub>
 			{' '}
-			{props.scaleName} modes
+			{t(props.scaleName).toLowerCase()} modes
 		</h1>
 		
 		<br/>
@@ -51,7 +54,7 @@ export const ScaleModesComponent = props => (
 
 const styles = {
 	note: {
-		fontSize  : 20,
+		fontSize  : 18,
 		marginLeft: 5
 	},
 	cell: {
