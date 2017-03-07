@@ -15,8 +15,8 @@ const App = () => (
 	<Router history={browserHistory}>
 		<Route path="/" component={Container}>
 			<IndexRoute component={NoteSelectionComponent}/>
-			<Route path="/:noteName/:noteAlt" component={ScaleSelectionContainer}/>
-			<Route path="/:noteName/:noteAlt/:scaleName" component={ScaleModesContainer}/>
+			<Route path="/:noteAlt/:noteName" component={ScaleSelectionContainer}/>
+			<Route path="/:noteAlt/:noteName/:scaleName" component={ScaleModesContainer}/>
 		</Route>
 	</Router>
 );

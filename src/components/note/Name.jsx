@@ -8,7 +8,7 @@ export const NoteNameComponent = props => (
 		type="button"
 		className={'btn btn-lg btn-secondary' + (props.name === props.stateName ? ' active' : '')}
 		style={styles.button}
-		onClick={() => props.setNoteName(props.name, `/${props.name}/${props.stateAlt}`)}>
+		onClick={() => props.setNoteName(props.name)}>
 		{t(props.name)}
 		<sub>{t(props.stateAlt)}</sub>
 	</button>

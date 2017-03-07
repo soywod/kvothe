@@ -5,13 +5,18 @@ import { selectScaleName } from "../../actions/scale";
 import { navigateTo } from "../../actions/navigation";
 import { ScaleNameComponent } from '../../components/scale/Name';
 
-const mapStateToProps = state => ({
-	stateName: state.scale.name,
-	baseUri: `/${state.note.name}/${state.note.alt}`
-});
+let baseUri;
+
+const mapStateToProps = state => {
+	baseUri = `/${state.note.alt}/${state.note.name}`;
+	
+	return {
+		stateName: state.scale.name
+	}
+};
 
 const mapDispatchToProps = dispatch => ({
-	selectScaleName: (name, baseUri) => dispatch(selectScaleName(name)) && dispatch(navigateTo(`${baseUri}/${name}`))
+	selectScaleName: name => dispatch(selectScaleName(name)) && dispatch(navigateTo(`${baseUri}/${name}`))
 });
 
 export const ScaleNameContainer = connect(
