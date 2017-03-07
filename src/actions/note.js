@@ -12,7 +12,3 @@ export const toggleNoteAlt = alt => ({
 	type: 'TOGGLE_NOTE_ALT',
 	alt
 });
-
-export const navigateToScaleSelection = () => ({
-	type: 'NAVIGATE_TO_SCALE_SELECTION',
-});

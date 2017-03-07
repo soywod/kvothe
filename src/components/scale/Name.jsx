@@ -8,7 +8,7 @@ export const ScaleNameComponent = props => (
 			type="button"
 			className={'btn btn-lg btn-secondary' + (props.name === props.stateName ? ' active' : '')}
 			style={styles.button}
-			onClick={() => props.selectScaleName(props.name)}>
+			onClick={() => props.selectScaleName(props.name, props.baseUri)}>
 			{t(props.name)}
 		</button>
 	</div>
