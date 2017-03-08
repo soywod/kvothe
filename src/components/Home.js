@@ -35,7 +35,9 @@ const HomeComponent = () => (
 		<h5>Coming soon</h5>
 		
     <p>
-	    - <em>2017/03</em> - A harmonizer tool !
+	    - <em>2017/03</em> - New tool: a harmonizer (build all matching chords for a specific scale)
+	    - <em>2017/04</em> - Update Modes builder: possibility to create a custom scale
+	    - <em>2017</em> - Integrate a scale / chord player (piano / guitar)
     </p>
 	</div>
 );
