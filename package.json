@@ -1,10 +1,10 @@
 {
-  "name": "achord",
-  "version": "0.0.1",
-  "description": "A simple web app that builds scales and chords from a tone",
-  "main": "./src/main.jsx",
+  "name": "kvothe",
+  "version": "alpha",
+  "description": "The composer assistant",
+  "main": "./src/index.jsx",
   "repository": {},
-  "author": "soywod <clement.douin@gmail.com>",
+  "author": "Soywod <clement.douin@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
