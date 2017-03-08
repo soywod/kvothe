@@ -8,7 +8,7 @@ import { NoteNameComponent } from '../../components/note/Name';
 let baseUri = '/';
 
 const mapStateToProps = state => {
-	baseUri = `/${state.note.alt}`;
+	baseUri = `/builder/${state.note.alt}`;
 	
 	return {
 		stateName: state.note.name,

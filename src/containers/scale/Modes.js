@@ -113,7 +113,9 @@ const isAValidScale = scale => {
 	return true;
 };
 
-export const ScaleModesContainer = connect(
+const ScaleModesContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(ScaleModesComponent);
+
+export default ScaleModesContainer;

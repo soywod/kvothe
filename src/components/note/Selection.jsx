@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { NoteNameContainer } from '../../containers/note/Name';
@@ -6,13 +7,17 @@ import { NoteAltContainer } from '../../containers/note/Alt';
 import * as Note from '../../models/Note.const';
 import * as Alt from '../../models/Alt.const';
 
-export const NoteSelectionComponent = props => (
+const NoteSelectionComponent = props => (
 	<ReactCSSTransitionGroup
 		transitionName="section"
 		transitionEnterTimeout={300}
 		transitionAppear={true}
 		transitionAppearTimeout={300}
 		transitionLeaveTimeout={300}>
+		
+		<Link to="/">
+			<i className="fa fa-arrow-left"/> Back
+		</Link>
 		
 		<h1 className="text-center">
 			Pick a note
@@ -47,3 +52,5 @@ const styles = {
 		justifyContent: 'center'
 	}
 };
+
+export default NoteSelectionComponent;

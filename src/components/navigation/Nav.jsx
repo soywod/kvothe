@@ -1,28 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const style = {
+export const Nav = props => (
+	<nav className="navbar navbar-toggleable-xl navbar-light bg-faded" style={styles.nav}>
+		<Link className="navbar-brand" to="/">
+			Kvothe
+			{' '}
+			<sub className="badge badge-pill badge-warning" style={styles.version}>ALPHA</sub>
+		</Link>
+	
+		<div className="navbar-collapse collapse">
+			<div className="mr-auto"></div>
+			<div className="navbar-nav">
+				<Link className="nav-item nav-link" to="/builder">Modes builder</Link>
+			</div>
+		</div>
+	</nav>
+);
+
+const styles = {
 	nav: {
-		marginBottom: '45px'
+		marginBottom: 15
+	},
+	version: {
+		fontStyle: 'italic',
+		fontSize: 8
 	}
 };
-
-export class Nav extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		return (
-			<nav className="navbar navbar-toggleable-sm navbar-light bg-faded" style={style.nav}>
-                <Link className="navbar-brand" to="/">Achord</Link>
-
-                <div className="navbar-collapse collapse">
-                    <div className="navbar-nav">
-                        <Link className="nav-item nav-link" to="/about">About</Link>
-                    </div>
-                </div>
-            </nav>
-		);
-	}
-}

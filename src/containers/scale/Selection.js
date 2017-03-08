@@ -11,7 +11,9 @@ const mapDispatchToProps = (dispatch, props) => {
 	return {};
 };
 
-export const ScaleSelectionContainer = connect(
+const ScaleSelectionContainer = connect(
 	null,
 	mapDispatchToProps
 )(ScaleSelectionComponent);
+
+export default ScaleSelectionContainer;

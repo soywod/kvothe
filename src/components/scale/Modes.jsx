@@ -30,11 +30,11 @@ export const ScaleModesComponent = props => (
 		transitionAppearTimeout={300}
 		transitionLeaveTimeout={300}>
 		
+		<Link to={`/builder/${props.noteAlt}/${props.noteName}`}>
+			<i className="fa fa-arrow-left"/> Back
+		</Link>
+		
 		<h1 className="text-center">
-			<Link to={`/${props.noteAlt}/${props.noteName}`}>
-				<i className="fa fa-arrow-left"/>
-			</Link>
-			{' '}
 			{t(props.noteName)}
 			<sub>{t(props.noteAlt)}</sub>
 			{' '}

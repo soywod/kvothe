@@ -8,7 +8,7 @@ import { ScaleNameComponent } from '../../components/scale/Name';
 let baseUri;
 
 const mapStateToProps = state => {
-	baseUri = `/${state.note.alt}/${state.note.name}`;
+	baseUri = `/builder/${state.note.alt}/${state.note.name}`;
 	
 	return {
 		stateName: state.scale.name

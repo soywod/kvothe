@@ -13,12 +13,12 @@ export const ScaleSelectionComponent = props => (
 		transitionAppearTimeout={300}
 		transitionLeaveTimeout={300}>
 		
+		<Link to="/builder">
+			<i className="fa fa-arrow-left"/> Back
+		</Link>
+		
 		<h1 className="text-center">
-			<Link to="/">
-				<i className="fa fa-arrow-left"/>
-			</Link>
-			{' '}
-			Pick a scale formula
+			Pick a scale
 		</h1>
 		
 		<br/>
