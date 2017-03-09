@@ -13,13 +13,17 @@ const NoteSelectionComponent = props => (
 				<i className="fa fa-cubes"/> Mode builder
 			</h1>
 
+      <p className="lead">
+        <a href="/">
+          <i className="fa fa-arrow-left"/> Back
+        </a>
+			</p>
+
 			<p className="lead">
 				This tool builds for you all modes associated to a specific note and a specific scale. <br/>
 				Get started by selecting a note bellow :
 			</p>
 		</div>
-
-		<br/>
 
 		<ReactCSSTransitionGroup
       transitionName="section"

@@ -29,6 +29,12 @@ const ScaleModesComponent = props => (
 				<i className="fa fa-cubes"/> Mode builder
 			</h1>
 
+      <p className="lead">
+        <a href="#" onClick={event => resetScale(event, props.resetScale)}>
+          <i className="fa fa-arrow-left"/> Back
+        </a>
+			</p>
+
 			<p className="lead">
 				Scale selected:
         {' '}
@@ -37,8 +43,6 @@ const ScaleModesComponent = props => (
         <span className="badge badge-success">{t(props.scaleName)}</span>
 			</p>
 		</div>
-
-    <br/>
 
 		<ReactCSSTransitionGroup
       transitionName="section"
@@ -52,10 +56,6 @@ const ScaleModesComponent = props => (
 					{renderScales(props.scales)}
 				</tbody>
 			</table>
-
-			<a href="#" onClick={event => resetScale(event, props.resetScale)}>
-				<i className="fa fa-arrow-left"/> Back
-			</a>
 		</ReactCSSTransitionGroup>
 	</div>
 );

@@ -2,20 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {
-  IndexRoute,
-  Router,
-  Route,
-  browserHistory
-} from 'react-router';
+import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import 'bootstrap';
+import 'fontAwesome';
 
 import AppComponent  from './components/App';
 import HomeComponent from './components/Home';
-import NoteSelectionComponent from './components/mode-builder/NoteSelection';
 import ModeBuilderContainer from './containers/mode-builder';
 import reducers from './reducers';
 import * as Alt from './models/Alt.const';
+import './app.css';
 
 const initialState = {
   note: {

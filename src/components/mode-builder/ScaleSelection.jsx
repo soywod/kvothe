@@ -14,14 +14,18 @@ const ScaleSelectionComponent = props => (
 				<i className="fa fa-cubes"/> Mode builder
 			</h1>
 
-			<p className="lead">
+      <p className="lead">
+        <a href="#" onClick={event => resetNote(event, props.resetNote)}>
+          <i className="fa fa-arrow-left"/> Back
+        </a>
+			</p>
+
+      <p className="lead">
 				Note selected: <span className="badge badge-primary">{t(props.noteName)}<sub>{t(props.noteAlt)}</sub></span>
-				<br/>
+        <br/>
 				Now, select a scale formula :
 			</p>
 		</div>
-
-    <br/>
 
 		<ReactCSSTransitionGroup
       transitionName="section"
@@ -36,10 +40,6 @@ const ScaleSelectionComponent = props => (
 				<ScaleNameContainer name={Scale.MINOR_HARMONIC}/>
 				<ScaleNameContainer name={Scale.MINOR_MELODIC}/>
 			</div>
-
-			<a href="#" onClick={event => resetNote(event, props.resetNote)}>
-				<i className="fa fa-arrow-left"/> Back
-			</a>
 		</ReactCSSTransitionGroup>
 	</div>
 );
