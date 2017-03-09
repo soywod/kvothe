@@ -1,6 +1,6 @@
 {
   "name": "kvothe",
-  "version": "alpha",
+  "version": "0.0.1-alpha",
   "description": "The composer assistant",
   "main": "./src/index.jsx",
   "repository": {},

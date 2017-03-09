@@ -1,14 +1,13 @@
 export const setNoteName = name => ({
-	type: 'SET_NOTE_NAME',
-	name
+  type: 'SET_NOTE_NAME',
+  name
 });
 
-export const setNoteAlt = alt => ({
-	type: 'SET_NOTE_ALT',
-	alt
+export const resetNote = () => ({
+  type: 'RESET_NOTE',
 });
 
 export const toggleNoteAlt = alt => ({
-	type: 'TOGGLE_NOTE_ALT',
-	alt
+  type: 'TOGGLE_NOTE_ALT',
+  alt
 });

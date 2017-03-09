@@ -3,7 +3,7 @@ import React from 'react';
 import { Nav } from './navigation/Nav';
 
 const AppComponent = props => (
-	<div>
+  <div>
 		<Nav />
 		
 		<div className="container">

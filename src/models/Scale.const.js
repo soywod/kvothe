@@ -18,8 +18,8 @@ export const MINOR_HARMONIC = 'minor-harmonic';
 export const MINOR_MELODIC  = 'minor-melodic';
 
 export const FORMULA = {
-	[MAJOR]         : [P1, M2, M3, P4, P5, M6, M7],
-	[MINOR_NATURAL] : [P1, M2, m3, P4, P5, m6, m7],
-	[MINOR_HARMONIC]: [P1, M2, m3, P4, P5, m6, M7],
-	[MINOR_MELODIC] : [P1, M2, m3, P4, P5, M6, M7],
+  [MAJOR]         : [P1, M2, M3, P4, P5, M6, M7],
+  [MINOR_NATURAL] : [P1, M2, m3, P4, P5, m6, m7],
+  [MINOR_HARMONIC]: [P1, M2, m3, P4, P5, m6, M7],
+  [MINOR_MELODIC] : [P1, M2, m3, P4, P5, M6, M7],
 };
