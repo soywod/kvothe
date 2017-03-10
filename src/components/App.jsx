@@ -1,14 +1,15 @@
 import React from 'react';
+import { Container } from 'reactstrap';
 
-import { Nav } from './navigation/Nav';
+import Navigation from './navigation/Navigation';
 
 const AppComponent = props => (
   <div>
-		<Nav />
-		
-		<div className="container">
+		<Navigation />
+
+		<Container>
 	    {props.children}
-		</div>
+		</Container>
 	</div>
 );
 
