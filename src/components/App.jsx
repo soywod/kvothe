@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 
-import Navigation from './navigation/Navigation';
+import Navigation from '../containers/navigation/Navigation';
 
 const AppComponent = props => (
   <div>

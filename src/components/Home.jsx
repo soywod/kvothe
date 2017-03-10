@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
-import * as Bootstrap from 'reactstrap';
 
-const HomeComponent = () => (
+const resetModeBuilder = (resetNote, resetScale) => {
+  resetNote();
+  resetScale();
+};
+
+const HomeComponent = props => (
   <div>
     <h1>
 	    <i className="fa fa-magic"/>{' '}
@@ -28,7 +32,10 @@ const HomeComponent = () => (
 
     <ul>
       <li>
-        Added the <Link to="/mode-builder">mode builder tool</Link>.
+        Added the{' '}
+        <Link to="/mode-builder" onClick={resetModeBuilder(props.resetNote, props.resetScale)}>
+          mode builder tool
+        </Link>.
       </li>
     </ul>
 
@@ -43,6 +50,11 @@ const HomeComponent = () => (
     </ul>
 	</div>
 );
+
+HomeComponent.propTypes = {
+  resetNote : React.PropTypes.func.isRequired,
+  resetScale: React.PropTypes.func.isRequired
+};
 
 const styles = {
   copyright: {

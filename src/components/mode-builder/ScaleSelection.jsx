@@ -8,40 +8,32 @@ import ScaleNameContainer from '../../containers/mode-builder/ScaleName'
 import t from '../../i18n/en'
 
 const ScaleSelectionComponent = props => (
-  <div>
-		<div className="jumbotron-fluid">
-			<h1 className="display-4">
-				<i className="fa fa-cubes"/> Mode builder
-			</h1>
+  <ReactCSSTransitionGroup
+    transitionName="section"
+    transitionEnterTimeout={0}
+    transitionAppear={true}
+    transitionAppearTimeout={0}
+    transitionLeaveTimeout={0}>
 
-      <p className="lead">
-        <a href="#" onClick={event => resetNote(event, props.resetNote)}>
-          <i className="fa fa-arrow-left"/> Back
-        </a>
-			</p>
+    <h1>
+      <a href="#" onClick={event => resetNote(event, props.resetNote)}>
+        <i className="fa fa-arrow-left"/>
+      </a> Mode builder
+    </h1>
 
-      <p className="lead">
-				Note selected: <span className="badge badge-primary">{t(props.noteName)}<sub>{t(props.noteAlt)}</sub></span>
-        <br/>
-				Now, select a scale formula :
-			</p>
-		</div>
+    <p className="lead">
+      Note selected: <span className="badge badge-primary">{t(props.noteName)}<sub>{t(props.noteAlt)}</sub></span>
+      <br/>
+      Now, select a scale formula :
+    </p>
 
-		<ReactCSSTransitionGroup
-      transitionName="section"
-      transitionEnterTimeout={0}
-      transitionAppear={true}
-      transitionAppearTimeout={0}
-      transitionLeaveTimeout={0}>
-
-			<div style={styles.flexCenter}>
-				<ScaleNameContainer name={Scale.MAJOR}/>
-				<ScaleNameContainer name={Scale.MINOR_NATURAL}/>
-				<ScaleNameContainer name={Scale.MINOR_HARMONIC}/>
-				<ScaleNameContainer name={Scale.MINOR_MELODIC}/>
-			</div>
-		</ReactCSSTransitionGroup>
-	</div>
+    <div style={styles.flexCenter}>
+      <ScaleNameContainer name={Scale.MAJOR}/>
+      <ScaleNameContainer name={Scale.MINOR_NATURAL}/>
+      <ScaleNameContainer name={Scale.MINOR_HARMONIC}/>
+      <ScaleNameContainer name={Scale.MINOR_MELODIC}/>
+    </div>
+  </ReactCSSTransitionGroup>
 );
 
 const resetNote = (event, callback) => {

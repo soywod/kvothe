@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import * as Bootstrap from 'reactstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import t from '../../i18n/en';
@@ -14,50 +15,42 @@ const renderNotes = (scale, mode) => ([
   <td key={mode} style={styles.cell}>Mode {mode}</td>,
   <td key={`${mode}-2`} className="text-right" style={styles.cell}>
 		{scale.map((note, index) => (
-      <span key={note.name + note.alt} className="badge badge-primary" style={styles.note}>
+      <Bootstrap.Badge color="primary" key={note.name + note.alt} style={styles.note}>
 		    {t(note.name)}
         <sub>{t(note.alt)}</sub>
-		  </span>
+		  </Bootstrap.Badge>
     ))}
 	</td>
 ]);
 
 const ScaleModesComponent = props => (
-  <div>
-		<div className="jumbotron-fluid">
-			<h1 className="display-4">
-				<i className="fa fa-cubes"/> Mode builder
-			</h1>
+  <ReactCSSTransitionGroup
+    transitionName="section"
+    transitionEnterTimeout={0}
+    transitionAppear={true}
+    transitionAppearTimeout={0}
+    transitionLeaveTimeout={0}>
 
-      <p className="lead">
-        <a href="#" onClick={event => resetScale(event, props.resetScale)}>
-          <i className="fa fa-arrow-left"/> Back
-        </a>
-			</p>
+    <h1>
+      <a href="#" onClick={event => resetScale(event, props.resetScale)}>
+        <i className="fa fa-arrow-left"/>
+      </a> Mode builder
+    </h1>
 
-			<p className="lead">
-				Scale selected:
-        {' '}
-        <span className="badge badge-primary">{t(props.noteName)}<sub>{t(props.noteAlt)}</sub></span>
-        {' '}
-        <span className="badge badge-success">{t(props.scaleName)}</span>
-			</p>
-		</div>
+    <p className="lead">
+      Scale selected:
+      {' '}
+      <Bootstrap.Badge color="primary">{t(props.noteName)}<sub>{t(props.noteAlt)}</sub></Bootstrap.Badge>
+      {' '}
+      <Bootstrap.Badge color="success">{t(props.scaleName)}</Bootstrap.Badge>
+    </p>
 
-		<ReactCSSTransitionGroup
-      transitionName="section"
-      transitionEnterTimeout={0}
-      transitionAppear={true}
-      transitionAppearTimeout={0}
-      transitionLeaveTimeout={0}>
-
-			<table className="table table-bordered">
-				<tbody>
-					{renderScales(props.scales)}
-				</tbody>
-			</table>
-		</ReactCSSTransitionGroup>
-	</div>
+    <Bootstrap.Table bordered>
+      <tbody>
+        {renderScales(props.scales)}
+      </tbody>
+    </Bootstrap.Table>
+  </ReactCSSTransitionGroup>
 );
 
 const resetScale = (event, callback) => {

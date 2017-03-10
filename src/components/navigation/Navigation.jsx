@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import * as Bootstrap from 'reactstrap';
 
-class Navigation extends React.Component {
+class NavigationComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -10,6 +10,10 @@ class Navigation extends React.Component {
       isNavOpen     : false,
       isDropDownOpen: false
     };
+
+    this.resetModeBuilder = this.resetModeBuilder.bind(this);
+    this.toggleDropDown   = this.toggleDropDown.bind(this);
+    this.toggleNav        = this.toggleNav.bind(this);
   }
 
   toggleNav() {
@@ -24,10 +28,15 @@ class Navigation extends React.Component {
     }));
   }
 
+  resetModeBuilder() {
+    this.props.resetNote();
+    this.props.resetScale();
+  }
+
   render() {
     return (
       <Bootstrap.Navbar color="faded" light toggleable>
-        <Bootstrap.NavbarToggler right onClick={this.toggleNav.bind(this)}/>
+        <Bootstrap.NavbarToggler right onClick={this.toggleNav}/>
 
         <Bootstrap.NavbarBrand tag={Link} to="/">
           Kvothe{' '}
@@ -37,12 +46,14 @@ class Navigation extends React.Component {
         <Bootstrap.Collapse isOpen={this.state.isNavOpen} navbar>
           <Bootstrap.Nav navbar>
             <Bootstrap.NavItem>
-              <Bootstrap.Dropdown isOpen={this.state.isDropDownOpen} toggle={this.toggleDropDown.bind(this)}>
+              <Bootstrap.Dropdown isOpen={this.state.isDropDownOpen} toggle={this.toggleDropDown}>
                 <Bootstrap.DropdownToggle caret nav={true}>
                   Tools
                 </Bootstrap.DropdownToggle>
                 <Bootstrap.DropdownMenu>
-                  <Bootstrap.DropdownItem tag={Link} to="/mode-builder" children="Mode builder"/>
+                  <Bootstrap.DropdownItem tag={Link} to="/mode-builder" onClick={this.resetModeBuilder}>
+                    Mode builder
+                  </Bootstrap.DropdownItem>
                 </Bootstrap.DropdownMenu>
               </Bootstrap.Dropdown>
             </Bootstrap.NavItem>
@@ -61,6 +72,11 @@ class Navigation extends React.Component {
   }
 }
 
+NavigationComponent.propTypes = {
+  resetNote : React.PropTypes.func.isRequired,
+  resetScale: React.PropTypes.func.isRequired
+};
+
 const styles = {
   version: {
     fontStyle: 'italic',
@@ -68,4 +84,4 @@ const styles = {
   }
 };
 
-export default Navigation;
+export default NavigationComponent;
