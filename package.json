@@ -38,6 +38,6 @@
     "start": "webpack-dev-server -d --config ./webpack/dev.config.js",
     "build": "rm -f ./dist/* && webpack -p --config ./webpack/prod.config.js",
     "deploy": "rsync -azvh -e 'ssh -p 60021' --delete-before dist/ soywod@soywod.fr:kvothe",
-    "prod": "npm run build && npm run rsync"
+    "prod": "npm run build && npm run deploy"
   }
 }
