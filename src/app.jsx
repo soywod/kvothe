@@ -8,20 +8,10 @@ import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import 'bootstrap';
 import 'fontAwesome';
 
-import App  from './components/App';
-import Home from './containers/Home';
-import ModeBuilder from './containers/mode-builder';
-import reducers from './reducers';
-import * as Alt from './models/Alt.const';
+import App  from './new/App';
+import Home from './new/Home';
+import Harmonizer from './new/harmonizer/Harmonizer';
 import './app.css';
-
-const initialState = {
-  note: {
-    alt: Alt.NATURAL
-  }
-};
-
-const store = createStore(reducers, initialState);
 
 ReactGA.initialize('UA-83352674-3');
 
@@ -31,13 +21,11 @@ const logPageView = () => {
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-		<Router history={browserHistory} onUpdate={logPageView}>
-			<Route path="/" component={App}>
-				<IndexRoute component={Home}/>
-				<Route path="/mode-builder" component={ModeBuilder}/>
-			</Route>
-		</Router>
-	</Provider>,
+  <Router history={browserHistory} onUpdate={logPageView}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
+      <Route path="/harmonizer" component={Harmonizer}/>*/
+    </Route>
+  </Router>,
   document.getElementById('app')
 );
