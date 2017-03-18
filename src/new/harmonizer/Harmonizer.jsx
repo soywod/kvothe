@@ -9,7 +9,7 @@ const HarmonizerComponent = props => (
       Harmonizer
     </h1>
 
-    <NoteSelection />
+    {props.children}
   </div>
 );
 

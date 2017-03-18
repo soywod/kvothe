@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as Bootstrap from 'reactstrap';
 
@@ -12,7 +13,7 @@ class NoteSelection extends React.Component {
     super(props);
 
     this.state = {
-      alt: NATURAL
+      noteAlt: NATURAL
     };
 
     this.selectNoteName = this.selectNoteName.bind(this);
@@ -52,38 +53,45 @@ class NoteSelection extends React.Component {
 
   render() {
     return (
-      <ReactCSSTransitionGroup
-        transitionName="section"
-        transitionEnterTimeout={0}
-        transitionAppear={true}
-        transitionAppearTimeout={0}
-        transitionLeaveTimeout={0}>
+      <div>
+        <ReactCSSTransitionGroup
+          transitionName="section"
+          transitionEnterTimeout={0}
+          transitionAppear={true}
+          transitionAppearTimeout={0}
+          transitionLeaveTimeout={0}>
 
-        <p className="lead">
-          Get started by selecting a note bellow :
-        </p>
+          <p className="lead">
+            Pick a note :
+          </p>
 
-        <Bootstrap.Row>
-          <Bootstrap.Col lg={styles.lg} md={styles.md}>
-            <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
-              {this.renderNoteNames()}
-            </div>
-          </Bootstrap.Col>
-        </Bootstrap.Row>
+          <Bootstrap.Row>
+            <Bootstrap.Col lg={styles.lg} md={styles.md}>
+              <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
+                {this.renderNoteNames()}
+              </div>
+            </Bootstrap.Col>
+          </Bootstrap.Row>
 
-        <Bootstrap.Row>
-          <Bootstrap.Col lg={styles.lg} md={styles.md}>
-            <div style={styles.buttonGroup}>
-              {this.renderNoteAlts()}
-            </div>
-          </Bootstrap.Col>
-        </Bootstrap.Row>
+          <Bootstrap.Row>
+            <Bootstrap.Col lg={styles.lg} md={styles.md}>
+              <div style={styles.buttonGroup}>
+                {this.renderNoteAlts()}
+              </div>
+            </Bootstrap.Col>
+          </Bootstrap.Row>
+        </ReactCSSTransitionGroup>
 
-        <Bootstrap.Button color="primary" className="float-right">
+        <Bootstrap.Button
+          tag={Link}
+          to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}`}
+          color="primary"
+          className="float-right"
+          disabled={!this.state.noteName}>
           Next
           <i className="fa fa-chevron-circle-right icon-right"/>
         </Bootstrap.Button>
-      </ReactCSSTransitionGroup>
+      </div>
     );
   }
 }

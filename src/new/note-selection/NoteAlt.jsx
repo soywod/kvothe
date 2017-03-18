@@ -5,6 +5,7 @@ import label from '../helpers/label';
 
 const NoteAlt = props => (
   <Bootstrap.Button
+    size="sm"
     color={props.active ? 'primary' : 'secondary'}
     onClick={props.selectNoteAlt.bind(undefined, props.name)}
     style={styles.button}>
@@ -23,7 +24,7 @@ const styles = {
   button: {
     boxSizing: 'border-box',
     flex     : 1,
-    height   : 50,
+    height   : 40,
     margin   : '0 2px'
   }
 };
