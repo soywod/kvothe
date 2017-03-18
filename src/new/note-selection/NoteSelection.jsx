@@ -5,49 +5,88 @@ import * as Bootstrap from 'reactstrap';
 import NoteName from '../note-selection/NoteName';
 import NoteAlt from '../note-selection/NoteAlt';
 import { A, B, C, D, E, F, G } from '../const/NoteName'
-import { FLAT, SHARP } from '../const/NoteAlt';
+import { FLAT, NATURAL, SHARP } from '../const/NoteAlt';
 
-const NoteSelection = props => (
-  <ReactCSSTransitionGroup
-    transitionName="section"
-    transitionEnterTimeout={0}
-    transitionAppear={true}
-    transitionAppearTimeout={0}
-    transitionLeaveTimeout={0}>
+class NoteSelection extends React.Component {
+  constructor(props) {
+    super(props);
 
-    <p className="lead">
-      Get started by selecting a note bellow :
-    </p>
+    this.state = {
+      alt: NATURAL
+    };
 
-    <Bootstrap.Row>
-      <Bootstrap.Col lg={styles.lg} md={styles.md}>
-        <Bootstrap.ButtonGroup style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
-          <NoteName name={A}/>
-          <NoteName name={B}/>
-          <NoteName name={C}/>
-          <NoteName name={D}/>
-          <NoteName name={E}/>
-          <NoteName name={F}/>
-          <NoteName name={G}/>
-        </Bootstrap.ButtonGroup>
-      </Bootstrap.Col>
-    </Bootstrap.Row>
+    this.selectNoteName = this.selectNoteName.bind(this);
+    this.selectNoteAlt  = this.selectNoteAlt.bind(this);
+  }
 
-    <Bootstrap.Row>
-      <Bootstrap.Col lg={styles.lg} md={styles.md}>
-        <Bootstrap.ButtonGroup style={styles.buttonGroup}>
-          <NoteAlt name={FLAT}/>
-          <NoteAlt name={SHARP}/>
-        </Bootstrap.ButtonGroup>
-      </Bootstrap.Col>
-    </Bootstrap.Row>
+  selectNoteName(noteName) {
+    this.setState({noteName});
+  }
 
-    <Bootstrap.Button color="primary" className="float-right">
-      Next
-      <i className="fa fa-chevron-circle-right icon-right"/>
-    </Bootstrap.Button>
-  </ReactCSSTransitionGroup>
-);
+  selectNoteAlt(noteAlt) {
+    this.setState(prevState => ({
+      noteAlt: prevState.noteAlt === noteAlt ? NATURAL : noteAlt
+    }));
+  }
+
+  renderNoteNames() {
+    return [A, B, C, D, E, F, G].map(noteName => (
+      <NoteName
+        key={noteName}
+        name={noteName}
+        alt={this.state.noteAlt}
+        active={noteName === this.state.noteName}
+        selectNoteName={this.selectNoteName}/>
+    ));
+  }
+
+  renderNoteAlts() {
+    return [FLAT, SHARP].map(noteAlt => (
+      <NoteAlt
+        key={noteAlt}
+        name={noteAlt}
+        active={noteAlt === this.state.noteAlt}
+        selectNoteAlt={this.selectNoteAlt}/>
+    ));
+  }
+
+  render() {
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="section"
+        transitionEnterTimeout={0}
+        transitionAppear={true}
+        transitionAppearTimeout={0}
+        transitionLeaveTimeout={0}>
+
+        <p className="lead">
+          Get started by selecting a note bellow :
+        </p>
+
+        <Bootstrap.Row>
+          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+            <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
+              {this.renderNoteNames()}
+            </div>
+          </Bootstrap.Col>
+        </Bootstrap.Row>
+
+        <Bootstrap.Row>
+          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+            <div style={styles.buttonGroup}>
+              {this.renderNoteAlts()}
+            </div>
+          </Bootstrap.Col>
+        </Bootstrap.Row>
+
+        <Bootstrap.Button color="primary" className="float-right">
+          Next
+          <i className="fa fa-chevron-circle-right icon-right"/>
+        </Bootstrap.Button>
+      </ReactCSSTransitionGroup>
+    );
+  }
+}
 
 const styles = {
   lg: {
@@ -61,7 +100,7 @@ const styles = {
 
   firstButtonGroup: {
     marginTop   : 14,
-    marginBottom: -1
+    marginBottom: 4
   },
   buttonGroup     : {
     width       : '100%',
