@@ -68,7 +68,7 @@ class NoteSelection extends React.Component {
           <Bootstrap.Row>
             <Bootstrap.Col lg={styles.lg} md={styles.md}>
               <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
-                {this.renderNoteNames()}
+                {this.renderNoteAlts()}
               </div>
             </Bootstrap.Col>
           </Bootstrap.Row>
@@ -76,7 +76,7 @@ class NoteSelection extends React.Component {
           <Bootstrap.Row>
             <Bootstrap.Col lg={styles.lg} md={styles.md}>
               <div style={styles.buttonGroup}>
-                {this.renderNoteAlts()}
+                {this.renderNoteNames()}
               </div>
             </Bootstrap.Col>
           </Bootstrap.Row>
@@ -89,7 +89,7 @@ class NoteSelection extends React.Component {
           className="float-right"
           disabled={!this.state.noteName}>
           Next
-          <i className="fa fa-chevron-circle-right icon-right"/>
+            <i className="fa fa-arrow-right icon-right"/>
         </Bootstrap.Button>
       </div>
     );

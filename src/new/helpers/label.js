@@ -1,5 +1,11 @@
 import { A, B, C, D, E, F, G } from '../const/NoteName';
 import { FLAT, NATURAL, SHARP } from '../const/NoteAlt';
+import {
+  MAJOR,
+  MINOR_NATURAL,
+  MINOR_MELODIC,
+  MINOR_HARMONIC
+} from '../const/ScaleName';
 
 const labels = {
   [A]: 'A',
@@ -13,6 +19,11 @@ const labels = {
   [FLAT]   : '♭',
   [NATURAL]: ' ',
   [SHARP]  : '♯',
+
+  [MAJOR]: 'Major',
+  [MINOR_NATURAL]: 'Minor',
+  [MINOR_MELODIC]: 'Minor (melodic)',
+  [MINOR_HARMONIC]: 'Minor (harmonic)',
 };
 
 const label = key => labels[key] || key;
