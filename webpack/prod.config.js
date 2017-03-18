@@ -7,8 +7,8 @@ const config = {
   devtool: false,
   entry  : './src/app',
   output : {
-    path      : require('path').join(__dirname, '..', 'dist'),
-    filename  : '[hash:8].js'
+    path    : require('path').join(__dirname, '..', 'dist'),
+    filename: '[hash:8].js'
   },
   resolve: {
     alias     : {
@@ -25,7 +25,10 @@ const config = {
         exclude: /node_modules/,
         options: {
           presets: ['es2015', 'react'],
-          plugins: ['transform-runtime']
+          plugins: [
+            'transform-runtime',
+            'transform-object-rest-spread',
+          ]
         }
       },
       {

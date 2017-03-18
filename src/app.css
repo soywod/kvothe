@@ -3,8 +3,20 @@ h1 {
   margin: 30px 0;
 }
 
-h5 {
+h2, h5 {
   font-weight: 200;
+}
+
+i.icon-left {
+  margin: 0 10px 0 0;
+}
+
+i.icon-right {
+  margin: 0 0 0 10px;
+}
+
+*:focus {
+  outline: none !important;
 }
 
 .btn {

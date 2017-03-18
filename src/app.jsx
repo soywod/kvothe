@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 
 import 'bootstrap';
@@ -24,7 +22,7 @@ ReactDOM.render(
   <Router history={browserHistory} onUpdate={logPageView}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="/harmonizer" component={Harmonizer}/>*/
+      <Route path="/harmonizer" component={Harmonizer}/>
     </Route>
   </Router>,
   document.getElementById('app')
