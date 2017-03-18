@@ -6,7 +6,7 @@ import label from '../helpers/label';
 const NoteAlt = props => (
   <Bootstrap.Button
     size="sm"
-    color={props.active ? 'info': 'secondary'}
+    active={props.active}
     onClick={props.selectNoteAlt.bind(undefined, props.name)}
     style={styles.button}>
     {label(props.name)}
