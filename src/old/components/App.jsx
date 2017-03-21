@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 
-import Navbar from './Navbar';
+import Navigation from '../containers/navigation/Navigation';
 
-const App = props => (
+const AppComponent = props => (
   <div>
-    <Navbar />
+    <Navigation />
 
     <Container>
       {props.children}
@@ -13,4 +13,4 @@ const App = props => (
   </div>
 );
 
-export default App;
+export default AppComponent;

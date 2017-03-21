@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const Home = props => (
+const resetModeBuilder = (resetNote, resetScale) => {
+  resetNote();
+  resetScale();
+};
+
+const HomeComponent = props => (
   <div>
     <h1>
-      <i className="fa fa-magic icon-left"/>
+      <i className="fa fa-magic"/>{' '}
       The composer assistant
     </h1>
 
@@ -28,7 +33,7 @@ const Home = props => (
     <ul>
       <li>
         Added the{' '}
-        <Link to="/mode-builder">
+        <Link to="/mode-builder" onClick={resetModeBuilder(props.resetNote, props.resetScale)}>
           mode builder tool
         </Link>.
       </li>
@@ -46,4 +51,15 @@ const Home = props => (
   </div>
 );
 
-export default Home;
+HomeComponent.propTypes = {
+  resetNote : React.PropTypes.func.isRequired,
+  resetScale: React.PropTypes.func.isRequired
+};
+
+const styles = {
+  copyright: {
+    fontSize: 10
+  }
+};
+
+export default HomeComponent;

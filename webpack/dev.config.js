@@ -19,8 +19,8 @@ const config = {
   },
   resolve  : {
     alias     : {
-      bootstrap  : 'bootstrap/dist/css/bootstrap.min.css',
-      fontAwesome: 'font-awesome/css/font-awesome.min.css'
+      bootstrap     : 'bootstrap/dist/css/bootstrap.min.css',
+      'font-awesome': 'font-awesome/css/font-awesome.min.css'
     },
     extensions: ['.js', '.jsx']
   },
