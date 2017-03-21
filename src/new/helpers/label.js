@@ -5,7 +5,7 @@ import {
   MINOR_NATURAL,
   MINOR_MELODIC,
   MINOR_HARMONIC
-} from '../const/ScaleName';
+} from '../const/Scale';
 
 const labels = {
   [A]: 'A',

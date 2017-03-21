@@ -28,7 +28,7 @@ ReactDOM.render(
       <Route path="/harmonizer" component={Harmonizer}>
         <IndexRoute component={NoteSelection}/>
         <Route path="/harmonizer/:noteName/:noteAlt" component={ScaleSelection}/>
-        <Route path="/harmonizer/:noteName/:noteAlt/:scaleID" component={ModeSelection}/>
+        <Route path="/harmonizer/:noteName/:noteAlt/:scale" component={ModeSelection}/>
       </Route>
     </Route>
   </Router>,

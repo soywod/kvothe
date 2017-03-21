@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as Bootstrap from 'reactstrap';
 
-import * as Scales from '../const/ScaleName'
+import * as Scales from '../const/Scale'
 import ScaleName from './ScaleName';
 
 class ScaleSelection extends React.Component {

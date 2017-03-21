@@ -1,0 +1,12 @@
+export const P1 = 'P1';
+export const m2 = 'm2';
+export const M2 = 'M2';
+export const m3 = 'm3';
+export const M3 = 'M3';
+export const P4 = 'P4';
+export const d5 = 'd5';
+export const P5 = 'P5';
+export const m6 = 'm6';
+export const M6 = 'M6';
+export const m7 = 'm7';
+export const M7 = 'M7';
