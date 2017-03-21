@@ -22,14 +22,36 @@ const formulas = {
 };
 
 class Scale {
-  constructor(note, scale) {
-    this.note      = note;
-    this.formula   = formulas[scale];
-    this.intervals = [];
+  static getInstance(params) {
+    return new Scale(params)
+  }
 
+  constructor(params) {
+    this.formula   = formulas[params.formula] || params.formula;
+    this.intervals = params.intervals;
+    this.note      = params.note;
+    this.notes     = [];
+
+    if (! this.formula && ! this.intervals) {
+      throw new Error('Missing parameter: formula or intervals.');
+    }
+
+    if (! this.formula) {
+      this.initFormula();
+    }
+
+    console.log(this.formula);
+
+    this.initIntervals();
+    this.initNotes();
+  }
+
+  initIntervals() {
     let bit = 1, cursor = 0;
 
-    for (; bit <= this.formula; bit = bit << 1, cursor++) {
+    this.intervals = [];
+
+    for (; bit <= this.formula; bit = bit << 1, cursor ++) {
       if ((this.formula & bit) === bit) {
         this.intervals.push(cursor);
       }
@@ -38,13 +60,26 @@ class Scale {
     this.lastDegree = cursor;
   }
 
-  buildAllModes() {
-    return this.intervals
-      .map(degree => this.buildModeInterval(degree))
-      .map((intervals, index) => this.buildMode(intervals, index));
+  initFormula() {
+    this.formula = _.reduce((formula, degree) => formula | Math.pow(2, degree))(0)(this.intervals);
   }
 
-  buildModeInterval(degreeRef) {
+  initNotes() {
+    this.notes = this.optimize(
+      _.map(degree => this.note.next(degree))(this.intervals)
+    );
+  }
+
+  buildAllModes() {
+    return this.intervals.map(degree => {
+      return Scale.getInstance({
+        note     : this.note.next(degree),
+        intervals: this.buildModeIntervals(degree)
+      });
+    });
+  }
+
+  buildModeIntervals(degreeRef) {
     return this.intervals
       .map(degree => Math.abs(degree - degreeRef + this.lastDegree) % this.lastDegree)
       .sort((a, b) => a > b);
@@ -54,15 +89,15 @@ class Scale {
     const noteRef = this.note.next(this.intervals[index]);
     const scale   = _.map(degree => noteRef.next(degree))(intervals);
 
-    return this.optimizeScale(scale);
+    return this.optimize(scale);
   }
 
-  optimizeScale(scaleRef) {
+  optimize(scaleRef) {
     const firstResults = [];
     const lastResults  = [];
     let cursor         = 1;
 
-    for (let bit = 0; bit <= Math.pow(2, scaleRef.length); bit++) {
+    for (let bit = 0; bit <= Math.pow(2, scaleRef.length); bit ++) {
       const currentScale = scaleRef.map((note, index) => {
         const currentBit = Math.pow(2, index);
         return ((bit & currentBit) === currentBit ? note.twin() || note : note);
@@ -77,7 +112,7 @@ class Scale {
       const firstNoteSame = (scale[0].name === scaleRef[0].name);
       let hasNoDuplicates = true;
 
-      for (let index = 0; index < scale.length; index++) {
+      for (let index = 0; index < scale.length; index ++) {
         const note = scale[index];
 
         if (scale.some((currNote, currIndex) => index !== currIndex && note.name === currNote.name)) {
@@ -103,7 +138,7 @@ class Scale {
   isAValidScale(scale) {
     let index = 0;
 
-    for (; index < scale.length; index++) {
+    for (; index < scale.length; index ++) {
       const note           = scale[index];
       const hasInvalidAlts = scale.some((currNote, currIndex) => (
         currNote.alt === FLAT && note.alt === SHARP ||
