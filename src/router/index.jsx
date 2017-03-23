@@ -6,7 +6,7 @@ import Home from '../components/Home';
 import Harmonizer from '../components/harmonizer';
 import NoteSelection from '../components/note-selection';
 import ScaleSelection from '../components/scale-selection';
-import HarmonizerResult from '../components/harmonizer/ResultList';
+import HarmonizerResult from '../components/harmonizer/ModeList';
 import updateLocation from '../analytics';
 
 const AppRouter = () => (

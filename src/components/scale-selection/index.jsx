@@ -1,35 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as Bootstrap from 'reactstrap';
 
 import * as Scales from '../../const/Scale'
-import ScaleName from './ScaleName';
+import Scale from './Scale';
 
 class ScaleSelection extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      noteName: props.params.noteName,
-      noteAlt : props.params.noteAlt
-    };
-
-    this.selectScaleName = this.selectScaleName.bind(this);
+    this.onSelectScale = this.onSelectScale.bind(this);
   }
 
-  selectScaleName(scaleName) {
-    this.setState({scaleName});
+  onSelectScale(scale) {
+    browserHistory.push(`/harmonizer/${this.props.params.noteName}/${this.props.params.noteAlt}/${scale}`);
   }
 
   renderScaleNames() {
-    return Object.values(Scales).map(scaleName => (
-      <ScaleName
-        key={scaleName}
-        name={scaleName}
-        active={scaleName === this.state.scaleName}
-        selectScaleName={this.selectScaleName}/>
-    ));
+    return Object.values(Scales)
+      .sort((a, b) => a > b)
+      .map((scale, index) => (
+        <Scale key={index} name={scale} onSelectScale={this.onSelectScale}/>
+      ));
   }
 
   render() {
@@ -62,16 +55,6 @@ class ScaleSelection extends React.Component {
             color="link">
             <i className="fa fa-arrow-left icon-left"/>
             Back
-          </Bootstrap.Button>
-
-          <Bootstrap.Button
-            tag={Link}
-            to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}/${this.state.scaleName}`}
-            color="primary"
-            className="float-right"
-            disabled={! this.state.scaleName}>
-            Next
-            <i className="fa fa-arrow-right icon-right"/>
           </Bootstrap.Button>
         </div>
       </div>

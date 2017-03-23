@@ -1,7 +1,7 @@
 import _ from 'lodash/fp';
 
-import { MAJOR, MINOR_NATURAL } from '../const/Scale';
 import { FLAT, SHARP } from '../const/NoteAlt';
+import * as ScaleConst from '../const/Scale';
 
 const P1 = 1;
 const m2 = P1 << 1;
@@ -9,6 +9,7 @@ const M2 = P1 << 2;
 const m3 = P1 << 3;
 const M3 = P1 << 4;
 const P4 = P1 << 5;
+const A4 = P1 << 6;
 const d5 = P1 << 6;
 const P5 = P1 << 7;
 const m6 = P1 << 8;
@@ -17,13 +18,28 @@ const m7 = P1 << 10;
 const M7 = P1 << 11;
 
 const formulas = {
-  [MAJOR]        : P1 | M2 | M3 | P4 | P5 | M6 | M7,
-  [MINOR_NATURAL]: P1 | M2 | m3 | P4 | P5 | m6 | m7,
+  [ScaleConst.CHROMATIC]: P1 | m2 | M2 | m3 | M3 | P4 | d5 | P5 | m6 | M6 | m7 | M7,
+
+  [ScaleConst.MAJOR]: P1 | M2 | M3 | P4 | P5 | M6 | M7,
+  [ScaleConst.MINOR]: P1 | M2 | m3 | P4 | P5 | m6 | m7,
+
+  [ScaleConst.DORIAN]    : P1 | M2 | m3 | P4 | P5 | M6 | m7,
+  [ScaleConst.PHRYGIAN]  : P1 | m2 | m3 | P4 | P5 | m6 | m7,
+  [ScaleConst.LYDIAN]    : P1 | M2 | M3 | A4 | P5 | M6 | M7,
+  [ScaleConst.MIXOLYDIAN]: P1 | M2 | M3 | P4 | P5 | M6 | m7,
+  [ScaleConst.LOCRIAN]   : P1 | m2 | m3 | P4 | d5 | m6 | m7,
+
+  [ScaleConst.MINOR_HARMONIC]: P1 | M2 | m3 | P4 | P5 | m6 | M7,
+  [ScaleConst.MINOR_MELODIC] : P1 | M2 | m3 | P4 | P5 | M6 | M7,
 };
 
 class Scale {
   static getInstance(params) {
     return new Scale(params)
+  }
+
+  getName() {
+    return _.findKey(formula => this.formula === formula)(formulas);
   }
 
   constructor(params) {
@@ -40,8 +56,6 @@ class Scale {
       this.initFormula();
     }
 
-    console.log(this.formula);
-
     this.initIntervals();
     this.initNotes();
   }
@@ -51,7 +65,7 @@ class Scale {
 
     this.intervals = [];
 
-    for (; bit <= this.formula; bit = bit << 1, cursor ++) {
+    for (; bit < formulas[ScaleConst.CHROMATIC]; bit = bit << 1, cursor ++) {
       if ((this.formula & bit) === bit) {
         this.intervals.push(cursor);
       }

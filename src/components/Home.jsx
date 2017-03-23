@@ -10,7 +10,7 @@ const Home = props => (
 
     <p className="lead">
       Kvothe (pronounce « quote ») is a web app that tries to help composers.
-      It provides you only one tool for now : a mode builder.
+      For now, it provides you only one tool : a <Link to="/harmonizer">Harmonizer</Link>.
       Many more tools will soon be available :)
     </p>
 
@@ -27,10 +27,7 @@ const Home = props => (
 
     <ul>
       <li>
-        Added the{' '}
-        <Link to="/mode-builder">
-          mode builder tool
-        </Link>.
+        Added the <Link to="/harmonizer">Harmonizer tool</Link>.
       </li>
     </ul>
 
@@ -39,8 +36,7 @@ const Home = props => (
     <h5>Coming soon :</h5>
 
     <ul>
-      <li><strong>New tool</strong>: a harmonizer (build all matching chords for a specific scale)</li>
-      <li>Update Modes builder: possibility to create a custom scale</li>
+      <li>Possibility to create a custom scale in the Harmonizer</li>
       <li>Integrate a scale / chord player</li>
     </ul>
   </div>
