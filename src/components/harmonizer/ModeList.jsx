@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash/fp';
 import { browserHistory, Link, Router } from 'react-router';
-import { Badge, Button, Col, Row } from 'reactstrap';
+import { Badge, Button, CardGroup, Col, Row } from 'reactstrap';
 
 import Mode from './Mode';
 import Note from '../../model/Note.class';
@@ -31,7 +31,7 @@ class ModeList extends React.Component {
     const allModes = this.state.scale.buildAllModes();
 
     return allModes.map((mode, index) => (
-      <Mode key={index} mode={mode}/>
+      <Mode key={index} index={index + 1} mode={mode}/>
     ));
   }
 
@@ -44,53 +44,6 @@ class ModeList extends React.Component {
           transitionAppear={true}
           transitionAppearTimeout={0}
           transitionLeaveTimeout={0}>
-
-          <p className="lead">
-            {'Note: '}
-            <Badge pill color="primary">
-              {label(this.state.scale.note.name)}
-              <sub>{label(this.state.scale.note.alt)}</sub>
-            </Badge>
-          </p>
-
-          <p className="lead">
-            {'Scale: '}
-            <Badge color="default">
-              {label(this.state.scale.getName()) || '?'}
-            </Badge>
-          </p>
-
-          <p className="lead">
-            {'Intervals: '}
-            {_
-              .concat(this.state.scale.intervals, this.state.scale.lastDegree)
-              .reduce((intervals, degree, index) => {
-                if (index === 0) return [];
-                intervals.push(`step-${degree - this.state.scale.intervals[index - 1]}`);
-                return intervals;
-              }, [])
-              .map((step, index) => (
-                <Badge key={index} color="warning" style={styles.badge}>
-                  {label(step)}
-                </Badge>
-              ))
-            }
-          </p>
-
-          <p className="lead">
-            {'Formula: '}
-            {this.state.scale.intervals
-              .map((degree, index) => (
-                <Badge color="danger" key={index} style={styles.badge}>
-                  {label(`degree-${degree}`)}
-                </Badge>
-              ))
-            }
-          </p>
-
-          <p className="lead">
-            Modes:
-          </p>
 
           <Row>
             <Col lg={styles.lg} md={styles.md}>
@@ -117,12 +70,12 @@ class ModeList extends React.Component {
 
 const styles = {
   lg: {
-    size  : 6,
-    offset: 3
-  },
-  md: {
     size  : 8,
     offset: 2
+  },
+  md: {
+    size  : 10,
+    offset: 1
   },
 
   badge      : {

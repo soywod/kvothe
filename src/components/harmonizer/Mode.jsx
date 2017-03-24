@@ -1,50 +1,84 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Badge, Button } from 'reactstrap';
+import _ from 'lodash/fp';
+import {
+  Badge,
+  Card,
+  CardBlock,
+  CardHeader,
+  CardSubtitle,
+  ListGroup,
+  ListGroupItem
+} from 'reactstrap';
 
 import Scale from '../../model/Scale.class';
 import label from '../../helpers/label';
 
 const Mode = props => (
-  <Button
-    tag={Link}
-    to={`/harmonizer/${props.mode.note.name}/${props.mode.note.alt}/${props.mode.getName() || props.mode.formula}`}
-    style={styles.button}>
-    <div>
-      {props.mode.notes
-        .map((note, index) => (
-          <Badge key={index} color="primary" style={styles.badge}>
-            {label(note.name)}
-            <sub>{label(note.alt)}</sub>
-          </Badge>
-        ))
-      }
-
-      <Badge color="default" className="float-right">
-        {label(props.mode.note.name)}
-        <sub>{label(props.mode.note.alt)}</sub>
-        {' '}
-        {label(props.mode.getName()) || '... ?'}
-      </Badge>
-    </div>
-  </Button>
+  <Card style={styles.card}>
+    <CardHeader>
+      {label(props.mode.note.name)}
+      <sub>{label(props.mode.note.alt)}</sub>{' '}
+      {label(props.mode.getName()) || '... ?'}
+      <span className="text-muted">
+        {` - Mode ${props.index}`}
+      </span>
+    </CardHeader>
+    <ListGroup flush>
+      <ListGroupItem>
+        {props.mode.intervals
+          .map((degree, index) => (
+            <Badge color="danger" key={index} style={styles.badge}>
+              {label(`degree-${degree}`)}
+            </Badge>
+          ))
+        }
+      </ListGroupItem>
+      <ListGroupItem>
+        {_
+          .concat(props.mode.intervals, props.mode.lastDegree)
+          .reduce((intervals, degree, index) => {
+            if (index === 0) return [];
+            intervals.push(`step-${degree - props.mode.intervals[index - 1]}`);
+            return intervals;
+          }, [])
+          .map((step, index) => (
+            <Badge key={index} color="warning" style={styles.badge}>
+              {label(step)}
+            </Badge>
+          ))
+        }
+      </ListGroupItem>
+      <ListGroupItem>
+        {props.mode.notes
+          .map((note, index) => (
+            <Badge color="primary" key={index} style={styles.badge}>
+              {label(note.name)}
+              <sub>{label(note.alt)}</sub>{' '}
+            </Badge>
+          ))
+        }
+      </ListGroupItem>
+    </ListGroup>
+  </Card>
 );
 
 Mode.propTypes = {
-  mode: React.PropTypes.instanceOf(Scale).isRequired,
+  mode : React.PropTypes.instanceOf(Scale).isRequired,
+  index: React.PropTypes.number.isRequired
 };
 
 const styles = {
-  badge : {
+  badge    : {
     marginRight: 2
   },
-  button: {
+  card     : {
+    marginBottom: 15
+  },
+  cardBlock: {
     width    : '100%',
-    height   : 40,
     textAlign: 'left',
-    boxSizing: 'border-box',
-    padding  : '10px 15px',
-    margin   : 2
+    boxSizing: 'border-box'
   }
 };
 
