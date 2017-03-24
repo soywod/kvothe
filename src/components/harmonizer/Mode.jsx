@@ -21,7 +21,7 @@ const Mode = props => (
       <sub>{label(props.mode.note.alt)}</sub>{' '}
       {label(props.mode.getName()) || '... ?'}
       <span className="text-muted">
-        {` - Mode ${props.index}`}
+        {` - mode ${props.index}`}
       </span>
     </CardHeader>
     <ListGroup flush>
