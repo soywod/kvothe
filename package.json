@@ -8,8 +8,11 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
+    "node-jsx": "^0.13.3",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
@@ -19,12 +22,14 @@
     "reactstrap": "^4.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
@@ -35,6 +40,9 @@
     "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
+    "dev:serve": "babel-node --presets react,es2015 --plugins transform-object-rest-spread src/server.js",
+    "dev:build": "webpack -d",
+    "dev": "npm run dev:build && npm run dev:serve",
     "start": "webpack-dev-server -d --config ./webpack/dev.config.js",
     "build": "rm -f ./dist/* && webpack -p --config ./webpack/prod.config.js",
     "deploy": "rsync -azvh -e 'ssh -p 60021' --delete-before dist/ soywod@soywod.fr:kvothe",

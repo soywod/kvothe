@@ -1,16 +1,9 @@
 import React from 'react';
-import { Container } from 'reactstrap';
 
-import Navbar from './Navbar';
+import Router from '../routing/Router';
 
-const App = props => (
-  <div>
-    <Navbar />
-
-    <Container>
-      {props.children}
-    </Container>
-  </div>
+const App = () => (
+  <Router/>
 );
 
 export default App;

@@ -38,21 +38,13 @@ class ModeList extends React.Component {
   render() {
     return (
       <div>
-        <ReactCSSTransitionGroup
-          transitionName="section"
-          transitionEnterTimeout={0}
-          transitionAppear={true}
-          transitionAppearTimeout={0}
-          transitionLeaveTimeout={0}>
-
-          <Row>
-            <Col lg={styles.lg} md={styles.md}>
-              <div style={styles.buttonGroup}>
-                {this.renderModeNames()}
-              </div>
-            </Col>
-          </Row>
-        </ReactCSSTransitionGroup>
+        <Row>
+          <Col lg={styles.lg} md={styles.md}>
+            <div style={styles.buttonGroup}>
+              {this.renderModeNames()}
+            </div>
+          </Col>
+        </Row>
 
         <div>
           <Button

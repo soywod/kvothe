@@ -1,6 +1,4 @@
 node_modules
-dist/*
 npm-debug.log
 .idea
-
-!.gitignore
+src/static/bundle.*

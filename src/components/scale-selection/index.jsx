@@ -28,25 +28,17 @@ class ScaleSelection extends React.Component {
   render() {
     return (
       <div>
-        <ReactCSSTransitionGroup
-          transitionName="section"
-          transitionEnterTimeout={0}
-          transitionAppear={true}
-          transitionAppearTimeout={0}
-          transitionLeaveTimeout={0}>
+        <p className="lead">
+          Pick a scale :
+        </p>
 
-          <p className="lead">
-            Pick a scale :
-          </p>
-
-          <Bootstrap.Row>
-            <Bootstrap.Col lg={styles.lg} md={styles.md}>
-              <div style={styles.buttonGroup}>
-                {this.renderScaleNames()}
-              </div>
-            </Bootstrap.Col>
-          </Bootstrap.Row>
-        </ReactCSSTransitionGroup>
+        <Bootstrap.Row>
+          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+            <div style={styles.buttonGroup}>
+              {this.renderScaleNames()}
+            </div>
+          </Bootstrap.Col>
+        </Bootstrap.Row>
 
         <div>
           <Bootstrap.Button

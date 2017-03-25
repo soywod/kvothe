@@ -54,33 +54,25 @@ class NoteSelection extends React.Component {
   render() {
     return (
       <div>
-        <ReactCSSTransitionGroup
-          transitionName="section"
-          transitionEnterTimeout={0}
-          transitionAppear={true}
-          transitionAppearTimeout={0}
-          transitionLeaveTimeout={0}>
+        <p className="lead">
+          Pick a note :
+        </p>
 
-          <p className="lead">
-            Pick a note :
-          </p>
+        <Bootstrap.Row>
+          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+            <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
+              {this.renderNoteAlts()}
+            </div>
+          </Bootstrap.Col>
+        </Bootstrap.Row>
 
-          <Bootstrap.Row>
-            <Bootstrap.Col lg={styles.lg} md={styles.md}>
-              <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
-                {this.renderNoteAlts()}
-              </div>
-            </Bootstrap.Col>
-          </Bootstrap.Row>
-
-          <Bootstrap.Row>
-            <Bootstrap.Col lg={styles.lg} md={styles.md}>
-              <div style={styles.buttonGroup}>
-                {this.renderNoteNames()}
-              </div>
-            </Bootstrap.Col>
-          </Bootstrap.Row>
-        </ReactCSSTransitionGroup>
+        <Bootstrap.Row>
+          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+            <div style={styles.buttonGroup}>
+              {this.renderNoteNames()}
+            </div>
+          </Bootstrap.Col>
+        </Bootstrap.Row>
 
         <Bootstrap.Button
           tag={Link}
