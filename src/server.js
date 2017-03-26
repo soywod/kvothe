@@ -1,5 +1,4 @@
 import Express from 'express';
-import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
@@ -9,9 +8,9 @@ import routes from './routing/routes';
 const app = Express();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'static'));
+app.set('views', '.');
 
-app.use(Express.static(path.join(__dirname, 'static')));
+app.use(Express.static('.'));
 
 app.get('*', (req, res) => {
   const location = req.url;

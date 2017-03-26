@@ -40,9 +40,7 @@ class ModeList extends React.Component {
       <div>
         <Row>
           <Col lg={styles.lg} md={styles.md}>
-            <div style={styles.buttonGroup}>
-              {this.renderModeNames()}
-            </div>
+            {this.renderModeNames()}
           </Col>
         </Row>
 
@@ -62,7 +60,7 @@ class ModeList extends React.Component {
 
 const styles = {
   lg: {
-    size  : 8,
+    size  : 4,
     offset: 2
   },
   md: {

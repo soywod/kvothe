@@ -1,19 +1,18 @@
-const webpack = require('webpack');
+const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlPlugin        = require('html-webpack-plugin');
 
-const config = {
-  devtool: false,
-  entry  : './src/app',
+const common = {
+  entry  : './src/client',
   output : {
-    path    : require('path').join(__dirname, '..', 'dist'),
-    filename: '[hash:8].js'
+    path      : path.join(__dirname, '..', 'dist'),
+    filename  : 'js/[hash:8].js',
+    publicPath: '/'
   },
   resolve: {
     alias     : {
       bootstrap     : 'bootstrap/dist/css/bootstrap.min.css',
-      'font-awesome': 'font-awesome/css/font-awesome.css'
+      'font-awesome': 'font-awesome/css/font-awesome.min.css'
     },
     extensions: ['.js', '.jsx']
   },
@@ -40,30 +39,29 @@ const config = {
       },
       {
         test  : /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash:8].[ext]'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]'
       },
       {
         test  : /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[hash:8].[ext]'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]'
       },
       {
         test  : /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[hash:8].[ext]'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=fonts/[hash:8].[ext]'
       },
       {
         test  : /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?name=[hash:8].[ext]'
+        loader: 'file-loader?name=fonts/[hash:8].[ext]'
       },
       {
         test  : /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[hash:8].[ext]'
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=fonts/[hash:8].[ext]'
       }
     ]
   },
   plugins: [
-    new HtmlPlugin({template: './src/app.ejs'}),
-    new ExtractTextPlugin('[hash:8].css')
+    new ExtractTextPlugin('css/[hash:8].css')
   ]
 };
 
-module.exports = config;
+module.exports = common;

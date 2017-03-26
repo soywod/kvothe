@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kvothe</title>
-
-    <link rel="stylesheet" href="/bundle.css">
-    <script async src="/bundle.js"></script>
+    <base href="/">
 </head>
 <body>
-    <div id="kvothe"><%- content %></div>
+    <div id="kvothe"><%= '<' + "%- (typeof content !== 'undefined') ? content : '' %" + '>' %></div>
 </body>
 </html>

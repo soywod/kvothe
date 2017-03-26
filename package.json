@@ -34,18 +34,21 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
+    "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-dev-server": "^2.3.0",
+    "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "dev:serve": "babel-node --presets react,es2015 --plugins transform-object-rest-spread src/server.js",
-    "dev:build": "webpack -d",
-    "dev": "npm run dev:build && npm run dev:serve",
-    "start": "webpack-dev-server -d --config ./webpack/dev.config.js",
-    "build": "rm -f ./dist/* && webpack -p --config ./webpack/prod.config.js",
-    "deploy": "rsync -azvh -e 'ssh -p 60021' --delete-before dist/ soywod@soywod.fr:kvothe",
-    "prod": "npm run build && npm run deploy"
+    "dev": "webpack-dev-server --config webpack/dev.js",
+    "prod:client:clean": "rm -rf dist/js && rm -rf dist/css && rm -rf dist/fonts",
+    "prod:client": "npm run prod:client:clean && webpack --config webpack/prod.client.js",
+    "prod:server:clean": "rm -f dist/server.js",
+    "prod:server": "npm run prod:server:clean && webpack --config webpack/prod.server.js",
+    "prod": "npm run prod:client && npm run prod:server",
+    "start": "npm run dev",
+    "deploy": "rsync -azvh -e 'ssh -p 60021' --delete-before dist/ soywod@soywod.fr:kvothe"
   }
 }
