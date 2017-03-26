@@ -60,7 +60,7 @@ class ModeList extends React.Component {
 
 const styles = {
   lg: {
-    size  : 4,
+    size  : 8,
     offset: 2
   },
   md: {

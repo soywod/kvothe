@@ -5,7 +5,7 @@ import {
   Badge,
   Card,
   CardBlock,
-  CardHeader,
+  CardTitle,
   CardSubtitle,
   ListGroup,
   ListGroupItem
@@ -15,20 +15,32 @@ import Scale from '../../model/Scale.class';
 import label from '../../helpers/label';
 
 const Mode = props => (
-  <Card style={styles.card}>
-    <CardHeader>
-      {label(props.mode.note.name)}
-      <sub>{label(props.mode.note.alt)}</sub>{' '}
-      {label(props.mode.getName()) || '... ?'}
-      <span className="text-muted">
-        {` - mode ${props.index}`}
-      </span>
-    </CardHeader>
+  <Card style={styles.card} color="secondary">
+    <CardBlock>
+      <CardTitle>
+        {label(props.mode.note.name)}
+        <sub>{label(props.mode.note.alt)}</sub>{' '}
+        {label(props.mode.getName()) || '... ?'}
+        <span className="float-right">
+          {props.mode.notes
+            .map((note, index) => (
+              <Badge color="primary" key={index} style={styles.badge}>
+              {label(note.name)}
+                <sub>{label(note.alt)}</sub>{' '}
+            </Badge>
+            ))
+          }
+        </span>
+      </CardTitle>
+      <CardSubtitle className="text-muted">
+        Mode {props.index}
+      </CardSubtitle>
+    </CardBlock>
     <ListGroup flush>
       <ListGroupItem>
         {props.mode.intervals
           .map((degree, index) => (
-            <Badge color="danger" key={index} style={styles.badge}>
+            <Badge key={index} style={styles.badge}>
               {label(`degree-${degree}`)}
             </Badge>
           ))
@@ -43,18 +55,8 @@ const Mode = props => (
             return intervals;
           }, [])
           .map((step, index) => (
-            <Badge key={index} color="warning" style={styles.badge}>
+            <Badge key={index} style={styles.badge}>
               {label(step)}
-            </Badge>
-          ))
-        }
-      </ListGroupItem>
-      <ListGroupItem>
-        {props.mode.notes
-          .map((note, index) => (
-            <Badge color="primary" key={index} style={styles.badge}>
-              {label(note.name)}
-              <sub>{label(note.alt)}</sub>{' '}
             </Badge>
           ))
         }
@@ -73,7 +75,7 @@ const styles = {
     marginRight: 2
   },
   card     : {
-    marginBottom: 15
+    marginBottom: 30
   },
   cardBlock: {
     width    : '100%',
