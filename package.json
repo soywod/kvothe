@@ -43,6 +43,7 @@
     "prod:client:clean": "rm -rf dist/js && rm -rf dist/css && rm -rf dist/fonts",
     "prod:client": "npm run prod:client:clean && webpack --config webpack/prod.js",
     "prod:server": "babel-node src/server",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "deploy": "ssh -p 60021 soywod@soywod.fr \"sudo service nginx stop; sudo service supervisor stop; cd kvothe; git pull; npm run prod:client; sudo service supervisor start; sudo service nginx start;\""
   }
 }
