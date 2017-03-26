@@ -1,3 +1,4 @@
+import path from 'path';
 import Express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -8,9 +9,9 @@ import routes from './routing/routes';
 const app = Express();
 
 app.set('view engine', 'ejs');
-app.set('views', '.');
+app.set('views', path.join(__dirname, '..', 'dist'));
 
-app.use(Express.static('.'));
+app.use(Express.static(path.join(__dirname, '..', 'dist')));
 
 app.get('*', (req, res) => {
   const location = req.url;
@@ -39,4 +40,5 @@ app.get('*', (req, res) => {
   );
 });
 
+console.log('Kvothe server listening ...');
 app.listen(8080);
