@@ -13,7 +13,7 @@ const prod = {
       "process.env.NODE_ENV": JSON.stringify("production")
     }),
     new HtmlPlugin({
-      template: 'src/static/index.ejs',
+      template: 'src/index.ejs',
       filename: 'index.ejs'
     }),
     new NoEmitOnErrorsPlugin,

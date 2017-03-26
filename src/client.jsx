@@ -5,7 +5,7 @@ import 'bootstrap';
 import 'font-awesome';
 
 import App from './components/App';
-import './static/styles.css';
+import './styles.css';
 
 ReactGA.initialize('UA-83352674-3');
 

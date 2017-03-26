@@ -14,7 +14,7 @@ const dev = {
     historyApiFallback: true
   },
   plugins  : [
-    new HtmlPlugin({template: 'src/static/index.ejs'}),
+    new HtmlPlugin({template: 'src/index.ejs'}),
     new HotModuleReloadPlugin,
     new LoaderOptionsPlugin({debug: true}),
   ]
