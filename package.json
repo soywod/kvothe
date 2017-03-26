@@ -32,7 +32,6 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
-    "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
@@ -43,7 +42,7 @@
     "dev": "webpack-dev-server --config webpack/dev.js",
     "prod:client:clean": "rm -rf dist/js && rm -rf dist/css && rm -rf dist/fonts",
     "prod:client": "npm run prod:client:clean && webpack --config webpack/prod.js",
-    "prod:server": "nodemon --exec babel-node src/server",
+    "prod:server": "babel-node src/server",
     "start": "npm run dev"
   }
 }
