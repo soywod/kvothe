@@ -3,7 +3,6 @@
 sudo service nginx stop
 sudo service supervisor stop
 
-cd kvothe
 git pull
 npm run prod:client
 

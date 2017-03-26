@@ -44,6 +44,6 @@
     "prod:client": "npm run prod:client:clean; cp src/static/* dist/; webpack --config webpack/prod.js",
     "prod:server": "babel-node src/server",
     "start": "npm run dev",
-    "deploy": "ssh -p 60021 soywod@soywod.fr \"kvothe/deploy.sh\""
+    "deploy": "ssh -p 60021 soywod@soywod.fr \"cd kvothe; ./deploy.sh\""
   }
 }
