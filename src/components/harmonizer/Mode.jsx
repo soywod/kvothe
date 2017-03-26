@@ -6,6 +6,7 @@ import {
   Card,
   CardBlock,
   CardTitle,
+  CardText,
   CardSubtitle,
   ListGroup,
   ListGroupItem
@@ -35,33 +36,37 @@ const Mode = props => (
       <CardSubtitle className="text-muted">
         Mode {props.index}
       </CardSubtitle>
+      <CardText>
+        <span className="clearfix" style={styles.block}>
+          <span className="float-right" style={styles.block}>
+            {props.mode.intervals
+              .map((degree, index) => (
+                <Badge key={index} color="info" style={styles.badge}>
+                  {label(`degree-${degree}`)}
+                </Badge>
+              ))
+            }
+          </span>
+        </span>
+        <span className="clearfix"style={styles.block}>
+          <span className="float-right" style={styles.block}>
+            {_
+              .concat(props.mode.intervals, props.mode.lastDegree)
+              .reduce((intervals, degree, index) => {
+                if (index === 0) return [];
+                intervals.push(`step-${degree - props.mode.intervals[index - 1]}`);
+                return intervals;
+              }, [])
+              .map((step, index) => (
+                <Badge key={index} color="default" style={styles.badge}>
+                  {label(step)}
+                </Badge>
+              ))
+            }
+          </span>
+        </span>
+      </CardText>
     </CardBlock>
-    <ListGroup flush>
-      <ListGroupItem>
-        {props.mode.intervals
-          .map((degree, index) => (
-            <Badge key={index} style={styles.badge}>
-              {label(`degree-${degree}`)}
-            </Badge>
-          ))
-        }
-      </ListGroupItem>
-      <ListGroupItem>
-        {_
-          .concat(props.mode.intervals, props.mode.lastDegree)
-          .reduce((intervals, degree, index) => {
-            if (index === 0) return [];
-            intervals.push(`step-${degree - props.mode.intervals[index - 1]}`);
-            return intervals;
-          }, [])
-          .map((step, index) => (
-            <Badge key={index} style={styles.badge}>
-              {label(step)}
-            </Badge>
-          ))
-        }
-      </ListGroupItem>
-    </ListGroup>
   </Card>
 );
 
@@ -71,6 +76,9 @@ Mode.propTypes = {
 };
 
 const styles = {
+  block: {
+    display: 'block'
+  },
   badge    : {
     marginRight: 2
   },

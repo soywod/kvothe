@@ -31,7 +31,9 @@ class ModeList extends React.Component {
     const allModes = this.state.scale.buildAllModes();
 
     return allModes.map((mode, index) => (
-      <Mode key={index} index={index + 1} mode={mode}/>
+      <Col key={index} lg="6" xs="12">
+        <Mode index={index + 1} mode={mode}/>
+      </Col>
     ));
   }
 
@@ -39,9 +41,7 @@ class ModeList extends React.Component {
     return (
       <div>
         <Row>
-          <Col lg={styles.lg} md={styles.md}>
-            {this.renderModeNames()}
-          </Col>
+          {this.renderModeNames()}
         </Row>
 
         <div>
@@ -59,15 +59,6 @@ class ModeList extends React.Component {
 }
 
 const styles = {
-  lg: {
-    size  : 8,
-    offset: 2
-  },
-  md: {
-    size  : 10,
-    offset: 1
-  },
-
   badge      : {
     marginRight: 5
   },
