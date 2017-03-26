@@ -43,7 +43,7 @@
     "dev": "webpack-dev-server --config webpack/dev.js",
     "prod:client:clean": "rm -rf dist/js && rm -rf dist/css && rm -rf dist/fonts",
     "prod:client": "npm run prod:client:clean && webpack --config webpack/prod.js",
-    "prod:server": "babel-node src/server",
+    "prod:server": "nodemon --exec babel-node src/server",
     "start": "npm run dev"
   }
 }
