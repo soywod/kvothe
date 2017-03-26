@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Home = props => (
   <div>
     <h1>
-      <i className="fa fa-magic icon-left"/>
+      <i className="fa fa-magic icon-left text-info"/>
       The composer assistant
     </h1>
 

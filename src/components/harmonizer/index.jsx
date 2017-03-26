@@ -3,7 +3,7 @@ import React from 'react';
 const Harmonizer = props => (
   <div>
     <h1>
-      <i className="fa fa-soundcloud icon-left"/>
+      <i className="fa fa-soundcloud icon-left text-warning"/>
       Harmonizer
     </h1>
 
