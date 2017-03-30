@@ -1,9 +1,17 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import * as Bootstrap from 'reactstrap';
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  CardHeader,
+  CardBlock,
+  ListGroup,
+  ListGroupItem
+} from 'reactstrap';
 
-import * as Scales from '../../const/Scale'
+import { SCALES, MODES } from '../../const/Scale';
 import Scale from './Scale';
 
 class ScaleSelection extends React.Component {
@@ -17,9 +25,15 @@ class ScaleSelection extends React.Component {
     browserHistory.push(`/harmonizer/${this.props.params.noteName}/${this.props.params.noteAlt}/${scale}`);
   }
 
-  renderScaleNames() {
-    return Object.values(Scales)
-      .sort((a, b) => a > b)
+  renderModes() {
+    return MODES
+      .map((scale, index) => (
+        <Scale key={index} name={scale} onSelectScale={this.onSelectScale}/>
+      ));
+  }
+
+  renderScales() {
+    return SCALES
       .map((scale, index) => (
         <Scale key={index} name={scale} onSelectScale={this.onSelectScale}/>
       ));
@@ -29,25 +43,52 @@ class ScaleSelection extends React.Component {
     return (
       <div>
         <p className="lead">
-          Pick a scale :
+          Pick a scale or a mode :
         </p>
 
-        <Bootstrap.Row>
-          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+        <Row>
+          <Col md="6" xs="12">
             <div style={styles.buttonGroup}>
-              {this.renderScaleNames()}
+              <Card>
+                <ListGroup flush>
+                  <ListGroupItem color="info" className="text-center">
+                    <h4>Scales</h4>
+                  </ListGroupItem>
+                  {this.renderScales()}
+                </ListGroup>
+              </Card>
             </div>
-          </Bootstrap.Col>
-        </Bootstrap.Row>
+          </Col>
+          <Col md="6" xs="12">
+            <div style={styles.buttonGroup}>
+              <Card>
+                <ListGroup flush>
+                  <ListGroupItem color="warning" className="text-center">
+                    <h4>Modes</h4>
+                  </ListGroupItem>
+                  {this.renderModes()}
+                </ListGroup>
+              </Card>
+            </div>
+          </Col>
+        </Row>
 
         <div>
-          <Bootstrap.Button
+          <Button
             tag={Link}
             to="/harmonizer"
             color="link">
             <i className="fa fa-arrow-left icon-left"/>
             Back
-          </Bootstrap.Button>
+          </Button>
+
+          <Button
+            color="primary"
+            className="float-right"
+            disabled>
+            Next
+            <i className="fa fa-arrow-right icon-right"/>
+          </Button>
         </div>
       </div>
     );
@@ -55,15 +96,6 @@ class ScaleSelection extends React.Component {
 }
 
 const styles = {
-  lg: {
-    size  : 6,
-    offset: 3
-  },
-  md: {
-    size  : 8,
-    offset: 2
-  },
-
   buttonGroup: {
     width       : '100%',
     textAlign   : 'left',

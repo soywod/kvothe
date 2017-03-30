@@ -17,17 +17,19 @@ const labels = {
 
   [ScaleConst.CHROMATIC]: 'Chromatic',
 
-  [ScaleConst.MAJOR]: 'Major (Ionian)',
-  [ScaleConst.MINOR]: 'Minor (Aeolian)',
+  [ScaleConst.MAJOR]: 'Major',
+  [ScaleConst.MINOR]: 'Minor',
 
+  [ScaleConst.IONIAN]    : 'Ionian',
   [ScaleConst.DORIAN]    : 'Dorian',
   [ScaleConst.PHRYGIAN]  : 'Phrygian',
   [ScaleConst.LYDIAN]    : 'Lydian',
   [ScaleConst.MIXOLYDIAN]: 'Mixolydian',
+  [ScaleConst.EOLIAN]    : 'Eolian',
   [ScaleConst.LOCRIAN]   : 'Locrian',
 
-  [ScaleConst.MINOR_MELODIC] : 'Minor (Melodic)',
-  [ScaleConst.MINOR_HARMONIC]: 'Minor (Harmonic)',
+  [ScaleConst.MINOR_MELODIC] : 'Minor melodic',
+  [ScaleConst.MINOR_HARMONIC]: 'Minor harmonic',
 
   'degree-0' : 'P1',
   'degree-1' : 'm2',

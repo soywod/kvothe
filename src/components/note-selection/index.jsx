@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import * as Bootstrap from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 
 import NoteName from './NoteName';
 import NoteAlt from './NoteAlt';
@@ -58,23 +58,31 @@ class NoteSelection extends React.Component {
           Pick a note :
         </p>
 
-        <Bootstrap.Row>
-          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+        <Row>
+          <Col lg={styles.lg} md={styles.md}>
             <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
               {this.renderNoteAlts()}
             </div>
-          </Bootstrap.Col>
-        </Bootstrap.Row>
+          </Col>
+        </Row>
 
-        <Bootstrap.Row>
-          <Bootstrap.Col lg={styles.lg} md={styles.md}>
+        <Row>
+          <Col lg={styles.lg} md={styles.md}>
             <div style={styles.buttonGroup}>
               {this.renderNoteNames()}
             </div>
-          </Bootstrap.Col>
-        </Bootstrap.Row>
+          </Col>
+        </Row>
 
-        <Bootstrap.Button
+        <Button
+          tag={Link}
+          to="/"
+          color="link">
+            <i className="fa fa-arrow-left icon-left"/>
+            Back
+        </Button>
+
+        <Button
           tag={Link}
           to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}`}
           color="primary"
@@ -82,7 +90,7 @@ class NoteSelection extends React.Component {
           disabled={! this.state.noteName}>
           Next
           <i className="fa fa-arrow-right icon-right"/>
-        </Bootstrap.Button>
+        </Button>
       </div>
     );
   }

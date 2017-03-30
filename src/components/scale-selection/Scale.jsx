@@ -1,18 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Button } from 'reactstrap';
+import { Button, ListGroupItem } from 'reactstrap';
 
 import label from '../../helpers/label';
 
 const Scale = props => (
-  <Button
-    size="sm"
-    onClick={props.onSelectScale.bind(undefined, props.name)}
-    style={styles.button}>
-    <div>
-      {label(props.name)}
-    </div>
-  </Button>
+  <ListGroupItem action style={styles.action} onClick={props.onSelectScale.bind(undefined, props.name)}>
+    {label(props.name)}
+  </ListGroupItem>
 );
 
 Scale.propTypes = {
@@ -22,13 +17,8 @@ Scale.propTypes = {
 };
 
 const styles = {
-  button: {
-    width    : '100%',
-    height   : 40,
-    textAlign: 'left',
-    boxSizing: 'border-box',
-    padding  : '10px 15px',
-    margin   : 2
+  action: {
+    cursor: 'pointer'
   }
 };
 
