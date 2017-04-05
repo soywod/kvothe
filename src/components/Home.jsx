@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Badge, Button, Col, Row } from 'reactstrap';
 
 const Home = props => (
   <div>
@@ -23,11 +24,36 @@ const Home = props => (
 
     <hr className="my-3"/>
 
+    <Row>
+      <Col md="6" sm="12">
+        <Button to="/harmonizer" tag={Link} style={styles.tool}>
+          <h3>
+            <i className="fa fa-soundcloud icon-left text-warning"/>
+            Harmonizer
+          </h3>
+        </Button>
+      </Col>
+
+      <Col md="6" sm="12">
+        <Button to="/" disabled tag={Link} style={styles.tool}>
+          <h3>
+            <span>
+              <i className="fa fa-random icon-left text-danger"/>
+              Randomizer{' '}
+            </span>
+            <span className="text-muted">(soon)</span>
+          </h3>
+        </Button>
+      </Col>
+    </Row>
+
+    <hr className="my-3"/>
+
     <h5>New content :</h5>
 
     <ul>
       <li>
-        Added the <Link to="/harmonizer">Harmonizer tool</Link>.
+        Updated the <Link to="/harmonizer">Harmonizer tool</Link>.
       </li>
     </ul>
 
@@ -36,10 +62,21 @@ const Home = props => (
     <h5>Coming soon :</h5>
 
     <ul>
+      <li>An random note generator</li>
       <li>Possibility to create a custom scale in the Harmonizer</li>
       <li>Integrate a scale / chord player</li>
     </ul>
   </div>
 );
+
+const styles = {
+  tool: {
+    width: '100%',
+    height: 150,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+};
 
 export default Home;
