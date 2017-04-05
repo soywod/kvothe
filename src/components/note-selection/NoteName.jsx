@@ -25,7 +25,7 @@ const styles = {
   button: {
     boxSizing: 'border-box',
     flex     : 1,
-    height   : 45,
+    height   : 60,
     margin   : '0 2px'
   }
 };
