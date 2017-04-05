@@ -30,7 +30,7 @@ const formulas = {
   [ScaleConst.PHRYGIAN]  : P1 | m2 | m3 | P4 | P5 | m6 | m7,
   [ScaleConst.LYDIAN]    : P1 | M2 | M3 | A4 | P5 | M6 | M7,
   [ScaleConst.MIXOLYDIAN]: P1 | M2 | M3 | P4 | P5 | M6 | m7,
-  [ScaleConst.EOLIAN]    : P1 | M2 | m3 | P4 | P5 | m6 | m7,
+  [ScaleConst.AEOLIAN]   : P1 | M2 | m3 | P4 | P5 | m6 | m7,
   [ScaleConst.LOCRIAN]   : P1 | m2 | m3 | P4 | d5 | m6 | m7,
 
   [ScaleConst.MINOR_HARMONIC]: P1 | M2 | m3 | P4 | P5 | m6 | M7,

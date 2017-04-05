@@ -1,7 +1,7 @@
 import ReactGA from 'react-ga';
 
 const updateLocation = () => {
-  ReactGA.set({page: window.location.pathname});
+  ReactGA.set({ page: window.location.pathname });
   ReactGA.pageview(window.location.pathname);
 };
 

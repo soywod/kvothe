@@ -51,7 +51,8 @@ const styles = {
     display       : 'flex',
     alignItems    : 'center',
     justifyContent: 'center',
-    fontSize      : 12
+    fontSize      : 12,
+    marginTop     : 10,
   },
   degree   : {
     flex: 1
@@ -70,7 +71,6 @@ const styles = {
     alignItems    : 'center',
     justifyContent: 'center',
     fontSize      : 16,
-    margin        : '5px 0'
   }
 };
 

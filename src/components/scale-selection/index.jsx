@@ -46,38 +46,10 @@ class ScaleSelection extends React.Component {
           Pick a scale or a mode :
         </p>
 
-        <Row>
-          <Col md="6" xs="12">
-            <div style={styles.buttonGroup}>
-              <Card>
-                <ListGroup flush>
-                  <ListGroupItem color="info" className="text-center">
-                    <h4>Scales</h4>
-                  </ListGroupItem>
-                  {this.renderScales()}
-                </ListGroup>
-              </Card>
-            </div>
-          </Col>
-          <Col md="6" xs="12">
-            <div style={styles.buttonGroup}>
-              <Card>
-                <ListGroup flush>
-                  <ListGroupItem color="warning" className="text-center">
-                    <h4>Modes</h4>
-                  </ListGroupItem>
-                  {this.renderModes()}
-                </ListGroup>
-              </Card>
-            </div>
-          </Col>
-        </Row>
-
-        <div>
+        <div className="navigation">
           <Button
             tag={Link}
-            to="/harmonizer"
-            color="link">
+            to="/harmonizer">
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
@@ -90,6 +62,33 @@ class ScaleSelection extends React.Component {
             <i className="fa fa-arrow-right icon-right"/>
           </Button>
         </div>
+
+        <Row>
+          <Col md="6" xs="12">
+            <div style={styles.buttonGroup}>
+              <Card>
+                <ListGroup flush>
+                  <ListGroupItem color="info" className="text-center">
+                    <h5>Scales</h5>
+                  </ListGroupItem>
+                  {this.renderScales()}
+                </ListGroup>
+              </Card>
+            </div>
+          </Col>
+          <Col md="6" xs="12">
+            <div style={styles.buttonGroup}>
+              <Card>
+                <ListGroup flush>
+                  <ListGroupItem color="warning" className="text-center">
+                    <h5>Modes</h5>
+                  </ListGroupItem>
+                  {this.renderModes()}
+                </ListGroup>
+              </Card>
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash/fp';
 import { browserHistory, Link, Router } from 'react-router';
-import { Button, Card, CardBlock } from 'reactstrap';
+import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Mode from './Mode';
 import Note from '../../model/Note.class';
@@ -14,7 +14,23 @@ class ModeList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { scale: this.computeScale(props) };
+    const scale = this.computeScale(props);
+
+    this.state = {
+      scale,
+      allModes     : scale.buildAllModes(),
+      isModeRefOpen: false
+    };
+
+    this.toggleModeRef = this.toggleModeRef.bind(this);
+  }
+
+  toggleModeRef(event) {
+    event.preventDefault();
+
+    this.setState(prevState => ({
+      isModeRefOpen: ! prevState.isModeRefOpen
+    }));
   }
 
   computeScale(props) {
@@ -24,25 +40,55 @@ class ModeList extends React.Component {
     return Scale.getInstance({ note, formula });
   }
 
-  renderModeNames() {
-    const allModes = this.state.scale.buildAllModes();
-    console.log(allModes);
-    return allModes
+  renderMainReferences() {
+    return this.state.allModes
       .filter(mode => mode !== null)
       .filter(mode => SCALES.indexOf(mode.getName()) !== - 1)
       .filter(mode => this.state.scale.formula !== mode.formula)
       .map((mode, index) => (
         <div key={index}>
-          <p className="lead">
-            {label(mode.note.name)}
-            <sub>{label(mode.note.alt)}</sub>{' '}
-            {label(mode.getName())}{' '}
-            scale
-          </p>
           <Card style={styles.mode}>
-            <CardBlock>
-              <Mode mode={mode}/>
-            </CardBlock>
+            <ListGroup flush>
+              <ListGroupItem color="warning" className="text-center">
+                <h5>
+                  {label(mode.note.name)}
+                  <sub>{label(mode.note.alt)}</sub>{' '}
+                  {label(mode.getName())}{' '}
+                  scale
+                </h5>
+              </ListGroupItem>
+
+              <ListGroupItem>
+                <Mode mode={mode}/>
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+        </div>
+      ));
+  }
+
+  renderOtherReferences() {
+    return this.state.allModes
+      .filter(mode => mode !== null)
+      .filter(mode => SCALES.indexOf(mode.getName()) === - 1)
+      .filter(mode => this.state.scale.formula !== mode.formula)
+      .map((mode, index) => (
+        <div key={index}>
+          <Card style={styles.mode}>
+            <ListGroup flush>
+              <ListGroupItem color="danger" className="text-center">
+                <h5>
+                  {label(mode.note.name)}
+                  <sub>{label(mode.note.alt)}</sub>{' '}
+                  {label(mode.getName())}{' '}
+                  scale
+                </h5>
+              </ListGroupItem>
+
+              <ListGroupItem>
+                <Mode mode={mode}/>
+              </ListGroupItem>
+            </ListGroup>
           </Card>
         </div>
       ));
@@ -51,57 +97,74 @@ class ModeList extends React.Component {
   render() {
     return (
       <div>
-        <h3>
-          Scale selected
-        </h3>
-
-        <p className="lead">
-          {label(this.state.scale.note.name)}
-          <sub>{label(this.state.scale.note.alt)}</sub>{' '}
-          {label(this.state.scale.getName())}{' '}
-          scale
-        </p>
-
-        <Card style={styles.mode}>
-          <CardBlock>
-            <Mode mode={this.state.scale}/>
-          </CardBlock>
-        </Card>
-
-        <h3>
-          Main references
-        </h3>
-
-        {this.renderModeNames()}
-
-        <div>
+        <div className="lead">
+          Harmonization result :
+        </div>
+        <div className="navigation">
           <Button
             tag={Link}
-            to={`/harmonizer/${this.state.scale.note.name}/${this.state.scale.note.alt}`}
-            color="link">
+            to={`/harmonizer/${this.state.scale.note.name}/${this.state.scale.note.alt}`}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
         </div>
+
+        <Card style={styles.mode}>
+          <ListGroup flush>
+            <ListGroupItem color="info" className="text-center">
+              <h5>
+                {label(this.state.scale.note.name)}
+                <sub>{label(this.state.scale.note.alt)}</sub>{' '}
+                {label(this.state.scale.getName())}{' '}
+                scale
+              </h5>
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <Mode mode={this.state.scale}/>
+            </ListGroupItem>
+          </ListGroup>
+        </Card>
+
+        <br/>
+
+        <h3>Scale references</h3>
+        {this.renderMainReferences()}
+
+        <br/>
+
+        <a href="#" style={styles.modeRef} onClick={this.toggleModeRef}>
+          <h3>
+            <i className={`fa fa-caret-${this.state.isModeRefOpen ? 'down' : 'right'} icon-left`} style={styles.caretModeRef}/>
+            Mode references
+          </h3>
+        </a>
+        {this.state.isModeRefOpen ? this.renderOtherReferences() : null}
       </div>
     );
   }
 }
 
 const styles = {
-  container  : {
+  container   : {
     display: 'flex'
   },
-  mode       : {
+  mode        : {
     marginBottom: 20
   },
-  badge      : {
+  badge       : {
     marginRight: 5
   },
-  buttonGroup: {
+  buttonGroup : {
     width       : '100%',
     textAlign   : 'left',
     marginBottom: 30
+  },
+  modeRef     : {
+    padding: 0,
+  },
+  caretModeRef: {
+    width: 15
   }
 };
 

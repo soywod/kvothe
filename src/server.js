@@ -16,7 +16,7 @@ app.use(Express.static(path.join(__dirname, '..', 'dist')));
 app.get('*', (req, res) => {
   const location = req.url;
 
-  match({routes, location}, (err, redirectLocation, renderProps) => {
+  match({ routes, location }, (err, redirectLocation, renderProps) => {
       if (err) {
         return res.status(500).send(err.message);
       }
@@ -35,7 +35,7 @@ app.get('*', (req, res) => {
         res.status(404);
       }
 
-      return res.render('index', {content});
+      return res.render('index', { content });
     }
   );
 });

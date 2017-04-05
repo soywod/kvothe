@@ -10,7 +10,7 @@ export const DORIAN     = 'dorian';
 export const PHRYGIAN   = 'phrygian';
 export const LYDIAN     = 'lydian';
 export const MIXOLYDIAN = 'mixolydian';
-export const EOLIAN     = 'eolian';
+export const AEOLIAN    = 'eolian';
 export const LOCRIAN    = 'locrian';
 
 
@@ -27,6 +27,6 @@ export const MODES = [
   PHRYGIAN,
   LYDIAN,
   MIXOLYDIAN,
-  EOLIAN,
+  AEOLIAN,
   LOCRIAN,
 ];

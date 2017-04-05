@@ -21,7 +21,7 @@ class NoteSelection extends React.Component {
   }
 
   selectNoteName(noteName) {
-    this.setState({noteName});
+    this.setState({ noteName });
   }
 
   selectNoteAlt(noteAlt) {
@@ -58,9 +58,28 @@ class NoteSelection extends React.Component {
           Pick a note :
         </p>
 
+        <div className="navigation">
+          <Button
+            tag={Link}
+            to="/">
+            <i className="fa fa-arrow-left icon-left"/>
+            Back
+          </Button>
+
+          <Button
+            tag={Link}
+            to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}`}
+            color="primary"
+            className="float-right"
+            disabled={! this.state.noteName}>
+            Next
+            <i className="fa fa-arrow-right icon-right"/>
+          </Button>
+        </div>
+
         <Row>
           <Col lg={styles.lg} md={styles.md}>
-            <div style={{...styles.buttonGroup, ...styles.firstButtonGroup}}>
+            <div style={{ ...styles.buttonGroup, ...styles.firstButtonGroup }}>
               {this.renderNoteAlts()}
             </div>
           </Col>
@@ -73,24 +92,6 @@ class NoteSelection extends React.Component {
             </div>
           </Col>
         </Row>
-
-        <Button
-          tag={Link}
-          to="/"
-          color="link">
-            <i className="fa fa-arrow-left icon-left"/>
-            Back
-        </Button>
-
-        <Button
-          tag={Link}
-          to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}`}
-          color="primary"
-          className="float-right"
-          disabled={! this.state.noteName}>
-          Next
-          <i className="fa fa-arrow-right icon-right"/>
-        </Button>
       </div>
     );
   }
