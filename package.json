@@ -44,7 +44,7 @@
     "dev": "webpack-dev-server --config webpack/dev.js",
     "sitemap": "babel-node sitemap-builder.js",
     "prod:client:clean": "rm -rf dist/*",
-    "prod:client": "npm run prod:client:cleanyarn; cp src/static/* dist/; npm run sitemap; webpack --config webpack/prod.js",
+    "prod:client": "npm run prod:client:clean; cp src/static/* dist/; webpack --config webpack/prod.js",
     "prod:server": "babel-node src/server",
     "start": "npm run dev",
     "deploy": "ssh -p 60021 soywod@soywod.fr \"cd kvothe; ./deploy.sh\""
