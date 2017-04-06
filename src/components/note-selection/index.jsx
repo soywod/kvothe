@@ -53,7 +53,7 @@ class NoteSelection extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="animated-container">
         <p className="lead">
           Pick a note :
         </p>

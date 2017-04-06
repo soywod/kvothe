@@ -96,7 +96,7 @@ class ModeList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="animated-container">
         <div className="lead">
           Harmonization result :
         </div>

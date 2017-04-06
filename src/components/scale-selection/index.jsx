@@ -41,7 +41,7 @@ class ScaleSelection extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="animated-container">
         <p className="lead">
           Pick a scale or a mode :
         </p>

@@ -43,43 +43,24 @@ i.icon-right {
   text-decoration: none !important;
 }
 
-.section-enter {
-  opacity: 0;
-  transform: translate(-200px, 0);
+.animated-container {
+  animation: container-fade 175ms cubic-bezier(0.86, 0, 0.07, 1), container-slide 150ms cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-.section-enter.section-enter-active {
-  opacity: 1;
-  transform: translate(0, 0);
-  transition: all 150ms cubic-bezier(0.86, 0, 0.07, 1), opacity 175ms cubic-bezier(0.86, 0, 0.07, 1);
+@keyframes container-slide {
+  0% {
+    transform: translate(-200px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
-.section-leave {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-.section-leave.section-leave-active {
-  opacity: 0;
-  transform: translate(-200px, 0);
-  transition: all 150ms cubic-bezier(0.86, 0, 0.07, 1), opacity 175ms cubic-bezier(0.86, 0, 0.07, 1);
-}
-
-.section-appear {
-  opacity: 0;
-  transform: translate(-200px, 0);
-}
-
-.section-appear.section-appear-active {
-  opacity: 1;
-  transform: translate(0, 0);
-  transition: all 150ms cubic-bezier(0.86, 0, 0.07, 1), opacity 175ms cubic-bezier(0.86, 0, 0.07, 1);
-}
-
-.scale-schema {
-  display: flex;
-}
-
-.scale-schema > * {
-  flex: 1;
+@keyframes container-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
