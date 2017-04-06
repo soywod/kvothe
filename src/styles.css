@@ -44,10 +44,10 @@ i.icon-right {
 }
 
 .animated-container {
-  animation: container-fade 175ms cubic-bezier(0.86, 0, 0.07, 1), container-slide 150ms cubic-bezier(0.86, 0, 0.07, 1);
+  animation: fade 175ms cubic-bezier(0.86, 0, 0.07, 1), slide 150ms cubic-bezier(0.86, 0, 0.07, 1);
 }
 
-@keyframes container-slide {
+@keyframes slide {
   0% {
     transform: translate(-200px, 0);
   }
@@ -56,7 +56,7 @@ i.icon-right {
   }
 }
 
-@keyframes container-fade {
+@keyframes fade {
   0% {
     opacity: 0;
   }
