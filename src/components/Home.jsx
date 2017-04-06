@@ -53,7 +53,7 @@ const Home = props => (
 
     <ul>
       <li>
-        Updated the <Link to="/harmonizer">Harmonizer tool</Link>.
+        Optimized the <Link to="/harmonizer">Harmonizer tool</Link> + added animations
       </li>
     </ul>
 
