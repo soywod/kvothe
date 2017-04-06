@@ -73,7 +73,7 @@ class ModeList extends React.Component {
       .filter(mode => SCALES.indexOf(mode.getName()) === - 1)
       .filter(mode => this.state.scale.formula !== mode.formula)
       .map((mode, index) => (
-        <div key={index}>
+        <div key={index} className={this.state.isModeRefOpen ? 'show' : 'hide'}>
           <Card style={styles.mode}>
             <ListGroup flush>
               <ListGroupItem color="danger" className="text-center">
@@ -139,7 +139,7 @@ class ModeList extends React.Component {
             Mode references
           </h3>
         </a>
-        {this.state.isModeRefOpen ? this.renderOtherReferences() : null}
+        {this.renderOtherReferences()}
       </div>
     );
   }
