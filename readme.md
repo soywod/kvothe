@@ -12,6 +12,7 @@ Many more tools will soon be available :)
 - Add a comment section (Disqus ?)
 - Set menu item active when reach the good route
 - Add possibility to create custom scale (from the Harmonizer)
+- Add a random note generator
 - Add a metronome tool
 - Add possibility to play chord / scale
 - Add a chord finder tool
