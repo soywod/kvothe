@@ -1,9 +1,16 @@
+// @flow
+
 import React from 'react';
 
 import Router from '../routing/Router';
 
-const App = () => (
-  <Router/>
-);
+class AppComponent extends React.Component {
+  render() {
+    return (
+      <Router/>
+    );
+  }
+}
 
-export default App;
+export default AppComponent;
+

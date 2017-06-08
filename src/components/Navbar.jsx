@@ -1,19 +1,36 @@
+// @flow
+
 import React from 'react';
-import { Link } from 'react-router';
-import * as Bootstrap from 'reactstrap';
+import {Link} from 'react-router';
+import {
+  Collapse,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
+
+type State = {
+  isNavOpen: boolean;
+  isDropDownOpen: boolean;
+};
 
 class NavbarComponent extends React.Component {
-  constructor(props) {
+  state: State;
+
+  constructor(props: any) {
     super(props);
 
     this.state = {
-      isNavOpen     : false,
+      isNavOpen: false,
       isDropDownOpen: false
     };
-
-    this.resetModeBuilder = this.resetModeBuilder.bind(this);
-    this.toggleDropDown   = this.toggleDropDown.bind(this);
-    this.toggleNav        = this.toggleNav.bind(this);
   }
 
   toggleNav() {
@@ -35,40 +52,41 @@ class NavbarComponent extends React.Component {
 
   render() {
     return (
-      <Bootstrap.Navbar color="faded" light toggleable>
-        <Bootstrap.NavbarToggler right onClick={this.toggleNav}/>
+      <Navbar color="faded" light toggleable>
+        <NavbarToggler right onClick={this.toggleNav}/>
 
-        <Bootstrap.NavbarBrand tag={Link} to="/">
+        <NavbarBrand tag={Link} to="/">
           Kvothe
-        </Bootstrap.NavbarBrand>
+        </NavbarBrand>
 
-        <Bootstrap.Collapse isOpen={this.state.isNavOpen} navbar>
-          <Bootstrap.Nav navbar>
-            <Bootstrap.NavItem>
-              <Bootstrap.Dropdown isOpen={this.state.isDropDownOpen} toggle={this.toggleDropDown}>
-                <Bootstrap.DropdownToggle caret nav={true}>
+        <Collapse isOpen={this.state.isNavOpen} navbar>
+          <Nav navbar>
+            <NavItem>
+              <Dropdown isOpen={this.state.isDropDownOpen} toggle={this.toggleDropDown}>
+                <DropdownToggle caret nav={true}>
                   Tools
-                </Bootstrap.DropdownToggle>
-                <Bootstrap.DropdownMenu>
-                  <Bootstrap.DropdownItem tag={Link} to="/harmonizer">
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem tag={Link} to="/harmonizer">
                     Harmonizer
-                  </Bootstrap.DropdownItem>
-                </Bootstrap.DropdownMenu>
-              </Bootstrap.Dropdown>
-            </Bootstrap.NavItem>
-          </Bootstrap.Nav>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </NavItem>
+          </Nav>
 
-          <Bootstrap.Nav className="ml-auto" navbar>
-            <Bootstrap.NavItem>
-              <Bootstrap.NavLink href="https://github.com/soywod/kvothe" target="_blank">
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="https://github.com/soywod/kvothe" target="_blank">
                 <i className="fa fa-github"/>
-              </Bootstrap.NavLink>
-            </Bootstrap.NavItem>
-          </Bootstrap.Nav>
-        </Bootstrap.Collapse>
-      </Bootstrap.Navbar>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }
 
 export default NavbarComponent;
+

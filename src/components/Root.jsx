@@ -1,16 +1,23 @@
+// @flow
+
 import React from 'react';
-import { Container } from 'reactstrap';
+import {Container} from 'reactstrap';
 
 import Navbar from './Navbar';
 
-const Root = props => (
-  <div>
-    <Navbar />
+class RootComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
 
-    <Container>
-      {props.children}
-    </Container>
-  </div>
-);
+        <Container>
+          {this.props.children}
+        </Container>
+      </div>
+    )
+  }
+}
 
-export default Root;
+export default RootComponent;
+
