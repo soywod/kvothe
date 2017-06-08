@@ -3,9 +3,9 @@
 import React from 'react';
 import {Container} from 'reactstrap';
 
-import Navbar from './Navbar';
+import Navbar from '../navigation/Navbar';
 
-class RootComponent extends React.Component {
+class ContainerComponent extends React.Component {
   render() {
     return (
       <div>
@@ -19,5 +19,5 @@ class RootComponent extends React.Component {
   }
 }
 
-export default RootComponent;
+export default ContainerComponent;
 

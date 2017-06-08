@@ -1,17 +1,17 @@
 // @flow
 
 import React from 'react';
-import { browserHistory, IndexRoute, Route } from 'react-router';
+import {browserHistory, IndexRoute, Route} from 'react-router';
 
-import Root from '../components/Root';
-import Home from '../components/Home';
+import Container from '../app/Container';
+import Home from '../home/Home';
 import Harmonizer from '../components/harmonizer';
 import NoteSelection from '../components/note-selection';
 import ScaleSelection from '../components/scale-selection';
 import HarmonizerResult from '../components/harmonizer/ModeList';
 
 const routes = (
-  <Route path="/" component={Root}>
+  <Route path="/" component={Container}>
     <IndexRoute component={Home}/>
     <Route path="/harmonizer" component={Harmonizer}>
       <IndexRoute component={NoteSelection}/>
@@ -22,3 +22,4 @@ const routes = (
 );
 
 export default routes;
+

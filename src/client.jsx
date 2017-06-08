@@ -4,12 +4,12 @@ import ReactGA from 'react-ga';
 import 'bootstrap';
 import 'font-awesome';
 
-import App from './components/App';
+import AppComponent from './app/App';
 import './styles.css';
 
 ReactGA.initialize('UA-83352674-3');
 
 ReactDOM.render(
-  <App/>,
+  <AppComponent />,
   document.getElementById('kvothe')
 );

@@ -16,41 +16,37 @@ import {
   NavLink,
 } from 'reactstrap';
 
+type Props = {};
 type State = {
-  isNavOpen: boolean;
-  isDropDownOpen: boolean;
+  isNavOpened: boolean;
+  isDropdownOpened: boolean;
 };
 
 class NavbarComponent extends React.Component {
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      isNavOpen: false,
-      isDropDownOpen: false
+      isNavOpened: false,
+      isDropdownOpened: false
     };
 
     this.toggleNav = this.toggleNav.bind(this);
-    this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   toggleNav = () => {
-    this.setState(oldState => ({
-      isNavOpen: ! oldState.isNavOpen
+    this.setState((oldState: State) => ({
+      isNavOpened: ! oldState.isNavOpened
     }));
   }
 
-  toggleDropDown = () => {
-    this.setState(oldState => ({
-      isDropDownOpen: ! oldState.isDropDownOpen
+  toggleDropdown = () => {
+    this.setState((oldState: State) => ({
+      isDropdownOpened: ! oldState.isDropdownOpened
     }));
-  }
-
-  resetModeBuilder() {
-    this.props.resetNote();
-    this.props.resetScale();
   }
 
   render() {
@@ -62,10 +58,10 @@ class NavbarComponent extends React.Component {
           Kvothe
         </NavbarBrand>
 
-        <Collapse isOpen={this.state.isNavOpen} navbar>
+        <Collapse isOpen={this.state.isNavOpened} navbar>
           <Nav navbar>
             <NavItem>
-              <Dropdown isOpen={this.state.isDropDownOpen} toggle={this.toggleDropDown}>
+              <Dropdown isOpen={this.state.isDropdownOpened} toggle={this.toggleDropdown}>
                 <DropdownToggle caret nav={true}>
                   Tools
                 </DropdownToggle>
