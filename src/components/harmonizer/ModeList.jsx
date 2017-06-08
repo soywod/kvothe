@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import _ from 'lodash/fp';
 import { browserHistory, Link, Router } from 'react-router';
 import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap';
