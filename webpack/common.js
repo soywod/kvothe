@@ -27,6 +27,7 @@ const common = {
           plugins: [
             'transform-runtime',
             'transform-object-rest-spread',
+            'transform-class-properties',
           ]
         }
       },

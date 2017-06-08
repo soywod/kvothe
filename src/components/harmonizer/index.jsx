@@ -1,14 +1,21 @@
+// @flow
+
 import React from 'react';
 
-const Harmonizer = props => (
-  <div>
-    <h1>
-      <i className="fa fa-soundcloud icon-left text-warning"/>
-      Harmonizer
-    </h1>
+class HarmonizerComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>
+          <i className="fa fa-soundcloud icon-left text-warning"/>
+          Harmonizer
+        </h1>
 
-    {props.children}
-  </div>
-);
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
-export default Harmonizer;
+export default HarmonizerComponent;
+

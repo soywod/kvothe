@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import _ from 'lodash/fp';
 import { browserHistory, Link, Router } from 'react-router';
@@ -9,8 +11,16 @@ import Scale from '../../model/Scale.class';
 import label from '../../helpers/label';
 import { SCALES } from '../../const/Scale';
 
-class ModeList extends React.Component {
-  constructor(props) {
+type State = {
+  scale: any;
+  allModes: any[];
+  isModeRefOpen: boolean;
+}
+
+class ModeListComponent extends React.Component {
+  state: State;
+
+  constructor(props: any) {
     super(props);
 
     const scale = this.computeScale(props);
@@ -24,7 +34,7 @@ class ModeList extends React.Component {
     this.toggleModeRef = this.toggleModeRef.bind(this);
   }
 
-  toggleModeRef(event) {
+  toggleModeRef = (event: any) => {
     event.preventDefault();
 
     this.setState(prevState => ({
@@ -32,7 +42,7 @@ class ModeList extends React.Component {
     }));
   }
 
-  computeScale(props) {
+  computeScale(props: any) {
     const formula = props.params.formula;
     const note    = Note.getInstance(props.params.noteName, props.params.noteAlt);
 
@@ -167,4 +177,5 @@ const styles = {
   }
 };
 
-export default ModeList;
+export default ModeListComponent;
+

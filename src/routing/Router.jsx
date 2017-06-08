@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { browserHistory, Router as ReactRouter } from 'react-router';
 

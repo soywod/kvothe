@@ -1,20 +1,26 @@
+// @flow
+
 import React from 'react';
 import * as Bootstrap from 'reactstrap';
 
 import label from '../../helpers/label';
 
-const NoteName = props => (
-  <Bootstrap.Button
-    size="sm"
-    active={props.active}
-    onClick={props.selectNoteName.bind(undefined, props.name)}
-    style={styles.button}>
-    {label(props.name)}
-    <sub>{label(props.alt)}</sub>
-  </Bootstrap.Button>
-);
+class NoteNameComponent extends React.Component {
+  render() {
+    return (
+      <Bootstrap.Button
+        size="sm"
+        active={this.props.active}
+        onClick={this.props.selectNoteName.bind(undefined, this.props.name)}
+        style={styles.button}>
+        {label(this.props.name)}
+        <sub>{label(this.props.alt)}</sub>
+      </Bootstrap.Button>
+    );
+  }
+}
 
-NoteName.propTypes = {
+NoteNameComponent.propTypes = {
   name  : React.PropTypes.string.isRequired,
   active: React.PropTypes.bool,
 
@@ -30,4 +36,5 @@ const styles = {
   }
 };
 
-export default NoteName;
+export default NoteNameComponent;
+

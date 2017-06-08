@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router';
 import { Button, Col, Row } from 'reactstrap';
@@ -7,8 +9,15 @@ import NoteAlt from './NoteAlt';
 import { A, B, C, D, E, F, G } from '../../const/NoteName'
 import { FLAT, NATURAL, SHARP } from '../../const/NoteAlt';
 
-class NoteSelection extends React.Component {
-  constructor(props) {
+type State = {
+  noteAlt: string;
+  noteName?: string;
+};
+
+class NoteSelectionComponent extends React.Component {
+  state: State;
+
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -19,11 +28,11 @@ class NoteSelection extends React.Component {
     this.selectNoteAlt  = this.selectNoteAlt.bind(this);
   }
 
-  selectNoteName(noteName) {
+  selectNoteName = (noteName: any) => {
     this.setState({ noteName });
   }
 
-  selectNoteAlt(noteAlt) {
+  selectNoteAlt = (noteAlt: any) => {
     this.setState(prevState => ({
       noteAlt: prevState.noteAlt === noteAlt ? NATURAL : noteAlt
     }));
@@ -67,7 +76,7 @@ class NoteSelection extends React.Component {
 
           <Button
             tag={Link}
-            to={`/harmonizer/${this.state.noteName}/${this.state.noteAlt}`}
+            to={`/harmonizer/${this.state.noteName || ''}/${this.state.noteAlt}`}
             color="primary"
             className="float-right"
             disabled={! this.state.noteName}>
@@ -117,4 +126,5 @@ const styles = {
   }
 };
 
-export default NoteSelection;
+export default NoteSelectionComponent;
+

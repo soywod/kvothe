@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import _ from 'lodash/fp';
 import {
@@ -13,31 +15,35 @@ import Scale from '../../model/Scale.class';
 import label from '../../helpers/label';
 import * as Degree from '../../const/Degree';
 
-const Mode = props => (
-  <div style={styles.mode}>
-    {props.mode.intervals
-      .map((degree, index) => (
-        <div key={index} style={styles.container}>
-          <div style={styles.note}>
-            {
-              degree !== null ? (
-                <Badge color="primary" key={index} style={styles.badge}>
-                  {label(props.mode.notes[index].name)}
-                  <sub>{label(props.mode.notes[index].alt)}</sub>
-                </Badge>
-              ) : <span className="text-muted">-</span>
-            }
-          </div>
-          <div className="text-muted" style={styles.note}>
-            {label(`degree-${index}`)}
-          </div>
-        </div>
-      ))
-    }
-  </div>
-);
+class ModeComponent extends React.Component {
+  render() {
+    return (
+      <div style={styles.mode}>
+        {this.props.mode.intervals
+          .map((degree, index) => (
+            <div key={index} style={styles.container}>
+              <div style={styles.note}>
+                {
+                  degree !== null ? (
+                    <Badge color="primary" key={index} style={styles.badge}>
+                      {label(this.props.mode.notes[index].name)}
+                      <sub>{label(this.props.mode.notes[index].alt)}</sub>
+                    </Badge>
+                  ) : <span className="text-muted">-</span>
+                }
+              </div>
+              <div className="text-muted" style={styles.note}>
+                {label(`degree-${index}`)}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    );
+  } 
+}
 
-Mode.propTypes = {
+ModeComponent.propTypes = {
   mode: React.PropTypes.instanceOf(Scale).isRequired
 };
 
@@ -74,4 +80,5 @@ const styles = {
   }
 };
 
-export default Mode;
+export default ModeComponent;
+

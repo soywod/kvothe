@@ -31,15 +31,18 @@ class NavbarComponent extends React.Component {
       isNavOpen: false,
       isDropDownOpen: false
     };
+
+    this.toggleNav = this.toggleNav.bind(this);
+    this.toggleDropDown = this.toggleDropDown.bind(this);
   }
 
-  toggleNav() {
+  toggleNav = () => {
     this.setState(oldState => ({
       isNavOpen: ! oldState.isNavOpen
     }));
   }
 
-  toggleDropDown() {
+  toggleDropDown = () => {
     this.setState(oldState => ({
       isDropDownOpen: ! oldState.isDropDownOpen
     }));

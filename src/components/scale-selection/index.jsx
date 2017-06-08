@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import {
@@ -14,14 +16,14 @@ import {
 import { SCALES, MODES } from '../../const/Scale';
 import Scale from './Scale';
 
-class ScaleSelection extends React.Component {
-  constructor(props) {
+class ScaleSelectionComponent extends React.Component {
+  constructor(props: any) {
     super(props);
 
     this.onSelectScale = this.onSelectScale.bind(this);
   }
 
-  onSelectScale(scale) {
+  onSelectScale = (scale: any) => {
     browserHistory.push(`/harmonizer/${this.props.params.noteName}/${this.props.params.noteAlt}/${scale}`);
   }
 
@@ -102,4 +104,5 @@ const styles = {
   }
 };
 
-export default ScaleSelection;
+export default ScaleSelectionComponent;
+
