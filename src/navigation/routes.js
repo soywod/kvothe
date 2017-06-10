@@ -3,12 +3,12 @@
 import React from 'react';
 import {browserHistory, IndexRoute, Route} from 'react-router';
 
-import Container from '../app/Container';
+import Container from '../container/AppContainer';
 import Home from '../home/Home';
-import Harmonizer from '../components/harmonizer';
+import Harmonizer from '../container/HarmonizerContainer';
 import NoteSelection from '../note/Note';
-import ScaleSelection from '../components/scale-selection';
-import HarmonizerResult from '../components/harmonizer/ModeList';
+import ScaleSelection from '../scale/ScaleSelection';
+import HarmonizerResult from '../scale/ModeList';
 
 const routes = (
   <Route path="/" component={Container}>

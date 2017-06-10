@@ -13,7 +13,7 @@ import {
   ListGroupItem
 } from 'reactstrap';
 
-import { SCALES, MODES } from '../../const/Scale';
+import { SCALES, MODES } from '../const/Scale';
 import Scale from './Scale';
 
 class ScaleSelectionComponent extends React.Component {

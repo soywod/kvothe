@@ -11,9 +11,9 @@ import {
   CardSubtitle,
 } from 'reactstrap';
 
-import Scale from '../../model/Scale.class';
-import label from '../../helpers/label';
-import * as Degree from '../../const/Degree';
+import Scale from '../model/Scale.class';
+import label from '../helpers/label';
+import * as Degree from '../const/Degree';
 
 class ModeComponent extends React.Component {
   render() {

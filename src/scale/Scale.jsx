@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Button, ListGroupItem} from 'reactstrap';
 
-import label from '../../helpers/label';
+import label from '../helpers/label';
 
 class ScaleComponent extends React.Component {
   render() {

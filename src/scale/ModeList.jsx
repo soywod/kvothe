@@ -6,10 +6,10 @@ import { browserHistory, Link, Router } from 'react-router';
 import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Mode from './Mode';
-import Note from '../../model/Note.class';
-import Scale from '../../model/Scale.class';
-import label from '../../helpers/label';
-import { SCALES } from '../../const/Scale';
+import Note from '../model/Note.class';
+import Scale from '../model/Scale.class';
+import label from '../helpers/label';
+import { SCALES } from '../const/Scale';
 
 type State = {
   scale: any;
