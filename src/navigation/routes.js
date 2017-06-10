@@ -15,8 +15,8 @@ const routes = (
     <IndexRoute component={Home}/>
     <Route path="/harmonizer" component={Harmonizer}>
       <IndexRoute component={NoteSelection}/>
-      <Route path="/harmonizer/:noteName/:noteAlt" component={ScaleSelection}/>
-      <Route path="/harmonizer/:noteName/:noteAlt/:formula" component={HarmonizerResult}/>
+      <Route path="/harmonizer/:noteId" component={ScaleSelection}/>
+      <Route path="/harmonizer/:noteId/:formula" component={HarmonizerResult}/>
     </Route>
   </Route>
 );

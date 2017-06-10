@@ -1,10 +1,6 @@
 // @flow
 
-import {forEach, findKey} from 'lodash';
-import type {NoteName, NoteAlt, NoteMap} from './Note.type';
-
-const NB_POSITIONS = 12;
-const NOTES = initNotes();
+import type {NoteName, NoteAlt} from './Note.type';
 
 type NoteParams = {
   name: NoteName;
@@ -25,26 +21,6 @@ class Note {
 
     this.id = `${this.name}-${this.alt}`;
     this.position = Note.getPositionById(this.id);
-  }
-
-  next(): Note {
-    const nextPosition = (this.position + 1) % NB_POSITIONS;
-
-    const id = findKey(NOTES, (note: Note, id: string) => (
-      note.position === nextPosition
-    ));
-
-    return NOTES[id];
-  }
-
-  twin(): ?Note {
-    const id = findKey(NOTES, (note: Note, id: string) => (
-      this.id !== id && this.position === note.position
-    ));
-
-    if (! id) return null;
-
-    return NOTES[id];
   }
 
   static getPositionById(id: string): number {
@@ -76,22 +52,5 @@ class Note {
   }
 }
 
-
-function initNotes(): NoteMap {
-  const notes = {};
-
-  forEach(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (name: NoteName) => {
-    forEach(['FLAT', 'NATURAL', 'SHARP'], (alt: NoteAlt) => {
-      const params = {name, alt};
-      const note = new Note(params);
-
-      notes[note.id] = note;
-    });
-  });
-
-  return notes;
-}
-
-export {NOTES};
 export default Note;
 

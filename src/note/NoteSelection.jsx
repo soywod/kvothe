@@ -5,13 +5,14 @@ import {Link} from 'react-router';
 import {Button, Col, Row} from 'reactstrap';
 
 import type {NoteName, NoteAlt} from './Note.type';
+import Note from './Note.class';
 import NoteNameComponent from './NoteName';
 import NoteAltComponent from './NoteAlt';
 import label from '../helpers/label';
+import noteRepository from './Note.repository';
 
 type State = {
-  noteName: NoteName | null;
-  noteAlt: NoteAlt;
+  note: ?Note,
 };
 
 class NoteSelectionComponent extends React.Component {
@@ -21,8 +22,7 @@ class NoteSelectionComponent extends React.Component {
     super(props);
 
     this.state = {
-      noteName: null,
-      noteAlt: 'NATURAL',
+      note: null,
     };
 
     this.selectNoteName = this.selectNoteName.bind(this);
@@ -30,20 +30,27 @@ class NoteSelectionComponent extends React.Component {
   }
 
   selectNoteName = (noteName: NoteName) => {
-    this.setState({noteName});
+    const newNoteAlt = this.state.note ? this.state.note.alt : 'NATURAL';
+    const note = noteRepository.getByNameAndAlt(noteName, newNoteAlt)
+
+    this.setState({note});
   }
 
   selectNoteAlt = (noteAlt: NoteAlt) => {
-    this.setState(prevState => ({
-      noteAlt: prevState.noteAlt === noteAlt ? 'NATURAL' : noteAlt
-    }));
+    const newNoteName = this.state.note ? this.state.note.name : 'C';
+    const newNoteAlt = this.state.note && this.state.note.alt !== noteAlt
+      ? noteAlt
+      : 'NATURAL';
+
+    const note = noteRepository.getByNameAndAlt(newNoteName, newNoteAlt);
+
+    this.setState({note});
   }
 
-  getNextPath() {
-    const noteName = (this.state.noteName || 'C').toLowerCase();
-    const noteAlt = this.state.noteAlt.toLowerCase();
-
-    return `/harmonizer/${noteName}/${noteAlt}`;
+  getNextPath(): string {
+    return this.state.note
+      ? `/harmonizer/${this.state.note.id.toLowerCase()}`
+      : `/harmonizer`;
   }
 
   renderNoteNames() {
@@ -51,8 +58,8 @@ class NoteSelectionComponent extends React.Component {
       <NoteNameComponent
         key={noteName}
         name={noteName}
-        alt={this.state.noteAlt}
-        active={noteName === this.state.noteName}
+        alt={this.state.note ? this.state.note.alt : 'NATURAL'}
+        active={this.state.note && noteName === this.state.note.name}
         selectNoteName={this.selectNoteName}
       />
     ));
@@ -63,7 +70,8 @@ class NoteSelectionComponent extends React.Component {
       <NoteAltComponent
         key={noteAlt}
         alt={noteAlt}
-        active={noteAlt === this.state.noteAlt}
+        active={this.state.note && noteAlt === this.state.note.alt}
+        disabled={! this.state.note}
         selectNoteAlt={this.selectNoteAlt}
       />
     ));
@@ -89,7 +97,7 @@ class NoteSelectionComponent extends React.Component {
             to={this.getNextPath()}
             color="primary"
             className="float-right"
-            disabled={! this.state.noteName}>
+            disabled={! this.state.note || ! this.state.note.name}>
             Next
             <i className="fa fa-arrow-right icon-right"/>
           </Button>
@@ -98,7 +106,7 @@ class NoteSelectionComponent extends React.Component {
         <Row>
           <Col lg={styles.lg} md={styles.md}>
             <div style={{ ...styles.buttonGroup, ...styles.firstButtonGroup }}>
-              {this.renderNoteAlts()}
+              {this.renderNoteNames()}
             </div>
           </Col>
         </Row>
@@ -106,7 +114,7 @@ class NoteSelectionComponent extends React.Component {
         <Row>
           <Col lg={styles.lg} md={styles.md}>
             <div style={styles.buttonGroup}>
-              {this.renderNoteNames()}
+              {this.renderNoteAlts()}
             </div>
           </Col>
         </Row>
