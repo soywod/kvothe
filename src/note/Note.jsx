@@ -6,8 +6,8 @@ import { Button, Col, Row } from 'reactstrap';
 
 import NoteName from './NoteName';
 import NoteAlt from './NoteAlt';
-import { A, B, C, D, E, F, G } from '../../const/NoteName'
-import { FLAT, NATURAL, SHARP } from '../../const/NoteAlt';
+import { A, B, C, D, E, F, G } from '../const/NoteName'
+import { FLAT, NATURAL, SHARP } from '../const/NoteAlt';
 
 type State = {
   noteAlt: string;

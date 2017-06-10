@@ -6,7 +6,7 @@ import {browserHistory, IndexRoute, Route} from 'react-router';
 import Container from '../app/Container';
 import Home from '../home/Home';
 import Harmonizer from '../components/harmonizer';
-import NoteSelection from '../components/note-selection';
+import NoteSelection from '../note/Note';
 import ScaleSelection from '../components/scale-selection';
 import HarmonizerResult from '../components/harmonizer/ModeList';
 
