@@ -1,26 +1,26 @@
 // @flow
 
 import React from 'react';
-import * as Bootstrap from 'reactstrap';
+import {Button} from 'reactstrap';
 
 import label from '../helpers/label';
 
 class NoteAltComponent extends React.Component {
   render() {
     return (
-      <Bootstrap.Button
+      <Button
         size="sm"
         active={this.props.active}
-        onClick={this.props.selectNoteAlt.bind(undefined, this.props.name)}
+        onClick={this.props.selectNoteAlt.bind(null, this.props.alt)}
         style={styles.button}>
-        {label(this.props.name)}
-      </Bootstrap.Button>
+        {label(this.props.alt)}
+      </Button>
     );
   }
 }
 
 NoteAltComponent.propTypes = {
-  name  : React.PropTypes.string.isRequired,
+  alt: React.PropTypes.string.isRequired,
   active: React.PropTypes.bool,
 
   selectNoteAlt: React.PropTypes.func.isRequired

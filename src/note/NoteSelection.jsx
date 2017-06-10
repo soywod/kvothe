@@ -1,17 +1,17 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router';
-import { Button, Col, Row } from 'reactstrap';
+import {Link} from 'react-router';
+import {Button, Col, Row} from 'reactstrap';
 
-import NoteName from './NoteName';
-import NoteAlt from './NoteAlt';
-import { A, B, C, D, E, F, G } from '../const/NoteName'
-import { FLAT, NATURAL, SHARP } from '../const/NoteAlt';
+import type {NoteName, NoteAlt} from './Note.type';
+import NoteNameComponent from './NoteName';
+import NoteAltComponent from './NoteAlt';
+import label from '../helpers/label';
 
 type State = {
-  noteAlt: string;
-  noteName?: string;
+  noteName: NoteName | null;
+  noteAlt: NoteAlt;
 };
 
 class NoteSelectionComponent extends React.Component {
@@ -21,41 +21,51 @@ class NoteSelectionComponent extends React.Component {
     super(props);
 
     this.state = {
-      noteAlt: NATURAL
+      noteName: null,
+      noteAlt: 'NATURAL',
     };
 
     this.selectNoteName = this.selectNoteName.bind(this);
     this.selectNoteAlt  = this.selectNoteAlt.bind(this);
   }
 
-  selectNoteName = (noteName: any) => {
-    this.setState({ noteName });
+  selectNoteName = (noteName: NoteName) => {
+    this.setState({noteName});
   }
 
-  selectNoteAlt = (noteAlt: any) => {
+  selectNoteAlt = (noteAlt: NoteAlt) => {
     this.setState(prevState => ({
-      noteAlt: prevState.noteAlt === noteAlt ? NATURAL : noteAlt
+      noteAlt: prevState.noteAlt === noteAlt ? 'NATURAL' : noteAlt
     }));
   }
 
+  getNextPath() {
+    const noteName = (this.state.noteName || 'C').toLowerCase();
+    const noteAlt = this.state.noteAlt.toLowerCase();
+
+    return `/harmonizer/${noteName}/${noteAlt}`;
+  }
+
   renderNoteNames() {
-    return [A, B, C, D, E, F, G].map(noteName => (
-      <NoteName
+    return ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(noteName => (
+      <NoteNameComponent
         key={noteName}
         name={noteName}
         alt={this.state.noteAlt}
         active={noteName === this.state.noteName}
-        selectNoteName={this.selectNoteName}/>
+        selectNoteName={this.selectNoteName}
+      />
     ));
   }
 
   renderNoteAlts() {
-    return [FLAT, SHARP].map(noteAlt => (
-      <NoteAlt
+    return ['FLAT', 'SHARP'].map(noteAlt => (
+      <NoteAltComponent
         key={noteAlt}
-        name={noteAlt}
+        alt={noteAlt}
         active={noteAlt === this.state.noteAlt}
-        selectNoteAlt={this.selectNoteAlt}/>
+        selectNoteAlt={this.selectNoteAlt}
+      />
     ));
   }
 
@@ -76,7 +86,7 @@ class NoteSelectionComponent extends React.Component {
 
           <Button
             tag={Link}
-            to={`/harmonizer/${this.state.noteName || ''}/${this.state.noteAlt}`}
+            to={this.getNextPath()}
             color="primary"
             className="float-right"
             disabled={! this.state.noteName}>
