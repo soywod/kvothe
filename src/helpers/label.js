@@ -1,25 +1,33 @@
-import * as ScaleConst from '../const/Scale';
+// @flow
+
+import {FORMULAS} from '../scale/Scale.const';
 
 const labels = {
-  'FLAT': '♭',
-  'NATURAL': ' ',
-  'SHARP': '♯',
+  'a': 'A',
+  'b': 'B',
+  'c': 'C',
+  'd': 'D',
+  'e': 'E',
+  'f': 'F',
+  'g': 'G',
 
-  [ScaleConst.CHROMATIC]: 'Chromatic',
+  'flat': '♭',
+  'natural': ' ',
+  'sharp': '♯',
 
-  [ScaleConst.MAJOR]: 'Major',
-  [ScaleConst.MINOR]: 'Minor',
+  [FORMULAS['chromatic']]: 'Chromatic',
 
-  [ScaleConst.IONIAN]    : 'Ionian',
-  [ScaleConst.DORIAN]    : 'Dorian',
-  [ScaleConst.PHRYGIAN]  : 'Phrygian',
-  [ScaleConst.LYDIAN]    : 'Lydian',
-  [ScaleConst.MIXOLYDIAN]: 'Mixolydian',
-  [ScaleConst.AEOLIAN]   : 'Aeolian',
-  [ScaleConst.LOCRIAN]   : 'Locrian',
+  [FORMULAS['major']]: 'Major',
+  [FORMULAS['minor']]: 'Minor',
 
-  [ScaleConst.MINOR_MELODIC] : 'Minor melodic',
-  [ScaleConst.MINOR_HARMONIC]: 'Minor harmonic',
+  [FORMULAS['dorian']] : 'Dorian',
+  [FORMULAS['phrygian']] : 'Phrygian',
+  [FORMULAS['lydian']] : 'Lydian',
+  [FORMULAS['mixolydian']] : 'Mixolydian',
+  [FORMULAS['locrian']] : 'Locrian',
+
+  [FORMULAS['minor-melodic']] : 'Minor melodic',
+  [FORMULAS['minor-harmonic']]: 'Minor harmonic',
 
   'degree-0' : 'P1',
   'degree-1' : 'b2',

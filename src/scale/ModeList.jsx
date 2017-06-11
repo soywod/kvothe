@@ -6,8 +6,8 @@ import { browserHistory, Link, Router } from 'react-router';
 import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap';
 
 import Mode from './Mode';
-import Note from '../model/Note.class';
-import Scale from '../model/Scale.class';
+import Note from '../note/Note.class';
+import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 import { SCALES } from '../const/Scale';
 

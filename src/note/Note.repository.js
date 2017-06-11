@@ -13,8 +13,8 @@ class NoteRepository {
   constructor() {
     this.notes = {};
 
-    forEach(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (name: NoteName) => {
-      forEach(['FLAT', 'NATURAL', 'SHARP'], (alt: NoteAlt) => {
+    forEach(['a', 'b', 'c', 'd', 'e', 'f', 'g'], (name: NoteName) => {
+      forEach(['flat', 'natural', 'sharp'], (alt: NoteAlt) => {
         const params = {name, alt};
         const note = new Note(params);
 
@@ -23,7 +23,7 @@ class NoteRepository {
     });
   }
 
-  getById(id: string) {
+  getById(id: string): ?Note {
     return this.notes[id] || null;
   }
 
@@ -37,8 +37,8 @@ class NoteRepository {
     return this.notes[id];
   }
 
-  getNext(note: Note): Note {
-    const nextPosition = (note.position + 1) % NB_POSITIONS;
+  getNext(note: Note, offset: number = 1): Note {
+    const nextPosition = (note.position + offset) % NB_POSITIONS;
 
     const id = findKey(this.notes, (currNote: Note) => (
       currNote.position === nextPosition

@@ -11,7 +11,7 @@ import {
   CardSubtitle,
 } from 'reactstrap';
 
-import Scale from '../model/Scale.class';
+import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 import * as Degree from '../const/Degree';
 

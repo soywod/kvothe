@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { browserHistory, Link } from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {
   Row,
   Col,
@@ -13,8 +13,8 @@ import {
   ListGroupItem
 } from 'reactstrap';
 
-import { SCALES, MODES } from '../const/Scale';
-import Scale from './Scale';
+import {SCALES, MODES} from './Scale.const';
+import ScaleComponent from './Scale';
 
 class ScaleSelectionComponent extends React.Component {
   constructor(props: any) {
@@ -23,21 +23,29 @@ class ScaleSelectionComponent extends React.Component {
     this.onSelectScale = this.onSelectScale.bind(this);
   }
 
-  onSelectScale = (scale: any) => {
-    browserHistory.push(`/harmonizer/${this.props.params.noteName}/${this.props.params.noteAlt}/${scale}`);
+  onSelectScale = (formula: number) => {
+    browserHistory.push(`/harmonizer/${this.props.params.noteId}/${formula}`);
   }
 
   renderModes() {
     return MODES
-      .map((scale, index) => (
-        <Scale key={index} name={scale} onSelectScale={this.onSelectScale}/>
+      .map((formula: number, index: number) => (
+        <ScaleComponent
+          key={index}
+          formula={formula}
+          onSelectScale={this.onSelectScale}
+        />
       ));
   }
 
   renderScales() {
     return SCALES
-      .map((scale, index) => (
-        <Scale key={index} name={scale} onSelectScale={this.onSelectScale}/>
+      .map((formula: number, index: number) => (
+        <ScaleComponent
+          key={index}
+          formula={formula}
+          onSelectScale={this.onSelectScale}
+        />
       ));
   }
 

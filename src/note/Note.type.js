@@ -6,8 +6,8 @@ type NoteMap = {
   [id: string]: Note;
 };
 
-type NoteName = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
-type NoteAlt = 'FLAT' | 'NATURAL' | 'SHARP';
+type NoteName = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g';
+type NoteAlt = 'flat' | 'natural' | 'sharp';
 
 export type {
   NoteName,

@@ -30,17 +30,17 @@ class NoteSelectionComponent extends React.Component {
   }
 
   selectNoteName = (noteName: NoteName) => {
-    const newNoteAlt = this.state.note ? this.state.note.alt : 'NATURAL';
+    const newNoteAlt = this.state.note ? this.state.note.alt : 'natural';
     const note = noteRepository.getByNameAndAlt(noteName, newNoteAlt)
 
     this.setState({note});
   }
 
   selectNoteAlt = (noteAlt: NoteAlt) => {
-    const newNoteName = this.state.note ? this.state.note.name : 'C';
+    const newNoteName = this.state.note ? this.state.note.name : 'c';
     const newNoteAlt = this.state.note && this.state.note.alt !== noteAlt
       ? noteAlt
-      : 'NATURAL';
+      : 'natural';
 
     const note = noteRepository.getByNameAndAlt(newNoteName, newNoteAlt);
 
@@ -49,16 +49,16 @@ class NoteSelectionComponent extends React.Component {
 
   getNextPath(): string {
     return this.state.note
-      ? `/harmonizer/${this.state.note.id.toLowerCase()}`
+      ? `/harmonizer/${this.state.note.id}`
       : `/harmonizer`;
   }
 
   renderNoteNames() {
-    return ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(noteName => (
+    return ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map(noteName => (
       <NoteNameComponent
         key={noteName}
         name={noteName}
-        alt={this.state.note ? this.state.note.alt : 'NATURAL'}
+        alt={this.state.note ? this.state.note.alt : 'natural'}
         active={this.state.note && noteName === this.state.note.name}
         selectNoteName={this.selectNoteName}
       />
@@ -66,7 +66,7 @@ class NoteSelectionComponent extends React.Component {
   }
 
   renderNoteAlts() {
-    return ['FLAT', 'SHARP'].map(noteAlt => (
+    return ['flat', 'sharp'].map(noteAlt => (
       <NoteAltComponent
         key={noteAlt}
         alt={noteAlt}
