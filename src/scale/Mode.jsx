@@ -13,7 +13,6 @@ import {
 
 import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
-import * as Degree from '../const/Degree';
 
 class ModeComponent extends React.Component {
   render() {
@@ -23,13 +22,14 @@ class ModeComponent extends React.Component {
           .map((degree, index) => (
             <div key={index} style={styles.container}>
               <div style={styles.note}>
-                {
-                  degree !== null ? (
+                {degree === null
+                  ? <span className="text-muted">-</span>
+                  : (
                     <Badge color="primary" key={index} style={styles.badge}>
                       {label(this.props.mode.notes[index].name)}
                       <sub>{label(this.props.mode.notes[index].alt)}</sub>
                     </Badge>
-                  ) : <span className="text-muted">-</span>
+                  )
                 }
               </div>
               <div className="text-muted" style={styles.note}>

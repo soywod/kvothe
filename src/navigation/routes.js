@@ -3,9 +3,9 @@
 import React from 'react';
 import {browserHistory, IndexRoute, Route} from 'react-router';
 
-import Container from '../container/AppContainer';
+import Container from '../container/App';
 import Home from '../home/Home';
-import Harmonizer from '../container/HarmonizerContainer';
+import Harmonizer from '../container/Harmonizer';
 import NoteSelection from '../note/NoteSelection';
 import ScaleSelection from '../scale/ScaleSelection';
 import HarmonizerResult from '../scale/ModeList';

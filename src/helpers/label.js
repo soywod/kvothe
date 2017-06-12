@@ -48,7 +48,7 @@ const labels = {
   'step-4': '2',
 };
 
-const label = key => labels[key] || key;
+const label = (key: any) => labels[key] || '';
 
 export default label;
 

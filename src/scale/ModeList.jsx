@@ -2,18 +2,21 @@
 
 import React from 'react';
 import _ from 'lodash/fp';
-import { browserHistory, Link, Router } from 'react-router';
-import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap';
+import {browserHistory, Link, Router} from 'react-router';
+import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
 
-import Mode from './Mode';
+import ModeComponent from './Mode';
 import Note from '../note/Note.class';
 import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
-import { SCALES } from '../const/Scale';
+import {SCALES} from './Scale.const';
+
+import noteRepository from '../note/Note.repository';
+import scaleRepository from './Scale.repository';
 
 type State = {
-  scale: any;
-  allModes: any[];
+  scale: Scale;
+  modes: Array<Scale|null>;
   isModeRefOpen: boolean;
 }
 
@@ -23,11 +26,19 @@ class ModeListComponent extends React.Component {
   constructor(props: any) {
     super(props);
 
-    const scale = this.computeScale(props);
+    const {formula, noteId} = props.params;
+    const note = noteRepository.getById(noteId);
+    if (! note) throw new Error(`Error while getting note from note id '${noteId}'`);
+
+    const scale = scaleRepository.getScaleByFormula(note, formula);
+    if (! scale) throw new Error(`Error while getting scale from formula '${formula}'`);
+
+    const modes = scaleRepository.getModesFromScale(scale);
+    if (! modes) throw new Error(`Error while getting modes from scale`);
 
     this.state = {
       scale,
-      allModes     : scale.buildAllModes(),
+      modes,
       isModeRefOpen: false
     };
 
@@ -42,65 +53,72 @@ class ModeListComponent extends React.Component {
     }));
   }
 
-  computeScale(props: any) {
-    const formula = props.params.formula;
-    const note    = Note.getInstance(props.params.noteName, props.params.noteAlt);
-
-    return Scale.getInstance({ note, formula });
-  }
-
   renderMainReferences() {
-    return this.state.allModes
-      .filter(mode => mode !== null)
-      .filter(mode => SCALES.indexOf(mode.getName()) !== - 1)
-      .filter(mode => this.state.scale.formula !== mode.formula)
-      .map((mode, index) => (
-        <div key={index}>
-          <Card style={styles.mode}>
-            <ListGroup flush>
-              <ListGroupItem color="warning" className="text-center">
-                <h5>
-                  {label(mode.note.name)}
-                  <sub>{label(mode.note.alt)}</sub>{' '}
-                  {label(mode.getName())}{' '}
-                  scale
-                </h5>
-              </ListGroupItem>
+    return this.state.modes
+      .filter(mode => mode && SCALES.includes(mode.formula))
+      .map((mode, index) => {
+        if (! mode || mode.formula === this.state.scale.formula) {
+          return null;
+        }
 
-              <ListGroupItem>
-                <Mode mode={mode}/>
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
-        </div>
-      ));
+        return (
+          <div key={index}>
+            <Card style={styles.mode}>
+              <ListGroup flush>
+                <ListGroupItem color="warning" className="text-center">
+                  <h5>
+                    {label(mode.tone.name)}
+                    <sub>{label(mode.tone.alt)}</sub>{' '}
+                    {label(mode.formula)}{' '}
+                    scale
+                  </h5>
+                </ListGroupItem>
+
+                <ListGroupItem>
+                  <ModeComponent mode={mode}/>
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+          </div>
+        );
+      })
+      .filter(mode => !! mode);
   }
 
   renderOtherReferences() {
-    return this.state.allModes
-      .filter(mode => mode !== null)
-      .filter(mode => SCALES.indexOf(mode.getName()) === - 1)
-      .filter(mode => this.state.scale.formula !== mode.formula)
-      .map((mode, index) => (
-        <div key={index} className={this.state.isModeRefOpen ? 'show' : 'hide'}>
-          <Card style={styles.mode}>
-            <ListGroup flush>
-              <ListGroupItem color="danger" className="text-center">
-                <h5>
-                  {label(mode.note.name)}
-                  <sub>{label(mode.note.alt)}</sub>{' '}
-                  {label(mode.getName())}{' '}
-                  scale
-                </h5>
-              </ListGroupItem>
+    return this.state.modes
+      .filter(mode => mode && ! SCALES.includes(mode.formula))
+      .map((mode, index) => {
+        if (! mode || mode.formula === this.state.scale.formula) {
+          return null;
+        }
 
-              <ListGroupItem>
-                <Mode mode={mode}/>
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
-        </div>
-      ));
+        if (! this.state.isModeRefOpen) {
+          return null;
+        }
+
+        return (
+          <div key={index}>
+            <Card style={styles.mode}>
+              <ListGroup flush>
+                <ListGroupItem color="danger" className="text-center">
+                  <h5>
+                    {label(mode.tone.name)}
+                    <sub>{label(mode.tone.alt)}</sub>{' '}
+                    {label(mode.formula)}{' '}
+                    scale
+                  </h5>
+                </ListGroupItem>
+
+                <ListGroupItem>
+                  <ModeComponent mode={mode}/>
+                </ListGroupItem>
+              </ListGroup>
+            </Card>
+          </div>
+        );
+      })
+      .filter(mode => !! mode);
   }
 
   render() {
@@ -112,7 +130,7 @@ class ModeListComponent extends React.Component {
         <div className="navigation">
           <Button
             tag={Link}
-            to={`/harmonizer/${this.state.scale.note.name}/${this.state.scale.note.alt}`}>
+            to={`/harmonizer/${this.state.scale.tone.id}`}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
@@ -122,15 +140,15 @@ class ModeListComponent extends React.Component {
           <ListGroup flush>
             <ListGroupItem color="info" className="text-center">
               <h5>
-                {label(this.state.scale.note.name)}
-                <sub>{label(this.state.scale.note.alt)}</sub>{' '}
-                {label(this.state.scale.getName())}{' '}
+                {label(this.state.scale.tone.name)}
+                <sub>{label(this.state.scale.tone.alt)}</sub>{' '}
+                {label(this.state.scale.formula)}{' '}
                 scale
               </h5>
             </ListGroupItem>
 
             <ListGroupItem>
-              <Mode mode={this.state.scale}/>
+              <ModeComponent mode={this.state.scale}/>
             </ListGroupItem>
           </ListGroup>
         </Card>

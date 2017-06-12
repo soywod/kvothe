@@ -49,7 +49,7 @@ class NoteRepository {
 
   getTwin(note: Note): ?Note {
     const id = findKey(this.notes, (currNote: Note) => (
-      currNote.id === note.id && currNote.position === note.position
+      currNote.id !== note.id && currNote.position === note.position
     ));
 
     if (! id) return null;
