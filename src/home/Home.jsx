@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Badge, Button, Col, Row} from 'reactstrap';
 
-class HomeComponent extends React.Component {
+class Home extends React.Component {
   render() {
     return (
       <div>
@@ -85,5 +85,5 @@ const styles = {
   },
 };
 
-export default HomeComponent;
+export default Home;
 

@@ -5,7 +5,7 @@ import {Button} from 'reactstrap';
 
 import label from '../helpers/label';
 
-class NoteNameComponent extends React.Component {
+class NoteNameSelection extends React.Component {
   render() {
     return (
       <Button
@@ -20,7 +20,7 @@ class NoteNameComponent extends React.Component {
   }
 }
 
-NoteNameComponent.propTypes = {
+NoteNameSelection.propTypes = {
   name: React.PropTypes.string.isRequired,
   alt: React.PropTypes.string.isRequired,
   active: React.PropTypes.bool,
@@ -37,5 +37,5 @@ const styles = {
   }
 };
 
-export default NoteNameComponent;
+export default NoteNameSelection;
 

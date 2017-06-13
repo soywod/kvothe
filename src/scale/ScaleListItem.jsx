@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import _ from 'lodash/fp';
 import {
   Badge,
   Card,
@@ -14,7 +13,7 @@ import {
 import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 
-class ModeComponent extends React.Component {
+class ScaleListItem extends React.Component {
   render() {
     return (
       <div style={styles.mode}>
@@ -43,7 +42,7 @@ class ModeComponent extends React.Component {
   } 
 }
 
-ModeComponent.propTypes = {
+ScaleListItem.propTypes = {
   mode: React.PropTypes.instanceOf(Scale).isRequired
 };
 
@@ -80,5 +79,5 @@ const styles = {
   }
 };
 
-export default ModeComponent;
+export default ScaleListItem;
 

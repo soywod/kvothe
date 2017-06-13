@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import Router from './navigation/Router';
+import RouterComponent from './navigation/Router';
 
 class AppComponent extends React.Component {
   render() {
-    return <Router />;
+    return <RouterComponent/>;
   }
 }
 

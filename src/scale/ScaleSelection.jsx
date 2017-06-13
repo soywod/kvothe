@@ -14,9 +14,9 @@ import {
 } from 'reactstrap';
 
 import {SCALES, MODES} from './Scale.const';
-import ScaleComponent from './Scale';
+import ScaleFormulaSelection from './ScaleFormulaSelection';
 
-class ScaleSelectionComponent extends React.Component {
+class ScaleSelection extends React.Component {
   constructor(props: any) {
     super(props);
 
@@ -30,7 +30,7 @@ class ScaleSelectionComponent extends React.Component {
   renderModes() {
     return MODES
       .map((formula: number, index: number) => (
-        <ScaleComponent
+        <ScaleFormulaSelection
           key={index}
           formula={formula}
           onSelectScale={this.onSelectScale}
@@ -41,7 +41,7 @@ class ScaleSelectionComponent extends React.Component {
   renderScales() {
     return SCALES
       .map((formula: number, index: number) => (
-        <ScaleComponent
+        <ScaleFormulaSelection
           key={index}
           formula={formula}
           onSelectScale={this.onSelectScale}
@@ -112,5 +112,5 @@ const styles = {
   }
 };
 
-export default ScaleSelectionComponent;
+export default ScaleSelection;
 

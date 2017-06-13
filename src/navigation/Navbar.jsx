@@ -9,24 +9,23 @@ import {
   DropdownMenu,
   DropdownItem,
   Nav,
-  Navbar,
+  Navbar as BootstrapNavbar,
   NavbarBrand,
   NavbarToggler,
   NavItem,
   NavLink,
 } from 'reactstrap';
 
-type Props = {};
 type State = {
   isNavOpened: boolean;
   isDropdownOpened: boolean;
 };
 
-class NavbarComponent extends React.Component {
+class Navbar extends React.Component {
   state: State;
 
-  constructor(props: Props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       isNavOpened: false,
@@ -51,7 +50,7 @@ class NavbarComponent extends React.Component {
 
   render() {
     return (
-      <Navbar color="faded" light toggleable>
+      <BootstrapNavbar color="faded" light toggleable>
         <NavbarToggler right onClick={this.toggleNav}/>
 
         <NavbarBrand tag={Link} to="/">
@@ -82,10 +81,10 @@ class NavbarComponent extends React.Component {
             </NavItem>
           </Nav>
         </Collapse>
-      </Navbar>
+      </BootstrapNavbar>
     );
   }
 }
 
-export default NavbarComponent;
+export default Navbar;
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-class HarmonizerComponent extends React.Component {
+class HarmonizerContainer extends React.Component {
   render() {
     return (
       <div>
@@ -17,5 +17,5 @@ class HarmonizerComponent extends React.Component {
   }
 }
 
-export default HarmonizerComponent;
+export default HarmonizerContainer;
 

@@ -5,7 +5,7 @@ import {Button} from 'reactstrap';
 
 import label from '../helpers/label';
 
-class NoteAltComponent extends React.Component {
+class NoteAltSelection extends React.Component {
   render() {
     return (
       <Button
@@ -20,7 +20,7 @@ class NoteAltComponent extends React.Component {
   }
 }
 
-NoteAltComponent.propTypes = {
+NoteAltSelection.propTypes = {
   alt: React.PropTypes.string.isRequired,
   active: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
@@ -37,5 +37,5 @@ const styles = {
   }
 };
 
-export default NoteAltComponent;
+export default NoteAltSelection;
 

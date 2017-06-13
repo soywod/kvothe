@@ -5,7 +5,7 @@ import _ from 'lodash/fp';
 import {browserHistory, Link, Router} from 'react-router';
 import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
 
-import ModeComponent from './Mode';
+import ScaleListItem from './ScaleListItem';
 import Note from '../note/Note.class';
 import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
@@ -75,7 +75,7 @@ class ModeListComponent extends React.Component {
                 </ListGroupItem>
 
                 <ListGroupItem>
-                  <ModeComponent mode={mode}/>
+                  <ScaleListItem mode={mode}/>
                 </ListGroupItem>
               </ListGroup>
             </Card>
@@ -111,7 +111,7 @@ class ModeListComponent extends React.Component {
                 </ListGroupItem>
 
                 <ListGroupItem>
-                  <ModeComponent mode={mode}/>
+                  <ScaleListItem mode={mode}/>
                 </ListGroupItem>
               </ListGroup>
             </Card>
@@ -148,7 +148,7 @@ class ModeListComponent extends React.Component {
             </ListGroupItem>
 
             <ListGroupItem>
-              <ModeComponent mode={this.state.scale}/>
+              <ScaleListItem mode={this.state.scale}/>
             </ListGroupItem>
           </ListGroup>
         </Card>

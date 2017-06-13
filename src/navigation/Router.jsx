@@ -1,18 +1,22 @@
 // @flow
 
 import React from 'react';
-import { browserHistory, Router as ReactRouter } from 'react-router';
+import {browserHistory, Router as ReactRouter} from 'react-router';
 
 import routes from './routes'
-import updateLocation from '../analytics';
+import sendLocationToGoogle from '../analytics/google';
 
-class RouterComponent extends React.Component {
+class Router extends React.Component {
   render() {
     return (
-      <ReactRouter history={browserHistory} routes={routes} onUpdate={updateLocation} />
+      <ReactRouter
+        history={browserHistory}
+        routes={routes}
+        onUpdate={sendLocationToGoogle}
+      />
     );
   }
 }
 
-export default RouterComponent;
+export default Router;
 

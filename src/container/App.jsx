@@ -5,11 +5,11 @@ import {Container} from 'reactstrap';
 
 import Navbar from '../navigation/Navbar';
 
-class ContainerComponent extends React.Component {
+class AppContainer extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar/>
 
         <Container>
           {this.props.children}
@@ -19,5 +19,5 @@ class ContainerComponent extends React.Component {
   }
 }
 
-export default ContainerComponent;
+export default AppContainer;
 

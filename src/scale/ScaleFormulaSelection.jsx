@@ -6,7 +6,7 @@ import {Button, ListGroupItem} from 'reactstrap';
 
 import label from '../helpers/label';
 
-class ScaleComponent extends React.Component {
+class ScaleFormulaSelection extends React.Component {
   onSelectScale = () => (
     this.props.onSelectScale.bind(null, this.props.formula)
   );
@@ -20,7 +20,7 @@ class ScaleComponent extends React.Component {
   }
 }
 
-ScaleComponent.propTypes = {
+ScaleFormulaSelection.propTypes = {
   formula: React.PropTypes.number.isRequired,
 
   onSelectScale: React.PropTypes.func.isRequired
@@ -32,5 +32,5 @@ const styles = {
   }
 };
 
-export default ScaleComponent;
+export default ScaleFormulaSelection;
 

@@ -4,18 +4,19 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Button, Col, Row} from 'reactstrap';
 
-import type {NoteName, NoteAlt} from './Note.type';
-import Note from './Note.class';
-import NoteNameComponent from './NoteName';
-import NoteAltComponent from './NoteAlt';
 import label from '../helpers/label';
+import Note from './Note.class';
 import noteRepository from './Note.repository';
+import type {NoteName, NoteAlt} from './Note.type';
+
+import NoteNameSelection from './NoteNameSelection';
+import NoteAltSelection from './NoteAltSelection';
 
 type State = {
   note: ?Note,
 };
 
-class NoteSelectionComponent extends React.Component {
+class NoteSelection extends React.Component {
   state: State;
 
   constructor(props: any) {
@@ -48,14 +49,15 @@ class NoteSelectionComponent extends React.Component {
   }
 
   getNextPath(): string {
-    return this.state.note
-      ? `/harmonizer/${this.state.note.id}`
-      : `/harmonizer`;
+    const harmonizer = '/harmonizer';
+    const noteId = this.state.note ? `/${this.state.note.id}` : '';
+
+    return `${harmonizer}${noteId}`;
   }
 
   renderNoteNames() {
     return ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map(noteName => (
-      <NoteNameComponent
+      <NoteNameSelection
         key={noteName}
         name={noteName}
         alt={this.state.note ? this.state.note.alt : 'natural'}
@@ -67,7 +69,7 @@ class NoteSelectionComponent extends React.Component {
 
   renderNoteAlts() {
     return ['flat', 'sharp'].map(noteAlt => (
-      <NoteAltComponent
+      <NoteAltSelection
         key={noteAlt}
         alt={noteAlt}
         active={this.state.note && noteAlt === this.state.note.alt}
@@ -144,5 +146,5 @@ const styles = {
   }
 };
 
-export default NoteSelectionComponent;
+export default NoteSelection;
 
