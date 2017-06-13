@@ -74,3 +74,10 @@ i.icon-right {
     opacity: 1;
   }
 }
+
+/* TODO: use sass/less variables instead */
+.list-group-item.active {
+  background-color: #e6e6e6;
+  border-color: #cecece;
+  color: inherit;
+}

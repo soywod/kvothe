@@ -14,7 +14,7 @@ class ScaleFormulaSelection extends React.Component {
 
   render() {
     return (
-      <ListGroupItem action style={styles.action} onClick={this.onSelectScale()}>
+      <ListGroupItem action active={this.props.active} style={styles.action} onClick={this.onSelectScale()}>
         {label(this.props.formula)}
       </ListGroupItem>
     );
@@ -23,8 +23,9 @@ class ScaleFormulaSelection extends React.Component {
 
 ScaleFormulaSelection.propTypes = {
   formula: PropTypes.number.isRequired,
+  active: PropTypes.boolean,
 
-  onSelectScale: PropTypes.func.isRequired
+  onSelectScale: PropTypes.func.isRequired,
 };
 
 const styles = {

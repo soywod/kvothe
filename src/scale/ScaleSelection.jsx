@@ -16,15 +16,25 @@ import {
 import {SCALES, MODES} from './Scale.const';
 import ScaleFormulaSelection from './ScaleFormulaSelection';
 
+type State = {
+  formula: number;
+};
+
 class ScaleSelection extends React.Component {
+  state: State;
+
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      formula: 0,
+    };
 
     this.onSelectScale = this.onSelectScale.bind(this);
   }
 
   onSelectScale = (formula: number) => {
-    browserHistory.push(`/harmonizer/${this.props.params.noteId}/${formula}`);
+    this.setState({formula});
   }
 
   renderModes() {
@@ -33,6 +43,7 @@ class ScaleSelection extends React.Component {
         <ScaleFormulaSelection
           key={index}
           formula={formula}
+          active={formula === this.state.formula}
           onSelectScale={this.onSelectScale}
         />
       ));
@@ -44,6 +55,7 @@ class ScaleSelection extends React.Component {
         <ScaleFormulaSelection
           key={index}
           formula={formula}
+          active={formula === this.state.formula}
           onSelectScale={this.onSelectScale}
         />
       ));
@@ -65,9 +77,11 @@ class ScaleSelection extends React.Component {
           </Button>
 
           <Button
+            tag={Link}
+            to={`/harmonizer/${this.props.params.noteId}/${this.state.formula}`}
             color="primary"
             className="float-right"
-            disabled>
+            disabled={this.state.formula === 0}>
             Next
             <i className="fa fa-arrow-right icon-right"/>
           </Button>
