@@ -24,7 +24,7 @@ class ScaleListItem extends React.Component {
                 {degree === null
                   ? <span className="text-muted">-</span>
                   : (
-                    <Badge color="primary" key={index} style={styles.badge}>
+                    <Badge color={this.props.color} key={index} style={styles.badge}>
                       {label(this.props.mode.notes[index].name)}
                       <sub>{label(this.props.mode.notes[index].alt)}</sub>
                     </Badge>
@@ -43,7 +43,8 @@ class ScaleListItem extends React.Component {
 }
 
 ScaleListItem.propTypes = {
-  mode: React.PropTypes.instanceOf(Scale).isRequired
+  mode: React.PropTypes.instanceOf(Scale).isRequired,
+  color: React.PropTypes.string,
 };
 
 const styles = {
