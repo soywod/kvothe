@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button} from 'reactstrap';
 
 import label from '../helpers/label';
@@ -21,11 +22,11 @@ class NoteAltSelection extends React.Component {
 }
 
 NoteAltSelection.propTypes = {
-  alt: React.PropTypes.string.isRequired,
-  active: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
+  alt: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  disabled: PropTypes.bool,
 
-  selectNoteAlt: React.PropTypes.func.isRequired
+  selectNoteAlt: PropTypes.func.isRequired
 };
 
 const styles = {

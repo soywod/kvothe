@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button} from 'reactstrap';
 
 import label from '../helpers/label';
@@ -21,11 +22,11 @@ class NoteNameSelection extends React.Component {
 }
 
 NoteNameSelection.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  alt: React.PropTypes.string.isRequired,
-  active: React.PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  active: PropTypes.bool,
 
-  selectNoteName: React.PropTypes.func.isRequired
+  selectNoteName: PropTypes.func.isRequired
 };
 
 const styles = {

@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Badge,
   Card,
@@ -43,8 +44,8 @@ class ScaleListItem extends React.Component {
 }
 
 ScaleListItem.propTypes = {
-  mode: React.PropTypes.instanceOf(Scale).isRequired,
-  color: React.PropTypes.string,
+  mode: PropTypes.instanceOf(Scale).isRequired,
+  color: PropTypes.string,
 };
 
 const styles = {

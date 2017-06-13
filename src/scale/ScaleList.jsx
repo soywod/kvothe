@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import _ from 'lodash/fp';
 import {browserHistory, Link, Router} from 'react-router';
 import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
 

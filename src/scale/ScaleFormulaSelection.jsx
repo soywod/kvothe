@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import {Button, ListGroupItem} from 'reactstrap';
 
@@ -21,9 +22,9 @@ class ScaleFormulaSelection extends React.Component {
 }
 
 ScaleFormulaSelection.propTypes = {
-  formula: React.PropTypes.number.isRequired,
+  formula: PropTypes.number.isRequired,
 
-  onSelectScale: React.PropTypes.func.isRequired
+  onSelectScale: PropTypes.func.isRequired
 };
 
 const styles = {
