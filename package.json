@@ -47,7 +47,9 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
+    "postinstall": "flow-typed install",
     "dev": "webpack-dev-server --config webpack/dev.js",
+    "test": "jest",
     "sitemap": "babel-node sitemap-builder.js",
     "prod:client:clean": "rm -rf dist/*",
     "prod:client": "npm run prod:client:clean; cp src/static/* dist/; webpack --config webpack/prod.js",
