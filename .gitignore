@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
+flow-typed
 .idea
+.vscode
 .jsGiven-reports
-.flow-typed
