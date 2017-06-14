@@ -22,14 +22,6 @@ const common = {
         test   : /\.jsx?$/,
         loader : 'babel-loader',
         exclude: /node_modules/,
-        options: {
-          presets: ['es2015', 'react'],
-          plugins: [
-            'transform-runtime',
-            'transform-object-rest-spread',
-            'transform-class-properties',
-          ]
-        }
       },
       {
         test  : /\.css$/,
