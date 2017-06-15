@@ -43,6 +43,10 @@ class NoteRepository {
     const id = findKey(this.notes, (currNote: Note) => (
       currNote.position === nextPosition
     ));
+    
+    if (! id && id !== 0) {
+      throw new Error('Note not found');
+    }
 
     return this.notes[id];
   }

@@ -23,7 +23,7 @@ class ScaleFormulaSelection extends React.Component {
 
 ScaleFormulaSelection.propTypes = {
   formula: PropTypes.number.isRequired,
-  active: PropTypes.boolean,
+  active: PropTypes.bool,
 
   onSelectScale: PropTypes.func.isRequired,
 };
