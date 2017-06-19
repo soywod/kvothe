@@ -61,23 +61,9 @@ class ModeListComponent extends React.Component {
         }
 
         return (
-          <div key={index}>
-            <Card style={styles.mode}>
-              <ListGroup flush>
-                <ListGroupItem color="warning" className="text-center">
-                  <h5>
-                    {label(mode.tone.name)}
-                    <sub>{label(mode.tone.alt)}</sub>{' '}
-                    {label(mode.formula)}
-                  </h5>
-                </ListGroupItem>
-
-                <ListGroupItem>
-                  <ScaleListItem color="warning" mode={mode}/>
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </div>
+          <ListGroupItem>
+            <ScaleListItem color="warning" mode={mode} key={index} />
+          </ListGroupItem>
         );
       })
       .filter(mode => !! mode);
@@ -91,27 +77,10 @@ class ModeListComponent extends React.Component {
           return null;
         }
 
-        if (! this.state.isModeRefOpen) {
-          return null;
-        }
-
         return (
-          <Card key={index} style={styles.mode}>
-            <ListGroup flush>
-              <ListGroupItem className="text-center">
-                <h5>
-                  {label(mode.tone.name)}
-                  <sub>{label(mode.tone.alt)}</sub>{' '}
-                  {label(mode.formula)}{' '}
-                  scale
-                </h5>
-              </ListGroupItem>
-
-              <ListGroupItem>
-                <ScaleListItem mode={mode}/>
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
+          <ListGroupItem>
+            <ScaleListItem color="danger" mode={mode} key={index} />
+          </ListGroupItem>
         );
       })
       .filter(mode => !! mode);
@@ -132,19 +101,10 @@ class ModeListComponent extends React.Component {
           </Button>
         </div>
 
-        <h3>
-          <i className="fa fa-caret-right icon-left" style={styles.caretModeRef}/>
-          Current scale
-        </h3>
-
         <Card style={styles.mode}>
           <ListGroup flush>
-            <ListGroupItem color="info" className="text-center">
-              <h5>
-                {label(this.state.scale.tone.name)}
-                <sub>{label(this.state.scale.tone.alt)}</sub>{' '}
-                {label(this.state.scale.formula)}
-              </h5>
+            <ListGroupItem color="info">
+              <h5>Current scale</h5>
             </ListGroupItem>
 
             <ListGroupItem>
@@ -155,21 +115,27 @@ class ModeListComponent extends React.Component {
 
         <br/>
 
-        <h3>
-          <i className="fa fa-caret-right icon-left" style={styles.caretModeRef}/>
-          Famous modes reference
-        </h3>
-        {this.renderMainReferences()}
+        <Card style={styles.mode}>
+          <ListGroup flush>
+            <ListGroupItem color="warning">
+              <h5>Famous modes reference</h5>
+            </ListGroupItem>
+
+            {this.renderMainReferences()}
+          </ListGroup>
+        </Card>
 
         <br/>
 
-        <a href="#" style={styles.modeRef} onClick={this.toggleModeRef}>
-          <h3>
-            <i className={`fa fa-caret-${this.state.isModeRefOpen ? 'down' : 'right'} icon-left`} style={styles.caretModeRef}/>
-            Other modes reference
-          </h3>
-        </a>
-        {this.renderOtherReferences()}
+        <Card style={styles.mode}>
+          <ListGroup flush>
+            <ListGroupItem color="danger">
+              <h5>Other modes reference</h5>
+            </ListGroupItem>
+
+            {this.renderOtherReferences()}
+          </ListGroup>
+        </Card>
       </div>
     );
   }
