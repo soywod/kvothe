@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {browserHistory, Link} from 'react-router';
 import {
   Row,
@@ -16,6 +17,11 @@ import {
 import {SCALES, MODES} from './Scale.const';
 import ScaleFormulaSelection from './ScaleFormulaSelection';
 
+type Props = {
+  previous: () => string;
+  next: (formula: number) => string;
+};
+
 type State = {
   formula: number;
 };
@@ -23,7 +29,7 @@ type State = {
 class ScaleSelection extends React.Component {
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -71,14 +77,14 @@ class ScaleSelection extends React.Component {
         <div className="navigation">
           <Button
             tag={Link}
-            to="/harmonizer">
+            to={this.props.previous()}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
 
           <Button
             tag={Link}
-            to={`/harmonizer/${this.props.params.noteId}/${this.state.formula}`}
+            to={this.props.next(this.state.formula)}
             color="primary"
             className="float-right"
             disabled={this.state.formula === 0}>
@@ -117,6 +123,11 @@ class ScaleSelection extends React.Component {
     );
   }
 }
+
+ScaleSelection.propTypes = {
+  previous: PropTypes.func.isRequired,
+  next: PropTypes.func.isRequired,
+};
 
 const styles = {
   buttonGroup: {

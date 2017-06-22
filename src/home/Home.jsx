@@ -15,7 +15,7 @@ class Home extends React.Component {
 
         <p className="lead">
           Kvothe (pronounce « quote ») is a web app that tries to help composers.
-          For now, it provides you only one tool : a <Link to="/harmonizer">Harmonizer</Link>.
+          For now, it provides you only one tool : a <Link to="/scale-harmonizer">Harmonizer</Link>.
           Many more tools will soon be available :)
         </p>
 
@@ -30,15 +30,15 @@ class Home extends React.Component {
 
         <Row>
           <Col md="6" sm="12">
-            <Button to="/harmonizer" tag={Link} style={styles.tool}>
+            <Button to="/scale-harmonizer" tag={Link} style={styles.tool}>
               <h3>
                 <i className="fa fa-soundcloud icon-left text-warning"/>
-                Harmonizer
+                Scale harmonizer
               </h3>
             </Button>
-          </Col>
 
-          <Col md="6" sm="12">
+            <br/>
+
             <Button to="/" disabled tag={Link} style={styles.tool}>
               <h3>
                 <span>
@@ -46,6 +46,15 @@ class Home extends React.Component {
                   Randomizer{' '}
                 </span>
                 <span className="text-muted">(soon)</span>
+              </h3>
+            </Button>
+          </Col>
+
+          <Col md="6" sm="12">
+            <Button to="/chord-harmonizer" tag={Link} style={styles.tool}>
+              <h3>
+                <i className="fa fa-soundcloud icon-left text-warning"/>
+                Chord harmonizer
               </h3>
             </Button>
           </Col>
@@ -57,7 +66,7 @@ class Home extends React.Component {
 
         <ul>
           <li>
-            Optimized the <Link to="/harmonizer">Harmonizer tool</Link> + added animations
+            Optimized the <Link to="/scale-harmonizer">Harmonizer tool</Link> + added animations
           </li>
         </ul>
 

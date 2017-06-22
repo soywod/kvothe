@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import {Button, Col, Row} from 'reactstrap';
 
@@ -12,6 +13,11 @@ import type {NoteName, NoteAlt} from './Note.type';
 import NoteNameSelection from './NoteNameSelection';
 import NoteAltSelection from './NoteAltSelection';
 
+type Props = {
+  previous: () => string;
+  next: (noteId: ?string) => string;
+};
+
 type State = {
   note: ?Note,
 };
@@ -19,7 +25,7 @@ type State = {
 class NoteSelection extends React.Component {
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -27,7 +33,7 @@ class NoteSelection extends React.Component {
     };
 
     this.selectNoteName = this.selectNoteName.bind(this);
-    this.selectNoteAlt  = this.selectNoteAlt.bind(this);
+    this.selectNoteAlt = this.selectNoteAlt.bind(this);
   }
 
   selectNoteName = (noteName: NoteName) => {
@@ -46,13 +52,6 @@ class NoteSelection extends React.Component {
     const note = noteRepository.getByNameAndAlt(newNoteName, newNoteAlt);
 
     this.setState({note});
-  }
-
-  getNextPath(): string {
-    const harmonizer = '/harmonizer';
-    const noteId = this.state.note ? `/${this.state.note.id}` : '';
-
-    return `${harmonizer}${noteId}`;
   }
 
   renderNoteNames() {
@@ -87,16 +86,14 @@ class NoteSelection extends React.Component {
         </p>
 
         <div className="navigation">
-          <Button
-            tag={Link}
-            to="/">
+          <Button tag={Link} to={this.props.previous()}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
 
           <Button
             tag={Link}
-            to={this.getNextPath()}
+            to={this.props.next(this.state.note ? this.state.note.id : null)}
             color="primary"
             className="float-right"
             disabled={! this.state.note || ! this.state.note.name}>
@@ -124,6 +121,11 @@ class NoteSelection extends React.Component {
     );
   }
 }
+
+NoteSelection.propTypes = {
+  previous: PropTypes.func.isRequired,
+  next: PropTypes.func.isRequired,
+};
 
 const styles = {
   lg: {

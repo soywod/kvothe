@@ -45,7 +45,7 @@ class ScaleListItem extends React.Component {
   render() {
     return (
       <div style={styles.modeContainer}>
-        <a href="#" className="text-left" onClick={this.toggleScale} style={styles.link}>
+        <a href="#" className={`text-left no-underline text-${this.props.color || 'default'}`} onClick={this.toggleScale} style={styles.link}>
           <i className={`fa fa-caret-${this.state.isItemOpen ? 'down' : 'right'} icon-left`} style={styles.caret}/> 
           {label(this.props.mode.tone.name)}
           <sub>{label(this.props.mode.tone.alt)}</sub>{' '}
@@ -130,4 +130,3 @@ const styles = {
 };
 
 export default ScaleListItem;
-

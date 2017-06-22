@@ -57,6 +57,11 @@ i.icon-right {
   transition: opacity 175ms cubic-bezier(0.86, 0, 0.07, 1);
 }
 
+.no-underline:hover,
+.no-underline:focus {
+  text-decoration: none;
+}
+
 @keyframes slide {
   0% {
     transform: translate(-200px, 0);

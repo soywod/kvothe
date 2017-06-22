@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {browserHistory, Link, Router} from 'react-router';
 import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
 
@@ -13,19 +14,25 @@ import {SCALES} from './Scale.const';
 import noteRepository from '../note/Note.repository';
 import scaleRepository from './Scale.repository';
 
+type Props = {
+  noteId: string;
+  formula: number;
+  previous: () => string;
+};
+
 type State = {
   scale: Scale;
   modes: Array<Scale|null>;
   isModeRefOpen: boolean;
 }
 
-class ModeListComponent extends React.Component {
+class ScaleList extends React.Component {
   state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
 
-    const {formula, noteId} = props.params;
+    const {formula, noteId} = props;
     const note = noteRepository.getById(noteId);
     if (! note) throw new Error(`Error while getting note from note id '${noteId}'`);
 
@@ -61,8 +68,8 @@ class ModeListComponent extends React.Component {
         }
 
         return (
-          <ListGroupItem>
-            <ScaleListItem color="warning" mode={mode} key={index} />
+          <ListGroupItem key={index}>
+            <ScaleListItem color="warning" mode={mode} />
           </ListGroupItem>
         );
       })
@@ -78,8 +85,8 @@ class ModeListComponent extends React.Component {
         }
 
         return (
-          <ListGroupItem>
-            <ScaleListItem color="danger" mode={mode} key={index} />
+          <ListGroupItem key={index}>
+            <ScaleListItem color="danger" mode={mode} />
           </ListGroupItem>
         );
       })
@@ -95,7 +102,7 @@ class ModeListComponent extends React.Component {
         <div className="navigation">
           <Button
             tag={Link}
-            to={`/harmonizer/${this.state.scale.tone.id}`}>
+            to={this.props.previous()}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
@@ -141,6 +148,12 @@ class ModeListComponent extends React.Component {
   }
 }
 
+ScaleList.propTypes = {
+  noteId: PropTypes.string.isRequired,
+  formula: PropTypes.number.isRequired,
+  previous: PropTypes.func.isRequired,
+};
+
 const styles = {
   container   : {
     display: 'flex'
@@ -164,5 +177,4 @@ const styles = {
   }
 };
 
-export default ModeListComponent;
-
+export default ScaleList;
