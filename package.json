@@ -38,7 +38,7 @@
     "flow-typed": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^20.0.4",
-    "js-given": "^0.1.1",
+    "js-given": "^0.1.4",
     "lodash": "^4.17.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.8",
@@ -47,6 +47,8 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
+    "pretest": "jsgiven clean",
+    "posttest": "jsgiven report",
     "postinstall": "flow-typed install",
     "dev": "webpack-dev-server --config webpack/dev.js",
     "test": "jest",
