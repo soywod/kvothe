@@ -65,7 +65,7 @@ class Navbar extends React.Component {
                   Tools
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem tag={Link} to="/harmonizer">
+                  <DropdownItem tag={Link} to="/scale-harmonizer">
                     Harmonizer
                   </DropdownItem>
                 </DropdownMenu>
