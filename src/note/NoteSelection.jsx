@@ -7,7 +7,7 @@ import {Button, Col, Row} from 'reactstrap';
 
 import label from '../helpers/label';
 import Note from './Note.class';
-import noteRepository from './Note.repository';
+import noteRepository from './noteRepository';
 import type {NoteName, NoteAlt} from './Note.type';
 
 import NoteNameSelection from './NoteNameSelection';

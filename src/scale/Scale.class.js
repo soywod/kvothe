@@ -1,7 +1,7 @@
 // @flow
 
 import Note from '../note/Note.class';
-import noteRepository from '../note/Note.repository';
+import noteRepository from '../note/noteRepository';
 import {FORMULAS} from './Scale.const';
 
 type ScaleParams = {

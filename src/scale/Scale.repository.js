@@ -5,7 +5,7 @@ import {drop, take, forEach} from 'lodash';
 import Note from '../note/Note.class';
 import Scale from './Scale.class';
 import {FORMULAS} from './Scale.const';
-import noteRepository from '../note/Note.repository';
+import noteRepository from '../note/noteRepository';
 
 class ScaleRepository {
   getFormulaByName(name: string): ?number {

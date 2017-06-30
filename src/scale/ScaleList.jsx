@@ -11,7 +11,7 @@ import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 import {SCALES} from './Scale.const';
 
-import noteRepository from '../note/Note.repository';
+import noteRepository from '../note/noteRepository';
 import scaleRepository from './Scale.repository';
 
 type Props = {
