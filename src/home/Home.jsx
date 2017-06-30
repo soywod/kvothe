@@ -15,7 +15,7 @@ class Home extends React.Component {
 
         <p className="lead">
           Kvothe (pronounce « quote ») is a web app that tries to help composers.
-          For now, it provides you only one tool : a <Link to="/scale-harmonizer">Harmonizer</Link>.
+          For now, it provides you only one tool : a <Link to="/scale-harmonizer">scale harmonizer</Link>.
           Many more tools will soon be available :)
         </p>
 
@@ -51,10 +51,13 @@ class Home extends React.Component {
           </Col>
 
           <Col md="6" sm="12">
-            <Button to="/chord-harmonizer" tag={Link} style={styles.tool}>
+            <Button to="/chord-harmonizer" disabled tag={Link} style={styles.tool}>
               <h3>
-                <i className="fa fa-soundcloud icon-left text-warning"/>
-                Chord harmonizer
+                <span>
+                  <i className="fa fa-soundcloud icon-left text-default"/>
+                  Chord harmonizer{' '}
+                </span>
+                <span className="text-muted">(soon)</span>
               </h3>
             </Button>
           </Col>
@@ -66,7 +69,10 @@ class Home extends React.Component {
 
         <ul>
           <li>
-            Optimized the <Link to="/scale-harmonizer">Harmonizer tool</Link> + added animations
+            Splited the harmonizer tool into 2 tools : a scale harmonizer and a chord harmonizer
+          </li>
+          <li>
+            Optimized the <Link to="/scale-harmonizer">harmonizer tool</Link> + added animations
           </li>
         </ul>
 
@@ -75,8 +81,9 @@ class Home extends React.Component {
         <h5>Coming soon :</h5>
 
         <ul>
+          <li>A chord harmonizer</li>
           <li>An random note generator</li>
-          <li>Possibility to create a custom scale in the Harmonizer</li>
+          <li>Possibility to create a custom scale in harmonizer tools</li>
           <li>Integrate a scale / chord player</li>
         </ul>
       </div>
