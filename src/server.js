@@ -4,7 +4,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 
-import routes from './routing/routes';
+import routes from './navigation/routes';
 
 const app = Express();
 
@@ -42,3 +42,4 @@ app.get('*', (req, res) => {
 
 console.log('Kvothe server listening ...');
 app.listen(8080);
+
