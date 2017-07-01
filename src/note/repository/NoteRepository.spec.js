@@ -13,7 +13,6 @@ import {
 } from 'js-given';
 
 import type {NoteName, NoteAlt} from '../Note.type';
-import type {NoteRepository} from './NoteRepository.type';
 
 import Note from '../Note';
 import {NB_POSITIONS} from './NoteRepository.type';
@@ -22,8 +21,6 @@ import noteRepository from './NoteRepository';
 setupForRspec(describe, it);
 
 class NoteStage extends Stage {
-  noteRepository: NoteRepository;
-
   noteId: string;
   noteName: ?NoteName;
   noteAlt: ?NoteAlt;
@@ -33,11 +30,6 @@ class NoteStage extends Stage {
   twinNote: ?Note;
 
   // ----- Given ----- //
-
-  a_note_repository(noteRepository: NoteRepository): this {
-    this.noteRepository = noteRepository;
-    return this;
-  }
 
   a_note_id_$(noteId: string): this {
     this.noteId = noteId;
@@ -57,18 +49,18 @@ class NoteStage extends Stage {
   // ----- When ----- //
 
   init_note_repository(): this {
-    this.noteRepository.init();
+    noteRepository.init();
     return this;
   }
 
   get_note_by_id(): this {
-    this.note = this.noteRepository.getById(this.noteId);
+    this.note = noteRepository.getById(this.noteId);
     return this;
   }
 
   get_note_by_name_and_alt(): this {
     this.note = this.noteName && this.noteAlt
-      ? this.noteRepository.getByNameAndAlt(this.noteName, this.noteAlt)
+      ? noteRepository.getByNameAndAlt(this.noteName, this.noteAlt)
       : null;
 
     return this;
@@ -76,7 +68,7 @@ class NoteStage extends Stage {
 
   get_next_note(): this {
     this.nextNote = this.note
-      ? this.noteRepository.getNext(this.note)
+      ? noteRepository.getNext(this.note)
       : null;
 
     return this;
@@ -84,7 +76,7 @@ class NoteStage extends Stage {
   
   get_twin_note(): this {
     this.twinNote = this.note
-      ? this.noteRepository.getTwin(this.note)
+      ? noteRepository.getTwin(this.note)
       : null;
 
     return this;
@@ -93,51 +85,51 @@ class NoteStage extends Stage {
   // ----- Then ----- //
 
   should_have_valid_mapping(): this {
-    expect(Object.keys(this.noteRepository.notes)).toHaveLength(21);
+    expect(Object.keys(noteRepository.notes)).toHaveLength(21);
 
-    expect(this.noteRepository.notes).toHaveProperty('a-flat');
-    expect(this.noteRepository.notes).toHaveProperty('a-natural');
-    expect(this.noteRepository.notes).toHaveProperty('a-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('a-flat');
-    expect(this.noteRepository.notes).toHaveProperty('b-natural');
-    expect(this.noteRepository.notes).toHaveProperty('b-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('b-flat');
-    expect(this.noteRepository.notes).toHaveProperty('c-natural');
-    expect(this.noteRepository.notes).toHaveProperty('c-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('c-flat');
-    expect(this.noteRepository.notes).toHaveProperty('d-natural');
-    expect(this.noteRepository.notes).toHaveProperty('d-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('d-flat');
-    expect(this.noteRepository.notes).toHaveProperty('e-natural');
-    expect(this.noteRepository.notes).toHaveProperty('e-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('e-flat');
-    expect(this.noteRepository.notes).toHaveProperty('f-natural');
-    expect(this.noteRepository.notes).toHaveProperty('f-sharp');
-    expect(this.noteRepository.notes).toHaveProperty('f-flat');
-    expect(this.noteRepository.notes).toHaveProperty('g-natural');
-    expect(this.noteRepository.notes).toHaveProperty('g-sharp');
+    expect(noteRepository.notes).toHaveProperty('a-flat');
+    expect(noteRepository.notes).toHaveProperty('a-natural');
+    expect(noteRepository.notes).toHaveProperty('a-sharp');
+    expect(noteRepository.notes).toHaveProperty('a-flat');
+    expect(noteRepository.notes).toHaveProperty('b-natural');
+    expect(noteRepository.notes).toHaveProperty('b-sharp');
+    expect(noteRepository.notes).toHaveProperty('b-flat');
+    expect(noteRepository.notes).toHaveProperty('c-natural');
+    expect(noteRepository.notes).toHaveProperty('c-sharp');
+    expect(noteRepository.notes).toHaveProperty('c-flat');
+    expect(noteRepository.notes).toHaveProperty('d-natural');
+    expect(noteRepository.notes).toHaveProperty('d-sharp');
+    expect(noteRepository.notes).toHaveProperty('d-flat');
+    expect(noteRepository.notes).toHaveProperty('e-natural');
+    expect(noteRepository.notes).toHaveProperty('e-sharp');
+    expect(noteRepository.notes).toHaveProperty('e-flat');
+    expect(noteRepository.notes).toHaveProperty('f-natural');
+    expect(noteRepository.notes).toHaveProperty('f-sharp');
+    expect(noteRepository.notes).toHaveProperty('f-flat');
+    expect(noteRepository.notes).toHaveProperty('g-natural');
+    expect(noteRepository.notes).toHaveProperty('g-sharp');
 
-    expect(this.noteRepository.notes['a-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['a-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['a-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['b-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['b-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['b-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['c-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['c-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['c-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['d-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['d-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['d-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['e-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['e-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['e-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['f-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['f-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['f-sharp']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['g-flat']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['g-natural']).toBeInstanceOf(Note);
-    expect(this.noteRepository.notes['g-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['a-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['a-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['a-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['b-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['b-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['b-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['c-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['c-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['c-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['d-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['d-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['d-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['e-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['e-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['e-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['f-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['f-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['f-sharp']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['g-flat']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['g-natural']).toBeInstanceOf(Note);
+    expect(noteRepository.notes['g-sharp']).toBeInstanceOf(Note);
 
     return this;
   }
@@ -165,7 +157,7 @@ class NoteStage extends Stage {
     }
 
     else if (expectedNextNoteId !== null && expectedNextNoteId !== undefined) {
-      const expectedNextNote = this.noteRepository.getById(expectedNextNoteId);
+      const expectedNextNote = noteRepository.getById(expectedNextNoteId);
 
       expect(this.note).not.toBeNull();
       expect(this.nextNote).not.toBeNull();
@@ -199,8 +191,6 @@ class NoteStage extends Stage {
 
 scenarios('Note repository', NoteStage, ({given, when, then}) => ({
   should_init_notes_mapping: scenario({}, () => {
-    given().a_note_repository(noteRepository);
-
     when().init_note_repository();
 
     then().should_have_valid_mapping();
@@ -212,9 +202,7 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
     ['c-sharp', 'c-sharp'],
     ['bad', null],
   ], (currentNoteId: string, expectedNextNoteId: ?string) => {
-    given()
-      .a_note_repository(noteRepository).and()
-      .a_note_id_$(currentNoteId);
+    given() .a_note_id_$(currentNoteId);
 
     when().get_note_by_id();
 
@@ -230,7 +218,6 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
     [null, null, null],
   ], (currentNoteName: ?NoteName, currentNoteAlt: ?NoteAlt, expectedNextNoteId: ?string) => {
     given()
-      .a_note_repository(noteRepository).and()
       .a_note_name_$(currentNoteName).and()
       .a_note_alt_$(currentNoteAlt);
 
@@ -249,9 +236,7 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
     ['g-flat', 'g-natural'], ['g-natural', 'g-sharp'], ['g-sharp', 'a-natural'],
     ['bad', null],
   ], (currentNoteId: string, expectedNextNoteId: ?string) => {
-    given()
-      .a_note_repository(noteRepository).and()
-      .a_note_id_$(currentNoteId);
+    given() .a_note_id_$(currentNoteId);
 
     when()
       .get_note_by_id().and()
@@ -270,9 +255,7 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
     ['g-flat', 'f-sharp'], ['g-natural', null], ['g-sharp', 'a-flat'],
     ['bad', null],
   ], (currentNoteId: string, expectedTwinNoteId: ?string) => {
-    given()
-      .a_note_repository(noteRepository).and()
-      .a_note_id_$(currentNoteId);
+    given().a_note_id_$(currentNoteId);
 
     when()
       .get_note_by_id().and()
