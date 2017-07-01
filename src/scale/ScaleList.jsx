@@ -6,12 +6,12 @@ import {browserHistory, Link, Router} from 'react-router';
 import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
 
 import ScaleListItem from './ScaleListItem';
-import Note from '../note/Note.class';
+import Note from '../note/Note';
 import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 import {SCALES} from './Scale.const';
 
-import noteRepository from '../note/noteRepository';
+import noteRepository from '../note/repository/NoteRepository';
 import scaleRepository from './Scale.repository';
 
 type Props = {

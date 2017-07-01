@@ -1,6 +1,6 @@
 // @flow
 
-import Note from './Note.class';
+import Note from './Note';
 
 type NoteMap = {
   [id: string]: Note;

@@ -6,7 +6,7 @@ import {browserHistory, IndexRoute, Route} from 'react-router';
 import AppContainer from '../container/App';
 import Home from '../home/Home';
 import ScaleHarmonizerContainer from '../container/ScaleHarmonizer';
-import NoteSelection from '../note/NoteSelection';
+import NoteSelection from '../note/components/NoteSelection';
 import ScaleSelection from '../scale/ScaleSelection';
 import ScaleList from '../scale/ScaleList';
 

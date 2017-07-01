@@ -2,10 +2,10 @@
 
 import {drop, take, forEach} from 'lodash';
 
-import Note from '../note/Note.class';
+import Note from '../note/Note';
 import Scale from './Scale.class';
 import {FORMULAS} from './Scale.const';
-import noteRepository from '../note/noteRepository';
+import noteRepository from '../note/repository/NoteRepository';
 
 class ScaleRepository {
   getFormulaByName(name: string): ?number {

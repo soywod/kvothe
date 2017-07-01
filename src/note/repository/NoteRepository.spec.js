@@ -12,10 +12,10 @@ import {
 declare function describe(suiteMessage: string, suite:() => void): void;
 declare function it(testMessage: string, test:() => void | Promise<void>): void;
 
-import Note from './Note.class';
+import Note from '../Note';
 import type {NoteRepository} from './NoteRepository.type';
 import {NB_POSITIONS} from './NoteRepository.type';
-import noteRepository from './noteRepository';
+import noteRepository from './NoteRepository';
 
 setupForRspec(describe, it);
 

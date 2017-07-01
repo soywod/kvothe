@@ -7,7 +7,7 @@ import {
 } from 'react-router-sitemap';
 
 import { SCALES, MODES } from './src/scale/Scale.const';
-import noteRepository from './src/note/noteRepository';
+import noteRepository from './src/note/repository/NoteRepository';
 
 noteRepository.init();
 

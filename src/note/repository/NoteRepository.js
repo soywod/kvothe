@@ -6,12 +6,12 @@ import {
   isNil,
 } from 'lodash';
 
-import Note from './Note.class';
+import Note from '../Note';
 import type {
   NoteMap,
   NoteName,
   NoteAlt
-} from './Note.type';
+} from '../Note.type';
 
 import type {NoteRepository} from './NoteRepository.type';
 import {NB_POSITIONS} from './NoteRepository.type';

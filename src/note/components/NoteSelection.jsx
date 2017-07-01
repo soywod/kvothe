@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import {Button, Col, Row} from 'reactstrap';
 
-import label from '../helpers/label';
-import Note from './Note.class';
-import noteRepository from './noteRepository';
-import type {NoteName, NoteAlt} from './Note.type';
+import label from '../../helpers/label';
+import Note from '../Note';
+import noteRepository from './../repository/NoteRepository';
+import type {NoteName, NoteAlt} from '../Note.type';
 
 import NoteNameSelection from './NoteNameSelection';
 import NoteAltSelection from './NoteAltSelection';

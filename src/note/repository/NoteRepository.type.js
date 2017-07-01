@@ -1,11 +1,11 @@
 // @flow
 
-import Note from './Note.class';
+import Note from '../Note';
 import type {
   NoteMap,
   NoteName,
   NoteAlt
-} from './Note.type';
+} from '../Note.type';
 
 export const NB_POSITIONS = 12;
 
