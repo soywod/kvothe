@@ -1,19 +1,21 @@
 // @flow
 
+declare function describe(suiteMessage: string, suite:() => void): void;
+declare function it(testMessage: string, test:() => void | Promise<void>): void;
+
 import {
-  parametrized1,
   parametrized2,
+  parametrized3,
   scenario,
   scenarios,
   setupForRspec,
   Stage,
 } from 'js-given';
 
-declare function describe(suiteMessage: string, suite:() => void): void;
-declare function it(testMessage: string, test:() => void | Promise<void>): void;
+import type {NoteName, NoteAlt} from '../Note.type';
+import type {NoteRepository} from './NoteRepository.type';
 
 import Note from '../Note';
-import type {NoteRepository} from './NoteRepository.type';
 import {NB_POSITIONS} from './NoteRepository.type';
 import noteRepository from './NoteRepository';
 
@@ -21,7 +23,11 @@ setupForRspec(describe, it);
 
 class NoteStage extends Stage {
   noteRepository: NoteRepository;
+
   noteId: string;
+  noteName: ?NoteName;
+  noteAlt: ?NoteAlt;
+
   note: ?Note;
   nextNote: ?Note;
   twinNote: ?Note;
@@ -38,6 +44,16 @@ class NoteStage extends Stage {
     return this;
   }
 
+  a_note_name_$(noteName: ?NoteName): this {
+    this.noteName = noteName;
+    return this;
+  }
+
+  a_note_alt_$(noteAlt: ?NoteAlt): this {
+    this.noteAlt = noteAlt;
+    return this;
+  }
+
   // ----- When ----- //
 
   init_note_repository(): this {
@@ -50,9 +66,25 @@ class NoteStage extends Stage {
     return this;
   }
 
+  get_note_by_name_and_alt(): this {
+    this.note = this.noteName && this.noteAlt
+      ? this.noteRepository.getByNameAndAlt(this.noteName, this.noteAlt)
+      : null;
+
+    return this;
+  }
+
   get_next_note(): this {
     this.nextNote = this.note
       ? this.noteRepository.getNext(this.note)
+      : null;
+
+    return this;
+  }
+  
+  get_twin_note(): this {
+    this.twinNote = this.note
+      ? this.noteRepository.getTwin(this.note)
       : null;
 
     return this;
@@ -114,9 +146,9 @@ class NoteStage extends Stage {
     if (expectedNoteId === null || expectedNoteId === undefined) {
       expect(this.note).toBeNull();
       return this;
-    } 
+    }
 
-    if (expectedNoteId !== null && expectedNoteId !== undefined) {
+    else if (expectedNoteId !== null && expectedNoteId !== undefined) {
       expect(this.note).not.toBeNull();
 
       if (this.note) {
@@ -129,17 +161,35 @@ class NoteStage extends Stage {
 
   should_have_next_id_$(expectedNextNoteId: ?string): this {
     if (expectedNextNoteId === null || expectedNextNoteId === undefined) {
-      expect(this.note).toBeNull();
       expect(this.nextNote).toBeNull();
-    } 
+    }
 
-    if (expectedNextNoteId !== null && expectedNextNoteId !== undefined) {
+    else if (expectedNextNoteId !== null && expectedNextNoteId !== undefined) {
+      const expectedNextNote = this.noteRepository.getById(expectedNextNoteId);
+
       expect(this.note).not.toBeNull();
       expect(this.nextNote).not.toBeNull();
+      expect(expectedNextNote).not.toBeNull();
 
-      if (this.note && this.nextNote) {
-        const expectedNextNotePosition = (this.note.position + NB_POSITIONS + 1) % NB_POSITIONS;
-        expect(this.nextNote.position).toEqual(expectedNextNotePosition);
+      if (this.nextNote && expectedNextNote) {
+        expect(this.nextNote.position).toEqual(expectedNextNote.position);
+      }
+    }
+
+    return this;
+  }
+
+  should_have_twin_id_$(expectedTwinNoteId: ?string): this {
+    if (expectedTwinNoteId === null || expectedTwinNoteId === undefined) {
+      expect(this.twinNote).toBeNull();
+    } 
+
+    else if (expectedTwinNoteId !== null && expectedTwinNoteId !== undefined) {
+      expect(this.note).not.toBeNull();
+      expect(this.twinNote).not.toBeNull();
+
+      if (this.twinNote) {
+        expect(this.twinNote.id).toEqual(expectedTwinNoteId);
       }
     }
 
@@ -171,6 +221,24 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
     then().should_have_id_$(expectedNextNoteId);
   })),
 
+  should_get_note_by_name_and_alt: scenario({}, parametrized3([
+    ['a', 'flat', 'a-flat'],
+    ['b', 'natural', 'b-natural'],
+    ['c', 'sharp', 'c-sharp'],
+    ['d', null, null],
+    [null, 'natural', null],
+    [null, null, null],
+  ], (currentNoteName: ?NoteName, currentNoteAlt: ?NoteAlt, expectedNextNoteId: ?string) => {
+    given()
+      .a_note_repository(noteRepository).and()
+      .a_note_name_$(currentNoteName).and()
+      .a_note_alt_$(currentNoteAlt);
+
+    when().get_note_by_name_and_alt();
+
+    then().should_have_id_$(expectedNextNoteId);
+  })),
+
   should_get_next_note: scenario({}, parametrized2([
     ['a-flat', 'a-natural'], ['a-natural', 'a-sharp'], ['a-sharp', 'b-natural'],
     ['b-flat', 'b-natural'], ['b-natural', 'b-sharp'], ['b-sharp', 'c-sharp'],
@@ -190,6 +258,27 @@ scenarios('Note repository', NoteStage, ({given, when, then}) => ({
       .get_next_note();
 
     then().should_have_next_id_$(expectedNextNoteId);
+  })),
+
+  should_get_twin_note: scenario({}, parametrized2([
+    ['a-flat', 'g-sharp'], ['a-natural', null], ['a-sharp', 'b-flat'],
+    ['b-flat', 'a-sharp'], ['b-natural', 'c-flat'], ['b-sharp', 'c-natural'],
+    ['c-flat', 'b-natural'], ['c-natural', 'b-sharp'], ['c-sharp', 'd-flat'],
+    ['d-flat', 'c-sharp'], ['d-natural', null], ['d-sharp', 'e-flat'],
+    ['e-flat', 'd-sharp'], ['e-natural', 'f-flat'], ['e-sharp', 'f-natural'],
+    ['f-flat', 'e-natural'], ['f-natural', 'e-sharp'], ['f-sharp', 'g-flat'],
+    ['g-flat', 'f-sharp'], ['g-natural', null], ['g-sharp', 'a-flat'],
+    ['bad', null],
+  ], (currentNoteId: string, expectedTwinNoteId: ?string) => {
+    given()
+      .a_note_repository(noteRepository).and()
+      .a_note_id_$(currentNoteId);
+
+    when()
+      .get_note_by_id().and()
+      .get_twin_note();
+
+    then().should_have_twin_id_$(expectedTwinNoteId);
   })),
 }));
 
