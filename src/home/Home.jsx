@@ -25,7 +25,7 @@ function Home() {
           If you find some bug, report <a href="https://github.com/soywod/kvothe/issues" target="_blank">here</a>.
         </p>
 
-      <hr className="my-3" />
+      <br />
 
       <Row>
         <Col md="6" sm="12">
@@ -60,30 +60,6 @@ function Home() {
           </Button>
         </Col>
       </Row>
-
-      <hr className="my-3" />
-
-      <h5>New content :</h5>
-
-      <ul>
-        <li>
-          Splited the harmonizer tool into 2 tools : a scale harmonizer and a chord harmonizer
-          </li>
-        <li>
-          Optimized the <Link to="/scale-harmonizer">harmonizer tool</Link> + added animations
-          </li>
-      </ul>
-
-      <hr className="my-3" />
-
-      <h5>Coming soon :</h5>
-
-      <ul>
-        <li>A chord harmonizer</li>
-        <li>An random note generator</li>
-        <li>Possibility to create a custom scale in harmonizer tools</li>
-        <li>Integrate a scale / chord player</li>
-      </ul>
     </div>
   )
 }
