@@ -50,13 +50,12 @@ function Home() {
         </Col>
 
         <Col md="6" sm="12">
-          <Button to="/chord-harmonizer" disabled tag={Link} style={styles.tool}>
+          <Button to="/chord-harmonizer" tag={Link} style={styles.tool}>
             <h3>
               <span>
                 <i className="fa fa-soundcloud icon-left text-default" />
                 Chord harmonizer{' '}
               </span>
-              <span className="text-muted">(soon)</span>
             </h3>
           </Button>
         </Col>

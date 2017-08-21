@@ -9,50 +9,88 @@ import ScaleHarmonizerContainer from '../container/ScaleHarmonizer'
 import NoteSelection from '../note/components/NoteSelection'
 import ScaleSelection from '../scale/ScaleSelection'
 import ScaleList from '../scale/ScaleList'
+import ChordHarmonizerContainer from '../container/ChordHarmonizer'
+import ChordList from '../chord/ChordList'
 
-function NoteSelectionWrapper() {
-  return (
-    <NoteSelection
-      previous={() => '/'}
-      next={(noteId: ?string) => {
-        return `/scale-harmonizer${noteId ? `/${noteId}` : ''}`
-      }}
-    />
-  );
+function noteSelectionWrapper(url: string) {
+  return (props: any) => {
+    const {noteId} = props.params
+
+    return (
+      <NoteSelection
+        previous={() => '/'}
+        next={(noteId: ?string) => `${url}${noteId ? `/${noteId}` : ''}`}
+      />
+    )
+  }
 }
 
-function ScaleSelectionWrapper(props: any) {
-  const {noteId} = props.params
+function scaleSelectionWrapper(url: string) {
+  return (props: any) => {
+    const { noteId } = props.params
 
-  return (
-    <ScaleSelection
-      previous={() => `/scale-harmonizer`}
-      next={(formula: number) => {
-        return `/scale-harmonizer/${noteId}/${formula}`
-      }}
-    />
-  )
+    return (
+      <ScaleSelection
+        previous={() => `/scale-harmonizer`}
+        next={(formula: number) => `${url}/${noteId}/${formula}`}
+      />
+    )
+  }
 }
 
-function ScaleListWrapper(props: any) {
-  const {noteId, formula} = props.params
+function scaleListWrapper(url: string) {
+  return (props: any) => {
+    const { noteId, formula } = props.params
 
-  return (
-    <ScaleList
-      noteId={noteId}
-      formula={+formula}
-      previous={() => `/scale-harmonizer/${noteId}`}
-    />
-  )
+    return (
+      <ScaleList
+        noteId={noteId}
+        formula={+formula}
+        previous={() => `${url}/${noteId}`}
+      />
+    )
+  }
 }
+
+function chordListWrapper(url: string) {
+  return (props: any) => {
+    const { noteId, formula } = props.params
+
+    return (
+      <ChordList
+        noteId={noteId}
+        formula={+formula}
+        previous={() => `${url}/${noteId}`}
+      />
+    )
+  }
+}
+
+const scaleHarmonizer = "/scale-harmonizer"
+const chordHarmonizer = "/chord-harmonizer"
 
 const routes = (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={Home}/>
-    <Route path="/scale-harmonizer" component={ScaleHarmonizerContainer}>
-      <IndexRoute component={NoteSelectionWrapper}/>
-      <Route path="/scale-harmonizer/:noteId" component={ScaleSelectionWrapper}/>
-      <Route path="/scale-harmonizer/:noteId/:formula" component={ScaleListWrapper}/>
+
+    <Route path={scaleHarmonizer} component={ScaleHarmonizerContainer}>
+      <IndexRoute component={noteSelectionWrapper(scaleHarmonizer)}/>
+      <Route
+        path={`${scaleHarmonizer}/:noteId`}
+        component={scaleSelectionWrapper(scaleHarmonizer)}/>
+      <Route
+        path={`${scaleHarmonizer}/:noteId/:formula`}
+        component={scaleListWrapper(scaleHarmonizer)}/>
+    </Route>
+
+    <Route path={chordHarmonizer} component={ChordHarmonizerContainer}>
+      <IndexRoute component={noteSelectionWrapper(chordHarmonizer)}/>
+      <Route
+        path={`${chordHarmonizer}/:noteId`}
+        component={scaleSelectionWrapper(chordHarmonizer)}/>
+      <Route
+        path={`${chordHarmonizer}/:noteId/:formula`}
+        component={chordListWrapper(chordHarmonizer)}/>
     </Route>
   </Route>
 );
