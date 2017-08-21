@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   Badge,
@@ -16,42 +16,41 @@ import Scale from '../scale/Scale.class';
 import label from '../helpers/label';
 
 type State = {
-  isItemOpen: boolean;
+  isExpanded: boolean;
 };
 
 type Props = {
   mode: Scale;
   color?: string;
+  expanded?: boolean;
 };
 
-class ScaleListItem extends React.Component {
-  state: State = {
-    isItemOpen: false,
-  };
-
-  toggleScale: (event: Event) => void;
-
+class ScaleListItem extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    this.state = {
+      isExpanded: !! props.expanded,
+    }
 
     this.toggleScale = this.toggleScale.bind(this);
   }
 
-  toggleScale(event: Event) {
+  toggleScale = (event: Event): void => {
     event.preventDefault();
-    this.setState(({isItemOpen}) => ({isItemOpen: !isItemOpen}));
+    this.setState(({isExpanded}) => ({isExpanded: !isExpanded}));
   }
 
   render() {
     return (
       <div style={styles.modeContainer}>
         <a href="#" className={`text-left no-underline text-${this.props.color || 'default'}`} onClick={this.toggleScale} style={styles.link}>
-          <i className={`fa fa-caret-${this.state.isItemOpen ? 'down' : 'right'} icon-left`} style={styles.caret}/> 
+          <i className={`fa fa-caret-${this.state.isExpanded ? 'down' : 'right'} icon-left`} style={styles.caret}/> 
           {label(this.props.mode.tone.name)}
           <sub>{label(this.props.mode.tone.alt)}</sub>{' '}
           {label(this.props.mode.formula)}
         </a>
-        {this.state.isItemOpen ?
+        {this.state.isExpanded ?
           <div style={styles.mode}>
             {this.props.mode.intervals
               .map((degree, index) => (

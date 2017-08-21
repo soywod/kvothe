@@ -1,96 +1,100 @@
 // @flow
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import {browserHistory, Link, Router} from 'react-router';
-import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { browserHistory, Link, Router } from 'react-router'
+import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap'
 
-import ScaleListItem from './ScaleListItem';
-import Note from '../note/Note';
-import Scale from '../scale/Scale.class';
-import label from '../helpers/label';
-import {SCALES} from './Scale.const';
+import ScaleListItem from './ScaleListItem'
+import Note from '../note/Note'
+import Scale from '../scale/Scale.class'
+import label from '../helpers/label'
+import { SCALES } from './Scale.const'
 
-import noteRepository from '../note/repository/NoteRepository';
-import scaleRepository from './Scale.repository';
+import noteRepository from '../note/repository/NoteRepository'
+import scaleRepository from './Scale.repository'
 
 type Props = {
   noteId: string;
   formula: number;
   previous: () => string;
-};
+}
 
 type State = {
   scale: Scale;
-  modes: Array<Scale|null>;
+  modes: Array<Scale | null>;
   isModeRefOpen: boolean;
 }
 
-class ScaleList extends React.Component {
-  state: State;
-
+class ScaleList extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
-    const {formula, noteId} = props;
-    const note = noteRepository.getById(noteId);
-    if (! note) throw new Error(`Error while getting note from note id '${noteId}'`);
+    const { formula, noteId } = props
+    const note = noteRepository.getById(noteId)
+    if (!note) {
+      throw new Error(`Error while getting note from note id '${noteId}'`)
+    }
 
-    const scale = scaleRepository.getScaleByFormula(note, formula);
-    if (! scale) throw new Error(`Error while getting scale from formula '${formula}'`);
+    const scale = scaleRepository.getScaleByFormula(note, formula)
+    if (!scale) {
+      throw new Error(`Error while getting scale from formula '${formula}'`)
+    }
 
-    const modes = scaleRepository.getModesFromScale(scale);
-    if (! modes) throw new Error(`Error while getting modes from scale`);
+    const modes = scaleRepository.getModesFromScale(scale)
+    if (!modes) {
+      throw new Error(`Error while getting modes from scale`)
+    }
 
     this.state = {
       scale,
       modes,
-      isModeRefOpen: false
-    };
+      isModeRefOpen: false,
+    }
 
-    this.toggleModeRef = this.toggleModeRef.bind(this);
+    this.toggleModeRef = this.toggleModeRef.bind(this)
   }
 
   toggleModeRef = (event: any) => {
-    event.preventDefault();
+    event.preventDefault()
 
     this.setState(prevState => ({
-      isModeRefOpen: ! prevState.isModeRefOpen
-    }));
+      isModeRefOpen: !prevState.isModeRefOpen,
+    }))
   }
 
   renderMainReferences() {
     return this.state.modes
       .filter(mode => mode && SCALES.includes(mode.formula))
       .map((mode, index) => {
-        if (! mode || mode.formula === this.state.scale.formula) {
-          return null;
+        if (!mode || mode.formula === this.state.scale.formula) {
+          return null
         }
 
         return (
           <ListGroupItem key={index}>
             <ScaleListItem color="warning" mode={mode} />
           </ListGroupItem>
-        );
+        )
       })
-      .filter(mode => !! mode);
+      .filter(mode => !!mode)
   }
 
   renderOtherReferences() {
     return this.state.modes
-      .filter(mode => mode && ! SCALES.includes(mode.formula))
+      .filter(mode => mode && !SCALES.includes(mode.formula))
       .map((mode, index) => {
-        if (! mode || mode.formula === this.state.scale.formula) {
-          return null;
+        if (!mode || mode.formula === this.state.scale.formula) {
+          return null
         }
 
         return (
           <ListGroupItem key={index}>
             <ScaleListItem color="danger" mode={mode} />
           </ListGroupItem>
-        );
+        )
       })
-      .filter(mode => !! mode);
+      .filter(mode => !!mode)
   }
 
   render() {
@@ -103,7 +107,7 @@ class ScaleList extends React.Component {
           <Button
             tag={Link}
             to={this.props.previous()}>
-            <i className="fa fa-arrow-left icon-left"/>
+            <i className="fa fa-arrow-left icon-left" />
             Back
           </Button>
         </div>
@@ -115,12 +119,15 @@ class ScaleList extends React.Component {
             </ListGroupItem>
 
             <ListGroupItem>
-              <ScaleListItem color="primary" mode={this.state.scale}/>
+              <ScaleListItem
+                color="primary"
+                mode={this.state.scale}
+                expanded />
             </ListGroupItem>
           </ListGroup>
         </Card>
 
-        <br/>
+        <br />
 
         <Card style={styles.mode}>
           <ListGroup flush>
@@ -132,7 +139,7 @@ class ScaleList extends React.Component {
           </ListGroup>
         </Card>
 
-        <br/>
+        <br />
 
         <Card style={styles.mode}>
           <ListGroup flush>
@@ -144,7 +151,7 @@ class ScaleList extends React.Component {
           </ListGroup>
         </Card>
       </div>
-    );
+    )
   }
 }
 
@@ -152,29 +159,29 @@ ScaleList.propTypes = {
   noteId: PropTypes.string.isRequired,
   formula: PropTypes.number.isRequired,
   previous: PropTypes.func.isRequired,
-};
+}
 
 const styles = {
-  container   : {
-    display: 'flex'
+  container: {
+    display: 'flex',
   },
-  mode        : {
-    marginBottom: 20
+  mode: {
+    marginBottom: 20,
   },
-  badge       : {
-    marginRight: 5
+  badge: {
+    marginRight: 5,
   },
-  buttonGroup : {
-    width       : '100%',
-    textAlign   : 'left',
-    marginBottom: 30
+  buttonGroup: {
+    width: '100%',
+    textAlign: 'left',
+    marginBottom: 30,
   },
-  modeRef     : {
+  modeRef: {
     padding: 0,
   },
   caretModeRef: {
-    width: 15
-  }
-};
+    width: 15,
+  },
+}
 
-export default ScaleList;
+export default ScaleList

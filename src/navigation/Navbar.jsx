@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react';
-import {Link} from 'react-router';
+import React, {Component} from 'react'
+import {Link} from 'react-router'
 import {
   Collapse,
   Dropdown,
@@ -14,38 +14,38 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
-} from 'reactstrap';
+} from 'reactstrap'
 
 type State = {
   isNavOpened: boolean;
   isDropdownOpened: boolean;
-};
+}
 
-class Navbar extends React.Component {
-  state: State;
+class Navbar extends Component<{}, State> {
+  state: State
 
   constructor() {
-    super();
+    super()
 
     this.state = {
       isNavOpened: false,
-      isDropdownOpened: false
-    };
+      isDropdownOpened: false,
+    }
 
-    this.toggleNav = this.toggleNav.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleNav = this.toggleNav.bind(this)
+    this.toggleDropdown = this.toggleDropdown.bind(this)
   }
 
   toggleNav = () => {
     this.setState((oldState: State) => ({
       isNavOpened: ! oldState.isNavOpened
-    }));
+    }))
   }
 
   toggleDropdown = () => {
     this.setState((oldState: State) => ({
       isDropdownOpened: ! oldState.isDropdownOpened
-    }));
+    }))
   }
 
   render() {
@@ -82,9 +82,8 @@ class Navbar extends React.Component {
           </Nav>
         </Collapse>
       </BootstrapNavbar>
-    );
+    )
   }
 }
 
-export default Navbar;
-
+export default Navbar

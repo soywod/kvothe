@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import {browserHistory, Link} from 'react-router';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {browserHistory, Link} from 'react-router'
 import {
   Row,
   Col,
@@ -12,35 +12,33 @@ import {
   CardBlock,
   ListGroup,
   ListGroupItem
-} from 'reactstrap';
+} from 'reactstrap'
 
-import {SCALES, MODES} from './Scale.const';
-import ScaleFormulaSelection from './ScaleFormulaSelection';
+import {SCALES, MODES} from './Scale.const'
+import ScaleFormulaSelection from './ScaleFormulaSelection'
 
 type Props = {
   previous: () => string;
   next: (formula: number) => string;
-};
+}
 
 type State = {
   formula: number;
-};
+}
 
-class ScaleSelection extends React.Component {
-  state: State;
-
+class ScaleSelection extends Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
 
     this.state = {
       formula: 0,
-    };
+    }
 
-    this.onSelectScale = this.onSelectScale.bind(this);
+    this.onSelectScale = this.onSelectScale.bind(this)
   }
 
   onSelectScale = (formula: number) => {
-    this.setState({formula});
+    this.setState({formula})
   }
 
   renderModes() {
@@ -52,7 +50,7 @@ class ScaleSelection extends React.Component {
           active={formula === this.state.formula}
           onSelectScale={this.onSelectScale}
         />
-      ));
+      ))
   }
 
   renderScales() {
@@ -64,7 +62,7 @@ class ScaleSelection extends React.Component {
           active={formula === this.state.formula}
           onSelectScale={this.onSelectScale}
         />
-      ));
+      ))
   }
 
   render() {
@@ -120,22 +118,21 @@ class ScaleSelection extends React.Component {
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
 ScaleSelection.propTypes = {
   previous: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
-};
+}
 
 const styles = {
   buttonGroup: {
     width       : '100%',
     textAlign   : 'left',
-    marginBottom: 30
-  }
-};
+    marginBottom: 30,
+  },
+}
 
-export default ScaleSelection;
-
+export default ScaleSelection

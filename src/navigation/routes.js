@@ -1,47 +1,49 @@
 // @flow
 
-import React from 'react';
-import {browserHistory, IndexRoute, Route} from 'react-router';
+import React from 'react'
+import {browserHistory, IndexRoute, Route} from 'react-router'
 
-import AppContainer from '../container/App';
-import Home from '../home/Home';
-import ScaleHarmonizerContainer from '../container/ScaleHarmonizer';
-import NoteSelection from '../note/components/NoteSelection';
-import ScaleSelection from '../scale/ScaleSelection';
-import ScaleList from '../scale/ScaleList';
+import AppContainer from '../container/App'
+import Home from '../home/Home'
+import ScaleHarmonizerContainer from '../container/ScaleHarmonizer'
+import NoteSelection from '../note/components/NoteSelection'
+import ScaleSelection from '../scale/ScaleSelection'
+import ScaleList from '../scale/ScaleList'
 
-class NoteSelectionWrapper extends React.Component {
-  render() {
-    return (
-      <NoteSelection
-        previous={() => '/'}
-        next={(noteId: ?string) => `/scale-harmonizer${noteId ? `/${noteId}` : ''}`}
-      />
-    );
-  }
+function NoteSelectionWrapper() {
+  return (
+    <NoteSelection
+      previous={() => '/'}
+      next={(noteId: ?string) => {
+        return `/scale-harmonizer${noteId ? `/${noteId}` : ''}`
+      }}
+    />
+  );
 }
 
-class ScaleSelectionWrapper extends React.Component {
-  render() {
-    return (
-      <ScaleSelection
-        previous={() => `/scale-harmonizer`}
-        next={(formula: number) => `/scale-harmonizer/${this.props.params.noteId}/${formula}`}
-      />
-    );
-  }
+function ScaleSelectionWrapper(props: any) {
+  const {noteId} = props.params
+
+  return (
+    <ScaleSelection
+      previous={() => `/scale-harmonizer`}
+      next={(formula: number) => {
+        return `/scale-harmonizer/${noteId}/${formula}`
+      }}
+    />
+  )
 }
 
-class ScaleListWrapper extends React.Component {
-  render() {
-    return (
-      <ScaleList
-        noteId={this.props.params.noteId}
-        formula={+this.props.params.formula}
-        previous={() => `/scale-harmonizer/${this.props.params.noteId}`}
-      />
-    );
-  }
+function ScaleListWrapper(props: any) {
+  const {noteId, formula} = props.params
+
+  return (
+    <ScaleList
+      noteId={noteId}
+      formula={+formula}
+      previous={() => `/scale-harmonizer/${noteId}`}
+    />
+  )
 }
 
 const routes = (

@@ -1,23 +1,20 @@
 // @flow
 
-import React from 'react';
-import {Container} from 'reactstrap';
+import React from 'react'
+import {Container} from 'reactstrap'
 
-import Navbar from '../navigation/Navbar';
+import Navbar from '../navigation/Navbar'
 
-class AppContainer extends React.Component {
-  render() {
-    return (
-      <div>
-        <Navbar/>
+function AppContainer(props: any) {
+  return (
+    <div>
+      <Navbar />
 
-        <Container>
-          {this.props.children}
-        </Container>
-      </div>
-    )
-  }
+      <Container>
+        {props.children}
+      </Container>
+    </div>
+  )
 }
 
-export default AppContainer;
-
+export default AppContainer

@@ -4,10 +4,8 @@ import React from 'react';
 
 import RouterComponent from './navigation/Router';
 
-class AppComponent extends React.Component {
-  render() {
-    return <RouterComponent/>;
-  }
+function AppComponent() {
+  return <RouterComponent/>;
 }
 
 export default AppComponent;
