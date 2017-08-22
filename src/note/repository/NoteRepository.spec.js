@@ -20,7 +20,7 @@ import noteRepository from './NoteRepository';
 
 setupForRspec(describe, it);
 
-class NoteStage extends Stage {
+class NoteRepositoryStage extends Stage {
   noteId: string;
   noteName: ?NoteName;
   noteAlt: ?NoteAlt;
@@ -189,7 +189,7 @@ class NoteStage extends Stage {
   }
 }
 
-scenarios('Note repository', NoteStage, ({given, when, then}) => ({
+scenarios('Note repository', NoteRepositoryStage, ({given, when, then}) => ({
   should_init_notes_mapping: scenario({}, () => {
     when().init_note_repository();
 
