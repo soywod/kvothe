@@ -1,10 +1,10 @@
 const webpack = require('webpack');
-const merge   = require('webpack-merge');
+const merge = require('webpack-merge');
 
-const DefinePlugin         = webpack.DefinePlugin;
-const HtmlPlugin           = require('html-webpack-plugin');
+const DefinePlugin = webpack.DefinePlugin;
+const HtmlPlugin = require('html-webpack-plugin');
 const NoEmitOnErrorsPlugin = webpack.NoEmitOnErrorsPlugin;
-const UglifyJsPlugin       = webpack.optimize.UglifyJsPlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const prod = {
   devtool: false,
