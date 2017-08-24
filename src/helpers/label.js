@@ -12,7 +12,7 @@ const labels = {
   'g': 'G',
 
   'flat': '♭',
-  'natural': ' ',
+  'natural': '',
   'sharp': '♯',
 
   [FORMULAS['chromatic']]: 'Chromatic',

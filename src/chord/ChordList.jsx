@@ -6,6 +6,7 @@ import Scale from '../scale/Scale.class'
 import Chord from './Chord'
 import noteRepository from '../note/repository/NoteRepository'
 import scaleRepository from '../scale/Scale.repository'
+import label from '../helpers/label'
 
 type Props = {
   noteId: string;
@@ -46,7 +47,20 @@ class ScaleList extends Component<Props, State> {
   }
 
   render() {
-    return null
+    /*
+    2 - sus: C(sus2)
+    3 - Minor: Cm
+    4 - sus: C(sus4)
+    5 - Dim: C(dim)
+      - Aug: C(aug)
+    */
+    const {scale} = this.state
+    const noteName = label(scale.tone.name)
+    const noteAlt = label(scale.tone.alt)
+    const third = scale.intervals[3] ? 'm' : ''
+    console.log(scale.intervals)
+
+    return <div>{`${noteName}${noteAlt}${third}`}</div>
   }
 }
 
