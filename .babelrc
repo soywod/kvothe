@@ -3,12 +3,14 @@
   "sourceMaps": false,
   "presets": [
     "react",
-    "stage-2",
-    "es2015"
+    "es2015",
+    "stage-0"
   ],
   "plugins": [
     "transform-runtime",
-    "transform-object-rest-spread",
-    "transform-class-properties"
+    "transform-regenerator",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
   ]
 }
