@@ -2,8 +2,8 @@
 
 import {assign, forEach, findKey} from 'lodash'
 
-import Note from './Note'
-import type {NoteName, NoteAlt} from './Note'
+import Note from '../model/Note'
+import type {NoteName, NoteAlt} from '../model/Note'
 
 type NoteMap = {
   [id: string]: Note;
