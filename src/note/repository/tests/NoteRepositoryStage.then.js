@@ -1,5 +1,6 @@
 // @flow
 
+import {forEach} from 'lodash'
 import {
   State,
   Stage,
@@ -20,51 +21,22 @@ class NoteRepositoryThenStage extends Stage {
   @State slug: string;
 
   should_have_valid_mapping(): this {
-    expect(Object.keys(this.repository.notes)).toHaveLength(21)
+    const {notes} = this.repository
 
-    expect(this.repository.notes).toHaveProperty('A♭')
-    expect(this.repository.notes).toHaveProperty('A')
-    expect(this.repository.notes).toHaveProperty('A♯')
-    expect(this.repository.notes).toHaveProperty('A♭')
-    expect(this.repository.notes).toHaveProperty('B')
-    expect(this.repository.notes).toHaveProperty('B♯')
-    expect(this.repository.notes).toHaveProperty('B♭')
-    expect(this.repository.notes).toHaveProperty('C')
-    expect(this.repository.notes).toHaveProperty('C♯')
-    expect(this.repository.notes).toHaveProperty('C♭')
-    expect(this.repository.notes).toHaveProperty('D')
-    expect(this.repository.notes).toHaveProperty('D♯')
-    expect(this.repository.notes).toHaveProperty('D♭')
-    expect(this.repository.notes).toHaveProperty('E')
-    expect(this.repository.notes).toHaveProperty('E♯')
-    expect(this.repository.notes).toHaveProperty('E♭')
-    expect(this.repository.notes).toHaveProperty('F')
-    expect(this.repository.notes).toHaveProperty('F♯')
-    expect(this.repository.notes).toHaveProperty('F♭')
-    expect(this.repository.notes).toHaveProperty('G')
-    expect(this.repository.notes).toHaveProperty('G♯')
+    expect(Object.keys(notes)).toHaveLength(21)
 
-    expect(this.repository.notes['A♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['A']).toBeInstanceOf(Note)
-    expect(this.repository.notes['A♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['B♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['B']).toBeInstanceOf(Note)
-    expect(this.repository.notes['B♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['C♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['C']).toBeInstanceOf(Note)
-    expect(this.repository.notes['C♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['D♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['D']).toBeInstanceOf(Note)
-    expect(this.repository.notes['D♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['E♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['E']).toBeInstanceOf(Note)
-    expect(this.repository.notes['E♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['F♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['F']).toBeInstanceOf(Note)
-    expect(this.repository.notes['F♯']).toBeInstanceOf(Note)
-    expect(this.repository.notes['G♭']).toBeInstanceOf(Note)
-    expect(this.repository.notes['G']).toBeInstanceOf(Note)
-    expect(this.repository.notes['G♯']).toBeInstanceOf(Note)
+    forEach([
+      'A♭', 'A', 'A♯',
+      'B♭', 'B', 'B♯',
+      'C♭', 'C', 'C♯',
+      'D♭', 'D', 'D♯',
+      'E♭', 'E', 'E♯',
+      'F♭', 'F', 'F♯',
+      'G♭', 'G', 'G♯',
+    ], id => {
+      expect(notes).toHaveProperty(id)
+      expect(notes[id]).toBeInstanceOf(Note)
+    })
 
     return this
   }
