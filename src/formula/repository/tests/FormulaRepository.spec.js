@@ -38,34 +38,34 @@ scenarios(
     ], (category: FormulaCategory, count: number) => {
       given()
         .a_formula_repository(repository).and()
-        .a_category(category)
+        .a_formula_category(category)
       when().get_by_category()
       then().should_have_$_formulas(count)
     })),
 
-    should_get_by_name: scenario({}, parametrized2([
+    should_get_by_id: scenario({}, parametrized2([
       ['Major', 'Major'],
       ['Minor harmonic', 'Minor harmonic'],
       ['Dorian', 'Dorian'],
       ['Aeolian', 'Aeolian'],
       ['bad', null],
-    ], (name: string, expectedName: ?string) => {
+    ], (id: string, expectedId: ?string) => {
       given()
         .a_formula_repository(repository).and()
-        .a_name(name)
-      when().get_by_name()
-      then().should_have_name_$(expectedName)
+        .a_formula_id(id)
+      when().get_by_id()
+      then().should_have_id_$(expectedId)
     })),
 
-    should_get_slug_by_name: scenario({}, parametrized2([
+    should_get_slug_by_id: scenario({}, parametrized2([
       ['Major', 'major'],
       ['Minor harmonic', 'minor-harmonic'],
       ['bad', 'bad'],
-    ], (name: string, expectedSlug: string) => {
+    ], (id: string, expectedSlug: string) => {
       given()
         .a_formula_repository(repository).and()
-        .a_name(name)
-      when().get_slug_by_name()
+        .a_formula_id(id)
+      when().get_slug_by_id()
       then().should_have_slug_$(expectedSlug)
     })),
   })

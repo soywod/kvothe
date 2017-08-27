@@ -8,19 +8,19 @@ import { Button, ListGroupItem } from 'reactstrap'
 import label from '../../utils/label'
 
 type Props = {
-  name: string;
+  id: string;
   active: boolean;
-  onSelectFormula: (formulaName: string) => void;
+  onSelectFormula: (formulaId: string) => void;
 }
 
 function FormulaNameSelection(props: Props) {
   const {
-    name,
+    id,
     active,
     onSelectFormula,
   } = props
 
-  const selectFormula = onSelectFormula.bind(null, name)
+  const selectFormula = onSelectFormula.bind(null, id)
 
   return (
     <ListGroupItem
@@ -28,13 +28,13 @@ function FormulaNameSelection(props: Props) {
       active={active}
       style={styles.action}
       onClick={selectFormula}>
-      {label(name)}
+      {label(id)}
     </ListGroupItem>
   )
 }
 
 FormulaNameSelection.propTypes = {
-  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   active: PropTypes.bool,
 
   onSelectFormula: PropTypes.func.isRequired,

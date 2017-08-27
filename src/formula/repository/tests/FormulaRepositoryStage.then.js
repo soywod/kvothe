@@ -47,13 +47,13 @@ class FormulaRepositoryThenStage extends Stage {
     expect(this.formulas).toHaveLength(count)
   }
 
-  should_have_name_$(expectedName: ?string) {
+  should_have_id_$(expectedId: ?string) {
     if (!this.formula) {
-      expect(expectedName).toBeNull()
+      expect(expectedId).toBeNull()
     }
 
     else {
-      expect(this.formula.name).toEqual(expectedName)
+      expect(this.formula.id).toEqual(expectedId)
     }
   }
 

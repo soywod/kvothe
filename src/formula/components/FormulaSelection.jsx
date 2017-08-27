@@ -40,8 +40,8 @@ class ScaleSelection extends Component<Props, State> {
     }
   }
 
-  onSelectFormula = (formulaName: string) => {
-    const newFormula = formulaRepository.getByName(formulaName)
+  onSelectFormula = (formulaId: string) => {
+    const newFormula = formulaRepository.getById(formulaId)
     this.setState({formula: newFormula})
   }
 
@@ -49,15 +49,15 @@ class ScaleSelection extends Component<Props, State> {
     const {formula: activeFormula} = this.state
     const formulas = formulaRepository.getByCategory(category)
 
-    return formulas.map(({name}, key) => {
+    return formulas.map(({id}, key) => {
       const active = activeFormula
-        ? name === activeFormula.name
+        ? id === activeFormula.id
         : false
 
       return (
         <FormulaNameSelection
           key={key}
-          name={name}
+          id={id}
           active={active}
           onSelectFormula={this.onSelectFormula}
         />
@@ -86,7 +86,7 @@ class ScaleSelection extends Component<Props, State> {
           <Button
             tag={Link}
             to={next(formula
-              ? formulaRepository.getSlugByName(formula.name)
+              ? formulaRepository.getSlugById(formula.id)
               : null)
             }
             color="primary"

@@ -12,7 +12,7 @@ import FormulaRepository from '../FormulaRepository'
 class FormulaRepositoryWhenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
-  @State name: string;
+  @State id: string;
 
   @State formulas: Formula[];
   @State formula: ?Formula;
@@ -23,13 +23,13 @@ class FormulaRepositoryWhenStage extends Stage {
     return this
   }
 
-  get_by_name() {
-    this.formula = this.repository.getByName(this.name)
+  get_by_id() {
+    this.formula = this.repository.getById(this.id)
     return this
   }
 
-  get_slug_by_name() {
-    this.slug = this.repository.getSlugByName(this.name)
+  get_slug_by_id() {
+    this.slug = this.repository.getSlugById(this.id)
     return this
   }
 }

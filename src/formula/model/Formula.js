@@ -7,14 +7,14 @@ type FormulaCategory
   | 'mode';
 
 type FormulaParams = {
-  id: number;
-  name: string;
+  id: string;
+  value: number;
   category: FormulaCategory;
 }
 
 class Formula {
-  id: number;
-  name: string;
+  id: string;
+  value: number;
   category: FormulaCategory;
 
   constructor(params: FormulaParams) {

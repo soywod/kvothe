@@ -56,34 +56,34 @@ class FormulaRepository {
 
     const formulas = {}
 
-    forEach(scaleFormulaPresets, (id, name) => {
+    forEach(scaleFormulaPresets, (value, id) => {
       const params = {
         id,
-        name,
+        value,
         category: 'scale',
       }
 
-      formulas[name] = new Formula(params)
+      formulas[id] = new Formula(params)
     })
 
-    forEach(modeFormulaPresets, (id, name) => {
+    forEach(modeFormulaPresets, (value, id) => {
       const params = {
         id,
-        name,
+        value,
         category: 'mode',
       }
 
-      formulas[name] = new Formula(params)
+      formulas[id] = new Formula(params)
     })
 
     this.formulas = assign(this.formulas, formulas)
     FormulaRepository.instance = this
   }
 
-  getByName(name: string): ?Formula {
+  getById(id: string): ?Formula {
     return find(
       this.formulas,
-      (f: Formula) => f.name === name
+      (f: Formula) => f.id === id
     )
   }
 
@@ -94,8 +94,8 @@ class FormulaRepository {
     )
   }
 
-  getSlugByName(name: string): string {
-    return name
+  getSlugById(id: string): string {
+    return id
       .replace(' ', '-')
       .toLowerCase()
   }
