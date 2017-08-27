@@ -4,8 +4,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Button} from 'reactstrap'
 
-import type {NoteAlt} from '../Note.type'
-import label from '../../helpers/label'
+import type {NoteAlt} from '../model/Note'
+import label from '../../utils/label'
 
 type Props = {
   alt: NoteAlt;

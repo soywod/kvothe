@@ -2,14 +2,14 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'reactstrap'
+import {Button} from 'reactstrap'
 
-import type {NoteName, NoteAlt } from '../Note.type'
-import label from '../../helpers/label'
+import type {NoteName, NoteAlt} from '../model/Note'
+import label from '../../utils/label'
 
 type Props = {
   name: NoteName;
-  alt: NoteAlt;
+  alt: ?NoteAlt;
   active: boolean;
   selectNoteName: NoteName => void;
 }
@@ -36,7 +36,7 @@ function NoteNameSelection(props: Props) {
 
 NoteNameSelection.propTypes = {
   name: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  alt: PropTypes.string,
   active: PropTypes.bool,
 
   selectNoteName: PropTypes.func.isRequired,
