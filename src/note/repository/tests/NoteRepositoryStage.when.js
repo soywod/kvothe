@@ -19,6 +19,7 @@ class NoteRepositoryWhenStage extends Stage {
   @State nextNote: ?Note;
   @State twinNote: ?Note;
   @State position: ?number;
+  @State slug: string;
 
   get_note_by_id(): this {
     this.note = this.repository.getById(this.noteId)
@@ -54,6 +55,11 @@ class NoteRepositoryWhenStage extends Stage {
       ? this.repository.getPosition(this.note)
       : null
 
+    return this
+  }
+
+  get_note_slug(): this {
+    this.slug = this.repository.getSlugById(this.noteId)
     return this
   }
 }

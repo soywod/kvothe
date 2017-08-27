@@ -105,6 +105,13 @@ class NoteRepository {
       default: return null
     }
   }
+
+  getSlugById(noteId: string): string {
+    return noteId
+      .replace('♭', '-flat')
+      .replace('♯', '-sharp')
+      .toLowerCase()
+  }
 }
 
 export {NB_POSITIONS}

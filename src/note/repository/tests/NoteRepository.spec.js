@@ -78,14 +78,14 @@ scenarios(
       currentNoteId: string,
       expectedNextNoteId: ?string
     ) => {
-        given()
-          .a_note_repository(repository).and()
-          .a_note_id_$(currentNoteId)
-        when()
-          .get_note_by_id().and()
-          .get_next_note()
-        then().should_have_next_id_$(expectedNextNoteId)
-      })),
+      given()
+        .a_note_repository(repository).and()
+        .a_note_id_$(currentNoteId)
+      when()
+        .get_note_by_id().and()
+        .get_next_note()
+      then().should_have_next_id_$(expectedNextNoteId)
+    })),
 
     should_get_twin_note: scenario({}, parametrized2([
       ['A♭', 'G♯'], ['A', null], ['A♯', 'B♭'],
@@ -100,14 +100,14 @@ scenarios(
       currentNoteId: string,
       expectedTwinNoteId: ?string
     ) => {
-        given()
-          .a_note_repository(repository).and()
-          .a_note_id_$(currentNoteId)
-        when()
-          .get_note_by_id().and()
-          .get_twin_note()
-        then().should_have_twin_id_$(expectedTwinNoteId)
-      })),
+      given()
+        .a_note_repository(repository).and()
+        .a_note_id_$(currentNoteId)
+      when()
+        .get_note_by_id().and()
+        .get_twin_note()
+      then().should_have_twin_id_$(expectedTwinNoteId)
+    })),
 
     should_get_note_position: scenario({}, parametrized2([
       ['A♭', 0], ['A', 1], ['A♯', 2],
@@ -122,13 +122,33 @@ scenarios(
       currentNoteId: string,
       expectedPosition: ?number
     ) => {
-        given()
-          .a_note_repository(repository).and()
-          .a_note_id_$(currentNoteId)
-        when()
-          .get_note_by_id().and()
-          .get_note_position()
-        then().should_have_position_$(expectedPosition)
-      })),
+      given()
+        .a_note_repository(repository).and()
+        .a_note_id_$(currentNoteId)
+      when()
+        .get_note_by_id().and()
+        .get_note_position()
+      then().should_have_position_$(expectedPosition)
+    })),
+
+    should_get_slug: scenario({}, parametrized2([
+      ['A♭', 'a-flat'], ['A', 'a'], ['A♯', 'a-sharp'],
+      ['B♭', 'b-flat'], ['B', 'b'], ['B♯', 'b-sharp'],
+      ['C♭', 'c-flat'], ['C', 'c'], ['C♯', 'c-sharp'],
+      ['D♭', 'd-flat'], ['D', 'd'], ['D♯', 'd-sharp'],
+      ['E♭', 'e-flat'], ['E', 'e'], ['E♯', 'e-sharp'],
+      ['F♭', 'f-flat'], ['F', 'f'], ['F♯', 'f-sharp'],
+      ['G♭', 'g-flat'], ['G', 'g'], ['G♯', 'g-sharp'],
+      ['bad', 'bad'],
+    ], (
+      currentNoteId: string,
+      expectedSlug: string
+    ) => {
+      given()
+        .a_note_repository(repository).and()
+        .a_note_id_$(currentNoteId)
+      when().get_note_slug()
+      then().should_have_slug_$(expectedSlug)
+    })),
   })
 )

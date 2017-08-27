@@ -10,12 +10,14 @@ import type {NoteName, NoteAlt} from '../../model/Note'
 import NoteRepository from '../NoteRepository'
 
 class NoteRepositoryThenStage extends Stage {
+  @State noteId: string;
   @State repository: NoteRepository;
 
   @State note: ?Note;
   @State nextNote: ?Note;
   @State twinNote: ?Note;
   @State position: ?number;
+  @State slug: string;
 
   should_have_valid_mapping(): this {
     expect(Object.keys(this.repository.notes)).toHaveLength(21)
@@ -135,6 +137,11 @@ class NoteRepositoryThenStage extends Stage {
       expect(this.position).toEqual(expectedPosition)
     }
 
+    return this
+  }
+
+  should_have_slug_$(expectedSlug: string): this {
+    expect(this.slug).toEqual(expectedSlug)
     return this
   }
 }
