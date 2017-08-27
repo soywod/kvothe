@@ -12,6 +12,7 @@ import FormulaRepository from '../FormulaRepository'
 class FormulaRepositoryGivenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
+  @State name: string;
 
   a_formula_repository(repository: FormulaRepository): this {
     this.repository = repository
@@ -20,6 +21,11 @@ class FormulaRepositoryGivenStage extends Stage {
 
   a_category(category: FormulaCategory): this {
     this.category = category
+    return this
+  }
+
+  a_name(name: string): this {
+    this.name = name
     return this
   }
 }

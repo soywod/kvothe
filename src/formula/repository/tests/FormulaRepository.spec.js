@@ -40,7 +40,21 @@ scenarios(
         .a_formula_repository(repository).and()
         .a_category(category)
       when().get_by_category()
-      then().should_get_$_formulas(count)
+      then().should_have_$_formulas(count)
+    })),
+
+    should_get_by_name: scenario({}, parametrized2([
+      ['Major', 'Major'],
+      ['Minor harmonic', 'Minor harmonic'],
+      ['Dorian', 'Dorian'],
+      ['Aeolian', 'Aeolian'],
+      ['bad', null],
+    ], (name: string, expectedName: ?string) => {
+      given()
+        .a_formula_repository(repository).and()
+        .a_name(name)
+      when().get_by_name()
+      then().should_have_name_$(expectedName)
     })),
   })
 )

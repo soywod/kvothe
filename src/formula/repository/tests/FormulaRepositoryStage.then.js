@@ -13,39 +13,50 @@ class FormulaRepositoryThenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
   @State formulas: Formula[];
+  @State formula: ?Formula;
 
   should_have_valid_mapping(): this {
     expect(Object.keys(this.repository.formulas)).toHaveLength(11)
 
-    expect(this.repository.formulas).toHaveProperty('major')
-    expect(this.repository.formulas).toHaveProperty('minor')
-    expect(this.repository.formulas).toHaveProperty('minor-harmonic')
-    expect(this.repository.formulas).toHaveProperty('minor-melodic')
-    expect(this.repository.formulas).toHaveProperty('ionian')
-    expect(this.repository.formulas).toHaveProperty('dorian')
-    expect(this.repository.formulas).toHaveProperty('phrygian')
-    expect(this.repository.formulas).toHaveProperty('lydian')
-    expect(this.repository.formulas).toHaveProperty('mixolydian')
-    expect(this.repository.formulas).toHaveProperty('aeolian')
-    expect(this.repository.formulas).toHaveProperty('locrian')
+    expect(this.repository.formulas).toHaveProperty('Major')
+    expect(this.repository.formulas).toHaveProperty('Minor')
+    expect(this.repository.formulas).toHaveProperty('Minor harmonic')
+    expect(this.repository.formulas).toHaveProperty('Minor melodic')
+    expect(this.repository.formulas).toHaveProperty('Ionian')
+    expect(this.repository.formulas).toHaveProperty('Dorian')
+    expect(this.repository.formulas).toHaveProperty('Phrygian')
+    expect(this.repository.formulas).toHaveProperty('Lydian')
+    expect(this.repository.formulas).toHaveProperty('Mixolydian')
+    expect(this.repository.formulas).toHaveProperty('Aeolian')
+    expect(this.repository.formulas).toHaveProperty('Locrian')
 
-    expect(this.repository.formulas['major']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['minor']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['minor-harmonic']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['minor-melodic']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['ionian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['dorian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['phrygian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['lydian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['mixolydian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['aeolian']).toBeInstanceOf(Formula)
-    expect(this.repository.formulas['locrian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Major']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Minor']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Minor harmonic']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Minor melodic']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Ionian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Dorian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Phrygian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Lydian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Mixolydian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Aeolian']).toBeInstanceOf(Formula)
+    expect(this.repository.formulas['Locrian']).toBeInstanceOf(Formula)
 
     return this
   }
 
-  should_get_$_formulas(count: number) {
+  should_have_$_formulas(count: number) {
     expect(this.formulas).toHaveLength(count)
+  }
+
+  should_have_name_$(expectedName: ?string) {
+    if (!this.formula) {
+      expect(expectedName).toBeNull()
+    }
+
+    else {
+      expect(this.formula.name).toEqual(expectedName)
+    }
   }
 }
 
