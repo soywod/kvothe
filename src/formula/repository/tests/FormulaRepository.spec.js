@@ -56,5 +56,17 @@ scenarios(
       when().get_by_name()
       then().should_have_name_$(expectedName)
     })),
+
+    should_get_slug_by_name: scenario({}, parametrized2([
+      ['Major', 'major'],
+      ['Minor harmonic', 'minor-harmonic'],
+      ['bad', 'bad'],
+    ], (name: string, expectedSlug: string) => {
+      given()
+        .a_formula_repository(repository).and()
+        .a_name(name)
+      when().get_slug_by_name()
+      then().should_have_slug_$(expectedSlug)
+    })),
   })
 )

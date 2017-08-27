@@ -1,5 +1,6 @@
 // @flow
 
+import {forEach} from 'lodash'
 import {
   State,
   Stage,
@@ -12,8 +13,10 @@ import FormulaRepository from '../FormulaRepository'
 class FormulaRepositoryThenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
+
   @State formulas: Formula[];
   @State formula: ?Formula;
+  @State slug: string;
 
   should_have_valid_mapping(): this {
     expect(Object.keys(this.repository.formulas)).toHaveLength(11)
@@ -57,6 +60,10 @@ class FormulaRepositoryThenStage extends Stage {
     else {
       expect(this.formula.name).toEqual(expectedName)
     }
+  }
+
+  should_have_slug_$(expectedSlug: string) {
+    expect(this.slug).toEqual(expectedSlug)
   }
 }
 
