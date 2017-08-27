@@ -16,7 +16,7 @@ class NoteRepository {
   notes: NoteMap;
 
   constructor() {
-    if(NoteRepository.instance instanceof NoteRepository) {
+    if(NoteRepository.instance) {
       return NoteRepository.instance
     }
 

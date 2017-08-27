@@ -19,7 +19,7 @@ class Note {
     this.id = `${name}${alt || ''}`
     this.name = name
     this.alt = alt
- }
+  }
 }
 
 export type {NoteName, NoteAlt}
