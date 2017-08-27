@@ -7,39 +7,16 @@ import AppContainer from '../container/App'
 import Home from '../home/Home'
 import ScaleHarmonizerContainer from '../container/ScaleHarmonizer'
 import NoteSelection from '../note/components/NoteSelection'
-// import ScaleSelection from '../scale/ScaleSelection'
+import FormulaSelection from '../formula/components/FormulaSelection'
 // import ScaleList from '../scale/ScaleList'
 // import ChordHarmonizerContainer from '../container/ChordHarmonizer'
 // import ChordList from '../chord/ChordList'
 
-function noteSelectionWrapper(url: string) {
-  return (props: any) => {
-    const {noteId} = props.params
-
-    return (
-      <NoteSelection
-        previous={() => '/'}
-        next={(param: ?string) => {
-          const paramUrl = param ? `/${param}` : ''
-          return `${url}${paramUrl}`
-        }}
-      />
-    )
-  }
+const path = {
+  harmonizer: {
+    scale: "/scale-harmonizer",
+  },
 }
-
-// function scaleSelectionWrapper(url: string) {
-//   return (props: any) => {
-//     const { noteId } = props.params
-
-//     return (
-//       <ScaleSelection
-//         previous={() => `/scale-harmonizer`}
-//         next={(formula: number) => `${url}/${noteId}/${formula}`}
-//       />
-//     )
-//   }
-// }
 
 // function scaleListWrapper(url: string) {
 //   return (props: any) => {
@@ -69,20 +46,19 @@ function noteSelectionWrapper(url: string) {
 //   }
 // }
 
-const scaleHarmonizer = "/scale-harmonizer"
-// const chordHarmonizer = "/chord-harmonizer"
-
 const routes = (
   <Route path="/" component={AppContainer}>
     <IndexRoute component={Home}/>
 
-    <Route path={scaleHarmonizer} component={ScaleHarmonizerContainer}>
-      <IndexRoute component={noteSelectionWrapper(scaleHarmonizer)}/>
-      {/* <Route
-        path={`${scaleHarmonizer}/:noteId`}
-        component={scaleSelectionWrapper(scaleHarmonizer)}/>
+    <Route path={path.harmonizer.scale} component={ScaleHarmonizerContainer}>
+      <IndexRoute component={NoteSelectionWrapper()}/>
+
       <Route
-        path={`${scaleHarmonizer}/:noteId/:formula`}
+        path={`${path.harmonizer.scale}/:noteSlug`}
+        component={FormulaSelectionWrapper()}/>
+
+      {/* <Route
+        path={`${scaleHarmonizer}/:noteSlug/:formulaSlug`}
         component={scaleListWrapper(scaleHarmonizer)}/> */}
     </Route>
 
@@ -97,5 +73,33 @@ const routes = (
     </Route> */}
   </Route>
 );
+
+function NoteSelectionWrapper() {
+  return () => (
+    <NoteSelection
+      previous={() => '/'}
+      next={(noteSlug: ?string) => {
+        const url = noteSlug ? `/${noteSlug}` : ''
+        return `${path.harmonizer.scale}${url}`
+      }}
+    />
+  )
+}
+
+function FormulaSelectionWrapper() {
+  return (props: any) => {
+    const {noteSlug} = props.params
+
+    return (
+      <FormulaSelection
+        previous={() => path.harmonizer.scale}
+        next={(formulaSlug: ?string) => {
+          const url = formulaSlug ? `/${formulaSlug}` : ''
+          return `${path.harmonizer.scale}/${noteSlug}${url}`
+        }}
+      />
+    )
+  }
+}
 
 export default routes;

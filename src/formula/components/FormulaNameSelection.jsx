@@ -5,39 +5,39 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { Button, ListGroupItem } from 'reactstrap'
 
-import label from '../helpers/label'
+import label from '../../utils/label'
 
 type Props = {
-  formula: number;
+  name: string;
   active: boolean;
-  onSelectScale: (formula: number) => void;
+  onSelectFormula: (formulaName: string) => void;
 }
 
-function ScaleFormulaSelection(props: Props) {
+function FormulaNameSelection(props: Props) {
   const {
-    formula,
+    name,
     active,
-    onSelectScale,
+    onSelectFormula,
   } = props
 
-  const selectScale = onSelectScale.bind(null, formula)
+  const selectFormula = onSelectFormula.bind(null, name)
 
   return (
     <ListGroupItem
       action
       active={active}
       style={styles.action}
-      onClick={selectScale}>
-      {label(formula)}
+      onClick={selectFormula}>
+      {label(name)}
     </ListGroupItem>
   )
 }
 
-ScaleFormulaSelection.propTypes = {
-  formula: PropTypes.number.isRequired,
+FormulaNameSelection.propTypes = {
+  name: PropTypes.string.isRequired,
   active: PropTypes.bool,
 
-  onSelectScale: PropTypes.func.isRequired,
+  onSelectFormula: PropTypes.func.isRequired,
 };
 
 const styles = {
@@ -46,4 +46,4 @@ const styles = {
   },
 }
 
-export default ScaleFormulaSelection
+export default FormulaNameSelection

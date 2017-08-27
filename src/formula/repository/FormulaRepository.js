@@ -4,6 +4,7 @@ import {
   assign,
   filter,
   forEach,
+  find,
 } from 'lodash';
 
 import Formula from '../model/Formula'
@@ -24,20 +25,20 @@ const m7 = P1 << 10
 const M7 = P1 << 11
 
 const scaleFormulaPresets = {
-  'major': P1 | M2 | M3 | P4 | P5 | M6 | M7,
-  'minor': P1 | M2 | m3 | P4 | P5 | m6 | m7,
-  'minor-harmonic': P1 | M2 | m3 | P4 | P5 | m6 | M7,
-  'minor-melodic': P1 | M2 | m3 | P4 | P5 | M6 | M7,
+  'Major': P1 | M2 | M3 | P4 | P5 | M6 | M7,
+  'Minor': P1 | M2 | m3 | P4 | P5 | m6 | m7,
+  'Minor harmonic': P1 | M2 | m3 | P4 | P5 | m6 | M7,
+  'Minor melodic': P1 | M2 | m3 | P4 | P5 | M6 | M7,
 }
 
 const modeFormulaPresets = {
-  'ionian': P1 | M2 | M3 | P4 | P5 | M6 | M7,
-  'dorian': P1 | M2 | m3 | P4 | P5 | M6 | m7,
-  'phrygian': P1 | m2 | m3 | P4 | P5 | m6 | m7,
-  'lydian': P1 | M2 | M3 | A4 | P5 | M6 | M7,
-  'mixolydian': P1 | M2 | M3 | P4 | P5 | M6 | m7,
-  'aeolian': P1 | M2 | m3 | P4 | P5 | m6 | m7,
-  'locrian': P1 | m2 | m3 | P4 | d5 | m6 | m7,
+  'Ionian': P1 | M2 | M3 | P4 | P5 | M6 | M7,
+  'Dorian': P1 | M2 | m3 | P4 | P5 | M6 | m7,
+  'Phrygian': P1 | m2 | m3 | P4 | P5 | m6 | m7,
+  'Lydian': P1 | M2 | M3 | A4 | P5 | M6 | M7,
+  'Mixolydian': P1 | M2 | M3 | P4 | P5 | M6 | m7,
+  'Aeolian': P1 | M2 | m3 | P4 | P5 | m6 | m7,
+  'Locrian': P1 | m2 | m3 | P4 | d5 | m6 | m7,
 }
 
 type FormulaMap = {
@@ -79,11 +80,24 @@ class FormulaRepository {
     FormulaRepository.instance = this
   }
 
-  getByCategory(category: FormulaCategory) {
+  getByName(name: string): ?Formula {
+    return find(
+      this.formulas,
+      (f: Formula) => f.name === name
+    )
+  }
+
+  getByCategory(category: FormulaCategory): Formula[] {
     return filter(
       this.formulas,
       (f: Formula) => f.category === category
     )
+  }
+
+  getSlugByName(name: string): string {
+    return name
+      .replace(' ', '-')
+      .toLowerCase()
   }
 }
 

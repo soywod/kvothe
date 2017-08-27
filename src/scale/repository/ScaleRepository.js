@@ -16,9 +16,6 @@ class ScaleRepository {
     ScaleRepository.instance = this
   }
 
-  getByFormula(tone: Note, formula: number): Scale {
-    // return new Scale({ tone, formula });
-  }
   // getFormulaByName(name: string): ?number {
   //   return FORMULAS[name] || null;
   // }

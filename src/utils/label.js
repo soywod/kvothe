@@ -14,19 +14,18 @@ const labels = {
   '♭': '♭',
   '♯': '♯',
 
-  // [FORMULAS['chromatic']]: 'Chromatic',
+  'Major': 'Major',
+  'Minor': 'Minor',
+  'Minor melodic': 'Minor melodic',
+  'Minor harmonic': 'Minor harmonic',
 
-  // [FORMULAS['major']]: 'Major',
-  // [FORMULAS['minor']]: 'Minor',
-
-  // [FORMULAS['dorian']] : 'Dorian',
-  // [FORMULAS['phrygian']] : 'Phrygian',
-  // [FORMULAS['lydian']] : 'Lydian',
-  // [FORMULAS['mixolydian']] : 'Mixolydian',
-  // [FORMULAS['locrian']] : 'Locrian',
-
-  // [FORMULAS['minor-melodic']] : 'Minor melodic',
-  // [FORMULAS['minor-harmonic']]: 'Minor harmonic',
+  'Ionian': 'Ionian',
+  'Dorian': 'Dorian',
+  'Phrygian': 'Phrygian',
+  'Lydian': 'Lydian',
+  'Mixolydian': 'Mixolydian',
+  'Aeolian': 'Aeolian',
+  'Locrian': 'Locrian',
 
   // 'degree-0' : 'P1',
   // 'degree-1' : 'b2',

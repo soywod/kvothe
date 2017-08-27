@@ -57,16 +57,16 @@ class NoteSelection extends Component<Props, State> {
   renderNoteNames() {
     const {note} = this.state
 
-    return ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(noteName => {
+    return ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((name, key) => {
       const alt = note ? note.alt : null
       const active = note
-        ? noteName === note.name
+        ? name === note.name
         : false
 
       return (
         <NoteNameSelection
-          key={noteName}
-          name={noteName}
+          key={key}
+          name={name}
           alt={alt}
           active={active}
           selectNoteName={this.selectNoteName}
@@ -78,15 +78,15 @@ class NoteSelection extends Component<Props, State> {
   renderNoteAlts() {
     const {note} = this.state
 
-    return ['♭', '♯'].map(noteAlt => {
+    return ['♭', '♯'].map((alt, key) => {
       const active = note
-        ? noteAlt === note.alt
+        ? alt === note.alt
         : false
 
       return (
         <NoteAltSelection
-          key={noteAlt}
-          alt={noteAlt}
+          key={key}
+          alt={alt}
           active={active}
           disabled={!note}
           selectNoteAlt={this.selectNoteAlt}

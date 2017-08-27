@@ -14,58 +14,61 @@ import {
   ListGroupItem
 } from 'reactstrap'
 
-import {SCALES, MODES} from './Scale.const'
-import ScaleFormulaSelection from './ScaleFormulaSelection'
+import type {FormulaCategory} from '../../formula/model/Formula'
+
+import Formula from '../model/Formula'
+import FormulaRepository from '../repository/FormulaRepository'
+import FormulaNameSelection from './FormulaNameSelection'
 
 type Props = {
   previous: () => string;
-  next: (formula: number) => string;
+  next: (formulaSlug: ?string) => string;
 }
 
 type State = {
-  formula: number;
+  formula: ?Formula;
 }
+
+const formulaRepository = new FormulaRepository
 
 class ScaleSelection extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
     this.state = {
-      formula: 0,
+      formula: null,
     }
-
-    this.onSelectScale = this.onSelectScale.bind(this)
   }
 
-  onSelectScale = (formula: number) => {
-    this.setState({formula})
+  onSelectFormula = (formulaName: string) => {
+    const newFormula = formulaRepository.getByName(formulaName)
+    this.setState({formula: newFormula})
   }
 
-  renderModes() {
-    return MODES
-      .map((formula: number, index: number) => (
-        <ScaleFormulaSelection
-          key={index}
-          formula={formula}
-          active={formula === this.state.formula}
-          onSelectScale={this.onSelectScale}
+  renderFormulasByCategory(category: FormulaCategory) {
+    const {formula: activeFormula} = this.state
+    const formulas = formulaRepository.getByCategory(category)
+
+    return formulas.map(({name}, key) => {
+      const active = activeFormula
+        ? name === activeFormula.name
+        : false
+
+      return (
+        <FormulaNameSelection
+          key={key}
+          name={name}
+          active={active}
+          onSelectFormula={this.onSelectFormula}
         />
-      ))
-  }
-
-  renderScales() {
-    return SCALES
-      .map((formula: number, index: number) => (
-        <ScaleFormulaSelection
-          key={index}
-          formula={formula}
-          active={formula === this.state.formula}
-          onSelectScale={this.onSelectScale}
-        />
-      ))
+      )
+    })
   }
 
   render() {
+    const {previous, next} = this.props
+    const {formula} = this.state
+
     return (
       <div className="animated-container">
         <p className="lead">
@@ -75,17 +78,20 @@ class ScaleSelection extends Component<Props, State> {
         <div className="navigation">
           <Button
             tag={Link}
-            to={this.props.previous()}>
+            to={previous()}>
             <i className="fa fa-arrow-left icon-left"/>
             Back
           </Button>
 
           <Button
             tag={Link}
-            to={this.props.next(this.state.formula)}
+            to={next(formula
+              ? formulaRepository.getSlugByName(formula.name)
+              : null)
+            }
             color="primary"
             className="float-right"
-            disabled={this.state.formula === 0}>
+            disabled={!formula}>
             Next
             <i className="fa fa-arrow-right icon-right"/>
           </Button>
@@ -99,7 +105,7 @@ class ScaleSelection extends Component<Props, State> {
                   <ListGroupItem color="info" className="text-center">
                     <h5>Scales</h5>
                   </ListGroupItem>
-                  {this.renderScales()}
+                  {this.renderFormulasByCategory('scale')}
                 </ListGroup>
               </Card>
             </div>
@@ -111,7 +117,7 @@ class ScaleSelection extends Component<Props, State> {
                   <ListGroupItem color="warning" className="text-center">
                     <h5>Modes</h5>
                   </ListGroupItem>
-                  {this.renderModes()}
+                  {this.renderFormulasByCategory('mode')}
                 </ListGroup>
               </Card>
             </div>
@@ -129,8 +135,8 @@ ScaleSelection.propTypes = {
 
 const styles = {
   buttonGroup: {
-    width       : '100%',
-    textAlign   : 'left',
+    width: '100%',
+    textAlign: 'left',
     marginBottom: 30,
   },
 }
