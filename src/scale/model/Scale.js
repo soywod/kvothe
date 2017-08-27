@@ -2,7 +2,6 @@
 
 import Note from '../../note/model/Note'
 import NoteRepository from '../../note/repository/NoteRepository'
-import {FORMULAS} from './Scale.const'
 
 type ScaleParams = {
   tone: Note;
