@@ -1,9 +1,16 @@
 // @flow
 
-import {assign, drop, take, forEach} from 'lodash';
+import {range} from 'lodash';
 
 import Note from '../../note/model/Note';
+import NoteRepository from '../../note/repository/NoteRepository'
+import FormulaRepository from '../../formula/repository/FormulaRepository'
 import Scale from '../model/Scale';
+
+import {NB_POSITIONS} from '../../note/repository/NoteRepository'
+
+const noteRepository = new NoteRepository
+const formulaRepository = new FormulaRepository
 
 class ScaleRepository {
   static instance: ScaleRepository;
@@ -14,6 +21,24 @@ class ScaleRepository {
     }
 
     ScaleRepository.instance = this
+  }
+
+  getByNoteSlugAndFormulaSlug(
+    noteSlug: string,
+    formulaSlug: string
+  ): Array<?Note> {
+    const tone = noteRepository.getBySlug(noteSlug)
+    const formula = formulaRepository.getBySlug(formulaSlug)
+    
+    const positions = range(NB_POSITIONS)
+
+    return positions.map((position: number) => {
+      const note = noteRepository.getNext(tone, position)
+      const value = Math.pow(2, position)
+      const doesFormulaContainValue = ((formula.value & value) === value)
+
+      return doesFormulaContainValue ? note : null
+    })
   }
 
   // getFormulaByName(name: string): ?number {

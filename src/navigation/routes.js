@@ -8,7 +8,7 @@ import Home from '../home/Home'
 import ScaleHarmonizerContainer from '../container/ScaleHarmonizer'
 import NoteSelection from '../note/components/NoteSelection'
 import FormulaSelection from '../formula/components/FormulaSelection'
-// import ScaleList from '../scale/ScaleList'
+import ScaleList from '../scale/components/ScaleList'
 // import ChordHarmonizerContainer from '../container/ChordHarmonizer'
 // import ChordList from '../chord/ChordList'
 
@@ -17,20 +17,6 @@ const path = {
     scale: "/scale-harmonizer",
   },
 }
-
-// function scaleListWrapper(url: string) {
-//   return (props: any) => {
-//     const { noteId, formula } = props.params
-
-//     return (
-//       <ScaleList
-//         noteId={noteId}
-//         formula={+formula}
-//         previous={() => `${url}/${noteId}`}
-//       />
-//     )
-//   }
-// }
 
 // function chordListWrapper(url: string) {
 //   return (props: any) => {
@@ -57,9 +43,9 @@ const routes = (
         path={`${path.harmonizer.scale}/:noteSlug`}
         component={FormulaSelectionWrapper()}/>
 
-      {/* <Route
-        path={`${scaleHarmonizer}/:noteSlug/:formulaSlug`}
-        component={scaleListWrapper(scaleHarmonizer)}/> */}
+      <Route
+        path={`${path.harmonizer.scale}/:noteSlug/:formulaSlug`}
+        component={ScaleListWrapper()}/>
     </Route>
 
     {/* <Route path={chordHarmonizer} component={ChordHarmonizerContainer}>
@@ -97,6 +83,20 @@ function FormulaSelectionWrapper() {
           const url = formulaSlug ? `/${formulaSlug}` : ''
           return `${path.harmonizer.scale}/${noteSlug}${url}`
         }}
+      />
+    )
+  }
+}
+
+function ScaleListWrapper() {
+  return (props: any) => {
+    const {noteSlug, formulaSlug} = props.params
+
+    return (
+      <ScaleList
+        noteSlug={noteSlug}
+        formulaSlug={formulaSlug}
+        previous={() => `${path.harmonizer.scale}/${noteSlug}`}
       />
     )
   }

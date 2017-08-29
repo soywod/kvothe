@@ -15,8 +15,8 @@ import noteRepository from '../note/repository/NoteRepository'
 import scaleRepository from './Scale.repository'
 
 type Props = {
-  noteId: string;
-  formula: number;
+  noteSlug: string;
+  formulaSlug: string;
   previous: () => string;
 }
 
