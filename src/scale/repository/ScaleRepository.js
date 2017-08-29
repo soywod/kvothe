@@ -28,8 +28,15 @@ class ScaleRepository {
     formulaSlug: string
   ): Array<?Note> {
     const tone = noteRepository.getBySlug(noteSlug)
+    if (! tone) {
+      throw new TypeError(`Note slug ${noteSlug} is invalid`)
+    }
+
     const formula = formulaRepository.getBySlug(formulaSlug)
-    
+    if (! formula) {
+      throw new TypeError(`Formula slug ${formulaSlug} is invalid`)
+    }
+
     const positions = range(NB_POSITIONS)
 
     return positions.map((position: number) => {

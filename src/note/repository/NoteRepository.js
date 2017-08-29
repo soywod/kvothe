@@ -106,11 +106,20 @@ class NoteRepository {
     }
   }
 
-  getSlugById(noteId: string): string {
-    return noteId
+  getSlugById(id: string): string {
+    return id
       .replace('♭', '-flat')
       .replace('♯', '-sharp')
       .toLowerCase()
+  }
+
+  getBySlug(slug: string): ?Note {
+    const id = slug
+      .replace('-flat', '♭')
+      .replace('-sharp', '♯')
+      .toUpperCase()
+
+    return this.getById(id)
   }
 }
 

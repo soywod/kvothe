@@ -5,6 +5,7 @@ import {
   filter,
   forEach,
   find,
+  capitalize,
 } from 'lodash';
 
 import Formula from '../model/Formula'
@@ -98,6 +99,14 @@ class FormulaRepository {
     return id
       .replace(' ', '-')
       .toLowerCase()
+  }
+
+  getBySlug(slug: string): ?Formula {
+    const id = capitalize(
+      slug.replace('-', ' ')
+    )
+
+    return this.getById(id)
   }
 }
 
