@@ -11,14 +11,14 @@ import type {NoteName, NoteAlt} from '../../model/Note'
 import NoteRepository from '../NoteRepository'
 
 class NoteRepositoryThenStage extends Stage {
-  @State noteId: string;
+  @State id: string;
+  @State slug: string;
   @State repository: NoteRepository;
 
   @State note: ?Note;
-  @State nextNote: ?Note;
-  @State twinNote: ?Note;
+  @State next: ?Note;
+  @State twin: ?Note;
   @State position: ?number;
-  @State slug: string;
 
   should_have_valid_mapping(): this {
     const {notes} = this.repository
@@ -60,19 +60,19 @@ class NoteRepositoryThenStage extends Stage {
 
   should_have_next_id_$(expectedNextNoteId: ?string): this {
     if (expectedNextNoteId === null || expectedNextNoteId === undefined) {
-      expect(this.nextNote).toBeNull()
+      expect(this.next).toBeNull()
     }
 
     else if (expectedNextNoteId !== null && expectedNextNoteId !== undefined) {
       const expectedNextNote = this.repository.getById(expectedNextNoteId)
 
       expect(this.note).not.toBeNull()
-      expect(this.nextNote).not.toBeNull()
+      expect(this.next).not.toBeNull()
       expect(expectedNextNote).not.toBeNull()
 
-      if (this.nextNote && expectedNextNote) {
+      if (this.next && expectedNextNote) {
         const position =
-          this.repository.getPosition(this.nextNote)
+          this.repository.getPosition(this.next)
         const expectedPosition =
           this.repository.getPosition(expectedNextNote)
 
@@ -85,15 +85,15 @@ class NoteRepositoryThenStage extends Stage {
 
   should_have_twin_id_$(expectedTwinNoteId: ?string): this {
     if (expectedTwinNoteId === null || expectedTwinNoteId === undefined) {
-      expect(this.twinNote).toBeNull()
+      expect(this.twin).toBeNull()
     }
 
     else if (expectedTwinNoteId !== null && expectedTwinNoteId !== undefined) {
       expect(this.note).not.toBeNull()
-      expect(this.twinNote).not.toBeNull()
+      expect(this.twin).not.toBeNull()
 
-      if (this.twinNote) {
-        expect(this.twinNote.id).toEqual(expectedTwinNoteId)
+      if (this.twin) {
+        expect(this.twin.id).toEqual(expectedTwinNoteId)
       }
     }
 

@@ -10,32 +10,32 @@ import type {NoteName, NoteAlt} from '../../model/Note'
 import NoteRepository from '../NoteRepository'
 
 class NoteRepositoryWhenStage extends Stage {
-  @State noteId: string;
-  @State noteName: ?NoteName;
-  @State noteAlt: ?NoteAlt;
+  @State id: string;
+  @State name: NoteName;
+  @State alt: ?NoteAlt;
+  @State slug: string;
   @State repository: NoteRepository;
 
   @State note: ?Note;
-  @State nextNote: ?Note;
-  @State twinNote: ?Note;
+  @State next: ?Note;
+  @State twin: ?Note;
   @State position: ?number;
-  @State slug: string;
 
   get_note_by_id(): this {
-    this.note = this.repository.getById(this.noteId)
+    this.note = this.repository.getById(this.id)
     return this
   }
 
   get_note_by_name_and_alt(): this {
-    this.note = this.noteName
-      ? this.repository.getByNameAndAlt(this.noteName, this.noteAlt)
+    this.note = this.name
+      ? this.repository.getByNameAndAlt(this.name, this.alt)
       : null
 
     return this
   }
 
   get_next_note(): this {
-    this.nextNote = this.note
+    this.next = this.note
       ? this.repository.getNext(this.note)
       : null
 
@@ -43,7 +43,7 @@ class NoteRepositoryWhenStage extends Stage {
   }
 
   get_twin_note(): this {
-    this.twinNote = this.note
+    this.twin = this.note
       ? this.repository.getTwin(this.note)
       : null
 
@@ -58,8 +58,13 @@ class NoteRepositoryWhenStage extends Stage {
     return this
   }
 
-  get_note_slug(): this {
-    this.slug = this.repository.getSlugById(this.noteId)
+  get_slug_by_id(): this {
+    this.slug = this.repository.getSlugById(this.id)
+    return this
+  }
+
+  get_note_by_slug(): this {
+    this.note = this.repository.getBySlug(this.slug)
     return this
   }
 }

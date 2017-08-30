@@ -51,11 +51,10 @@ scenarios(
       ['A', '♭', 'A♭'],
       ['B', null, 'B'],
       ['C', '♯', 'C♯'],
-      [null, null, null],
     ], (
-      currentNoteName: ?NoteName,
+      currentNoteName: NoteName,
       currentNoteAlt: ?NoteAlt,
-      expectedNoteId: ?string
+      expectedNoteId: string
     ) => {
         given()
           .a_note_repository(repository).and()
@@ -142,13 +141,33 @@ scenarios(
       ['bad', 'bad'],
     ], (
       currentNoteId: string,
-      expectedSlug: string
+      expectedNoteSlug: string
     ) => {
       given()
         .a_note_repository(repository).and()
         .a_note_id_$(currentNoteId)
-      when().get_note_slug()
-      then().should_have_slug_$(expectedSlug)
+      when().get_slug_by_id()
+      then().should_have_slug_$(expectedNoteSlug)
+    })),
+
+    should_get_note_by_slug: scenario({}, parametrized2([
+      ['a-flat', 'A♭'], ['a', 'A'], ['a-sharp', 'A♯'],
+      ['b-flat', 'B♭'], ['b', 'B'], ['b-sharp', 'B♯'],
+      ['c-flat', 'C♭'], ['c', 'C'], ['c-sharp', 'C♯'],
+      ['d-flat', 'D♭'], ['d', 'D'], ['d-sharp', 'D♯'],
+      ['e-flat', 'E♭'], ['e', 'E'], ['e-sharp', 'E♯'],
+      ['f-flat', 'F♭'], ['f', 'F'], ['f-sharp', 'F♯'],
+      ['g-flat', 'G♭'], ['g', 'G'], ['g-sharp', 'G♯'],
+      ['bad', null],
+    ], (
+      currentNoteSlug: string,
+      expecteNoteId: ?string
+    ) => {
+      given()
+        .a_note_repository(repository).and()
+        .a_note_slug_$(currentNoteSlug)
+      when().get_note_by_slug()
+      then().should_have_id_$(expecteNoteId)
     })),
   })
 )

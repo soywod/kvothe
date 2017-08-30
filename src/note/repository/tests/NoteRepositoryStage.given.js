@@ -10,9 +10,10 @@ import type {NoteName, NoteAlt} from '../../model/Note'
 import NoteRepository from '../NoteRepository'
 
 class NoteRepositoryGivenStage extends Stage {
-  @State noteId: string;
-  @State noteName: ?NoteName;
-  @State noteAlt: ?NoteAlt;
+  @State id: string;
+  @State name: NoteName;
+  @State alt: ?NoteAlt;
+  @State slug: string;
   @State repository: NoteRepository;
 
   a_note_repository(repository: NoteRepository): this {
@@ -20,18 +21,23 @@ class NoteRepositoryGivenStage extends Stage {
     return this
   }
 
-  a_note_id_$(noteId: string): this {
-    this.noteId = noteId
+  a_note_id_$(id: string): this {
+    this.id = id
     return this
   }
 
-  a_note_name_$(noteName: ?NoteName): this {
-    this.noteName = noteName
+  a_note_name_$(name: NoteName): this {
+    this.name = name
     return this
   }
 
-  a_note_alt_$(noteAlt: ?NoteAlt): this {
-    this.noteAlt = noteAlt
+  a_note_alt_$(alt: ?NoteAlt): this {
+    this.alt = alt
+    return this
+  }
+
+  a_note_slug_$(slug: string): this {
+    this.slug = slug
     return this
   }
 }
