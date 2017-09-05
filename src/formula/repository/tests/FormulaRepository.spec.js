@@ -68,5 +68,20 @@ scenarios(
       when().get_slug_by_id()
       then().should_have_slug_$(expectedSlug)
     })),
+
+    should_get_formula_by_slug: scenario({}, parametrized2([
+      ['major', 'Major'],
+      ['minor-harmonic', 'Minor harmonic'],
+      ['bad', null],
+    ], (
+      currentFormulaSlug: string,
+      expectedFormulaId: ?string
+    ) => {
+      given()
+        .a_formula_repository(repository).and()
+        .a_formula_slug(currentFormulaSlug)
+      when().get_formula_by_slug()
+      then().should_have_id_$(expectedFormulaId)
+    })),
   })
 )

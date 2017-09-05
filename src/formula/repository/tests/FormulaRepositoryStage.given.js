@@ -13,6 +13,7 @@ class FormulaRepositoryGivenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
   @State id: string;
+  @State slug: string;
 
   a_formula_repository(repository: FormulaRepository): this {
     this.repository = repository
@@ -26,6 +27,11 @@ class FormulaRepositoryGivenStage extends Stage {
 
   a_formula_id(id: string): this {
     this.id = id
+    return this
+  }
+
+  a_formula_slug(slug: string): this {
+    this.slug = slug
     return this
   }
 }

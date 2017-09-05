@@ -32,6 +32,11 @@ class FormulaRepositoryWhenStage extends Stage {
     this.slug = this.repository.getSlugById(this.id)
     return this
   }
+
+  get_formula_by_slug() {
+    this.formula = this.repository.getBySlug(this.slug)
+    return this
+  }
 }
 
 export default FormulaRepositoryWhenStage
