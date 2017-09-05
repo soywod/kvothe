@@ -161,13 +161,13 @@ scenarios(
       ['bad', null],
     ], (
       currentNoteSlug: string,
-      expecteNoteId: ?string
+      expectedNoteId: ?string
     ) => {
       given()
         .a_note_repository(repository).and()
         .a_note_slug_$(currentNoteSlug)
       when().get_note_by_slug()
-      then().should_have_id_$(expecteNoteId)
+      then().should_have_id_$(expectedNoteId)
     })),
   })
 )
