@@ -1,6 +1,11 @@
 // @flow
 
-import {range} from 'lodash';
+import {
+  drop,
+  first,
+  range,
+  take,
+} from 'lodash';
 
 import Note from '../../note/model/Note';
 import NoteRepository from '../../note/repository/NoteRepository'
@@ -23,28 +28,56 @@ class ScaleRepository {
     ScaleRepository.instance = this
   }
 
-  getByNoteSlugAndFormulaSlug(
+  getByNoteAndFormulaSlug(
     noteSlug: string,
-    formulaSlug: string
-  ): Array<?Note> {
+    formulaSlug: string,
+  ): Scale {
     const tone = noteRepository.getBySlug(noteSlug)
     if (! tone) {
-      throw new TypeError(`Note slug ${noteSlug} is invalid`)
+      throw new TypeError(`Note slug '${noteSlug}' is invalid`)
     }
 
     const formula = formulaRepository.getBySlug(formulaSlug)
     if (! formula) {
-      throw new TypeError(`Formula slug ${formulaSlug} is invalid`)
+      throw new TypeError(`Formula slug '${formulaSlug}' is invalid`)
     }
 
     const positions = range(NB_POSITIONS)
-
-    return positions.map((position: number) => {
+    const intervals = positions.map((position: number) => {
       const note = noteRepository.getNext(tone, position)
       const value = Math.pow(2, position)
       const doesFormulaContainValue = ((formula.value & value) === value)
 
       return doesFormulaContainValue ? note : null
+    })
+
+    // TODO: optimize intervals
+
+    return new Scale({tone, intervals})
+  }
+
+  getModesByScale(scale: Scale): Array<?Scale> {
+    return scale.intervals.map((note: ?Note, offset: number) => {
+      if (! note) {
+        return null
+      }
+
+      if (offset === 0) {
+        return scale
+      }
+
+      const intervals: Array<?Note> = [
+        ...drop(scale.intervals, offset),
+        ...take(scale.intervals, offset),
+      ]
+
+      const tone = first(intervals)
+
+      if (! tone) {
+        throw new TypeError("First note of intervals can't be null")
+      }
+
+      return new Scale({tone, intervals})
     })
   }
 

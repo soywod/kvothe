@@ -5,14 +5,9 @@ import PropTypes from 'prop-types'
 import { browserHistory, Link, Router } from 'react-router'
 import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap'
 
+import Scale from '../model/Scale';
 import ScaleListItem from './ScaleListItem'
-import Note from '../note/Note'
-import Scale from '../scale/Scale.class'
-import label from '../helpers/label'
-import { SCALES } from './Scale.const'
-
-import noteRepository from '../note/repository/NoteRepository'
-import scaleRepository from './Scale.repository'
+import ScaleRepository from '../repository/ScaleRepository'
 
 type Props = {
   noteSlug: string;
@@ -22,80 +17,58 @@ type Props = {
 
 type State = {
   scale: Scale;
-  modes: Array<Scale | null>;
-  isModeRefOpen: boolean;
+  modes: Array<?Scale>;
 }
+
+const scaleRepository = new ScaleRepository
 
 class ScaleList extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    const { formula, noteId } = props
-    const note = noteRepository.getById(noteId)
-    if (!note) {
-      throw new Error(`Error while getting note from note id '${noteId}'`)
-    }
-
-    const scale = scaleRepository.getScaleByFormula(note, formula)
-    if (!scale) {
-      throw new Error(`Error while getting scale from formula '${formula}'`)
-    }
-
-    const modes = scaleRepository.getModesFromScale(scale)
-    if (!modes) {
-      throw new Error(`Error while getting modes from scale`)
-    }
+    const { formulaSlug, noteSlug } = props
+    const scale = scaleRepository.getByNoteAndFormulaSlug(formulaSlug, noteSlug)
+    const modes = scaleRepository.getModesByScale(scale)
 
     this.state = {
       scale,
       modes,
-      isModeRefOpen: false,
     }
-
-    this.toggleModeRef = this.toggleModeRef.bind(this)
   }
 
-  toggleModeRef = (event: any) => {
-    event.preventDefault()
+  // renderMainReferences() {
+  //   return this.state.modes
+  //     .filter(mode => mode && SCALES.includes(mode.formula))
+  //     .map((mode, index) => {
+  //       if (!mode || mode.formula === this.state.scale.formula) {
+  //         return null
+  //       }
 
-    this.setState(prevState => ({
-      isModeRefOpen: !prevState.isModeRefOpen,
-    }))
-  }
+  //       return (
+  //         <ListGroupItem key={index}>
+  //           <ScaleListItem color="warning" mode={mode} />
+  //         </ListGroupItem>
+  //       )
+  //     })
+  //     .filter(mode => !!mode)
+  // }
 
-  renderMainReferences() {
-    return this.state.modes
-      .filter(mode => mode && SCALES.includes(mode.formula))
-      .map((mode, index) => {
-        if (!mode || mode.formula === this.state.scale.formula) {
-          return null
-        }
+  // renderOtherReferences() {
+  //   return this.state.modes
+  //     .filter(mode => mode && !SCALES.includes(mode.formula))
+  //     .map((mode, index) => {
+  //       if (!mode || mode.formula === this.state.scale.formula) {
+  //         return null
+  //       }
 
-        return (
-          <ListGroupItem key={index}>
-            <ScaleListItem color="warning" mode={mode} />
-          </ListGroupItem>
-        )
-      })
-      .filter(mode => !!mode)
-  }
-
-  renderOtherReferences() {
-    return this.state.modes
-      .filter(mode => mode && !SCALES.includes(mode.formula))
-      .map((mode, index) => {
-        if (!mode || mode.formula === this.state.scale.formula) {
-          return null
-        }
-
-        return (
-          <ListGroupItem key={index}>
-            <ScaleListItem color="danger" mode={mode} />
-          </ListGroupItem>
-        )
-      })
-      .filter(mode => !!mode)
-  }
+  //       return (
+  //         <ListGroupItem key={index}>
+  //           <ScaleListItem color="danger" mode={mode} />
+  //         </ListGroupItem>
+  //       )
+  //     })
+  //     .filter(mode => !!mode)
+  // }
 
   render() {
     return (
@@ -134,8 +107,6 @@ class ScaleList extends Component<Props, State> {
             <ListGroupItem color="warning">
               <h5>Famous modes reference</h5>
             </ListGroupItem>
-
-            {this.renderMainReferences()}
           </ListGroup>
         </Card>
 
@@ -146,19 +117,11 @@ class ScaleList extends Component<Props, State> {
             <ListGroupItem color="danger">
               <h5>Other modes reference</h5>
             </ListGroupItem>
-
-            {this.renderOtherReferences()}
           </ListGroup>
         </Card>
       </div>
     )
   }
-}
-
-ScaleList.propTypes = {
-  noteId: PropTypes.string.isRequired,
-  formula: PropTypes.number.isRequired,
-  previous: PropTypes.func.isRequired,
 }
 
 const styles = {
