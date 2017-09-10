@@ -8,14 +8,16 @@ import Home from '../home/Home'
 import ScaleHarmonizerContainer from '../container/ScaleHarmonizer'
 import NoteSelection from '../note/components/NoteSelection'
 import FormulaSelection from '../formula/components/FormulaSelection'
-import ScaleList from '../scale/components/ScaleList'
+// import ScaleList from '../scale/components/ScaleList'
 // import ChordHarmonizerContainer from '../container/ChordHarmonizer'
 // import ChordList from '../chord/ChordList'
+import Randomizer from '../randomizer/components/RandomizerContainer'
 
 const path = {
   harmonizer: {
     scale: "/scale-harmonizer",
   },
+  randomizer: "/randomizer",
 }
 
 // function chordListWrapper(url: string) {
@@ -43,9 +45,9 @@ const routes = (
         path={`${path.harmonizer.scale}/:noteSlug`}
         component={FormulaSelectionWrapper()}/>
 
-      <Route
+      {/* <Route
         path={`${path.harmonizer.scale}/:noteSlug/:formulaSlug`}
-        component={ScaleListWrapper()}/>
+        component={ScaleListWrapper()}/> */}
     </Route>
 
     {/* <Route path={chordHarmonizer} component={ChordHarmonizerContainer}>
@@ -57,6 +59,8 @@ const routes = (
         path={`${chordHarmonizer}/:noteId/:formula`}
         component={chordListWrapper(chordHarmonizer)}/>
     </Route> */}
+
+    <Route path={path.randomizer} component={Randomizer}/>
   </Route>
 );
 
@@ -88,18 +92,18 @@ function FormulaSelectionWrapper() {
   }
 }
 
-function ScaleListWrapper() {
-  return (props: any) => {
-    const {noteSlug, formulaSlug} = props.params
+// function ScaleListWrapper() {
+//   return (props: any) => {
+//     const {noteSlug, formulaSlug} = props.params
 
-    return (
-      <ScaleList
-        noteSlug={noteSlug}
-        formulaSlug={formulaSlug}
-        previous={() => `${path.harmonizer.scale}/${noteSlug}`}
-      />
-    )
-  }
-}
+//     return (
+//       <ScaleList
+//         noteSlug={noteSlug}
+//         formulaSlug={formulaSlug}
+//         previous={() => `${path.harmonizer.scale}/${noteSlug}`}
+//       />
+//     )
+//   }
+// }
 
 export default routes;

@@ -38,13 +38,12 @@ function Home() {
 
           <br />
 
-          <Button to="/" disabled tag={Link} style={styles.tool}>
+          <Button to="/randomizer" tag={Link} style={styles.tool}>
             <h3>
               <span>
                 <i className="fa fa-random icon-left text-danger" />
-                Randomizer <br />
+                Randomizer
               </span>
-              <span className="text-muted">(soon)</span>
             </h3>
           </Button>
         </Col>

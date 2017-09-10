@@ -1,5 +1,4 @@
 const path = require('path');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const common = {
@@ -14,14 +13,19 @@ const common = {
       'bootstrap': 'bootstrap/dist/css/bootstrap.min.css',
       'font-awesome': 'font-awesome/css/font-awesome.min.css'
     },
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.elm']
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: [/elm-stuff/, /node_modules/],
+      },
+      {
+        test: /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        loader: 'elm-webpack-loader',
       },
       {
         test: /\.css$/,
@@ -50,7 +54,8 @@ const common = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=fonts/[hash:8].[ext]'
       }
-    ]
+    ],
+    noParse: /\.elm$/,
   },
   plugins: [
     new ExtractTextPlugin('css/[hash:8].css')
