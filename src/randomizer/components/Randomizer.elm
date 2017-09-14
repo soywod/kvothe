@@ -1,14 +1,15 @@
 module Randomizer exposing (main)
 
+import Random
+import Array exposing (Array, get)
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
-import Random exposing (..)
+import Maybe exposing (withDefault)
 
 
 type Msg
     = NextNote
-    | RandomNoteName Int
-    | RandomNoteAlt Int
+    | RandomNote Int
 
 
 type alias Model =
@@ -16,9 +17,7 @@ type alias Model =
 
 
 type alias Note =
-    { name : NoteName
-    , alt : NoteAlt
-    }
+    ( NoteName, NoteAlt )
 
 
 type NoteName
@@ -32,16 +31,104 @@ type NoteName
 
 
 type NoteAlt
-    = FLAT
-    | NATURAL
-    | SHARP
+    = Flat
+    | Natural
+    | Sharp
 
 
-toString : Model -> String
-toString model =
+notes : Array ( NoteName, NoteAlt )
+notes =
     let
-        name =
-            case model.note.name of
+        names =
+            Array.fromList [ A, B, C, D, E, F, G ]
+
+        alts =
+            Array.fromList [ Flat, Natural, Sharp ]
+
+        getNoteIndex x =
+            ( x % 7, x % 3 )
+
+        getMaybeNote ( x, y ) =
+            ( get x names, get y alts )
+
+        getNote ( x, y ) =
+            ( withDefault A x, withDefault Natural y )
+    in
+        List.range 0 20
+            |> Array.fromList
+            |> Array.map (getNote << getMaybeNote << getNoteIndex)
+
+
+main : Program Never Model Msg
+main =
+    Html.program
+        { init = init
+        , update = update
+        , view = view
+        , subscriptions = subscriptions
+        }
+
+
+init : ( Model, Cmd Msg )
+init =
+    let
+        note =
+            ( A, Natural )
+
+        model =
+            { note = note }
+    in
+        ( model, Cmd.none )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        NextNote ->
+            ( model, Random.generate RandomNote (Random.int 0 20) )
+
+        RandomNote randomIndex ->
+            let
+                note =
+                    get randomIndex notes
+
+                nextModel =
+                    { note = withDefault ( A, Natural ) note }
+
+                ( name, alt ) =
+                    model.note
+
+                ( nextName, nextAlt ) =
+                    nextModel.note
+
+                command =
+                    if name == nextName && alt == nextAlt then
+                        Random.generate RandomNote (Random.int 0 20)
+                    else
+                        Cmd.none
+            in
+                ( nextModel, command )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+view : Model -> Html Msg
+view model =
+    div
+        []
+        [ button [ onClick NextNote ] [ text "Random note" ]
+        , model.note |> toString |> text
+        ]
+
+
+toString : ( NoteName, NoteAlt ) -> String
+toString ( name, alt ) =
+    let
+        strName =
+            case name of
                 A ->
                     "A"
 
@@ -63,116 +150,15 @@ toString model =
                 G ->
                     "G"
 
-        alt =
-            case model.note.alt of
-                FLAT ->
+        strAlt =
+            case alt of
+                Flat ->
                     "♭"
 
-                NATURAL ->
+                Natural ->
                     ""
 
-                SHARP ->
+                Sharp ->
                     "♯"
     in
-        name ++ alt
-
-
-main : Program Never Model Msg
-main =
-    Html.program
-        { init = init
-        , update = update
-        , view = view
-        , subscriptions = subscriptions
-        }
-
-
-init : ( Model, Cmd Msg )
-init =
-    let
-        note =
-            { name = A, alt = NATURAL }
-
-        model =
-            { note = note }
-    in
-        ( model, Cmd.none )
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        NextNote ->
-            ( model, Random.generate RandomNoteName (Random.int 1 7) )
-
-        RandomNoteName rand ->
-            let
-                name =
-                    case rand of
-                        1 ->
-                            A
-
-                        2 ->
-                            B
-
-                        3 ->
-                            C
-
-                        4 ->
-                            D
-
-                        5 ->
-                            E
-
-                        6 ->
-                            F
-
-                        _ ->
-                            G
-
-                note =
-                    { name = name
-                    , alt = model.note.alt
-                    }
-
-                nextModel =
-                    { note = note }
-            in
-                ( nextModel, Random.generate RandomNoteAlt (Random.int 1 3) )
-
-        RandomNoteAlt rand ->
-            let
-                alt =
-                    case rand of
-                        1 ->
-                            FLAT
-
-                        2 ->
-                            NATURAL
-
-                        _ ->
-                            SHARP
-
-                note =
-                    { name = model.note.name
-                    , alt = alt
-                    }
-
-                nextModel =
-                    { note = note }
-            in
-                ( nextModel, Cmd.none )
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
-
-
-view : Model -> Html Msg
-view model =
-    div
-        []
-        [ button [ onClick NextNote ] [ text "Random note" ]
-        , model |> toString |> text
-        ]
+        strName ++ strAlt
