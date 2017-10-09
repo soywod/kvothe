@@ -1,12 +1,12 @@
 // @flow
 
-import {
+import _, {
   assign,
-  filter,
-  forEach,
-  find,
   capitalize,
-} from 'lodash';
+  filter,
+  find,
+  forEach,
+} from 'lodash'
 
 import Formula from '../model/Formula'
 import type {FormulaCategory} from '../model/Formula'
@@ -81,24 +81,25 @@ class FormulaRepository {
     FormulaRepository.instance = this
   }
 
-  getById(id: string): ?Formula {
-    return find(
-      this.formulas,
-      (f: Formula) => f.id === id
-    )
-  }
-
   getByCategory(category: FormulaCategory): Formula[] {
     return filter(
       this.formulas,
-      (f: Formula) => f.category === category
+      f => f.category === category
     )
   }
 
-  getSlugById(id: string): string {
-    return id
-      .replace(' ', '-')
-      .toLowerCase()
+  getById(id: string): ?Formula {
+    return find(
+      this.formulas,
+      f => f.id === id
+    )
+  }
+
+  getByValue(value: number): Formula {
+    return _(this.formulas)
+      .filter(f => f.value === value)
+      .sort(f => f.category === 'scale' ? -1 : 1)
+      .first()
   }
 
   getBySlug(slug: string): ?Formula {
@@ -107,6 +108,12 @@ class FormulaRepository {
     )
 
     return this.getById(id)
+  }
+
+  getSlugById(id: string): string {
+    return id
+      .replace(' ', '-')
+      .toLowerCase()
   }
 }
 

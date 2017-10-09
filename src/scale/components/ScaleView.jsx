@@ -22,7 +22,6 @@ type State = {
 
 type Props = {
   scale: Scale;
-  formula: Formula;
   color?: string;
   expanded?: boolean;
 };
@@ -44,7 +43,7 @@ class ScaleView extends Component<Props, State> {
   }
 
   render() {
-    const {formula, scale, color} = this.props
+    const {scale, color} = this.props
     const {expanded} = this.state
 
     return (
@@ -54,7 +53,7 @@ class ScaleView extends Component<Props, State> {
           {label(scale.tone.name)}
           <sub>{label(scale.tone.alt)}</sub>
           {' '}
-          {label(formula.id)}
+          {label(scale.formula.id)}
         </a>
         {this.state.expanded &&
           <div style={styles.scale}>

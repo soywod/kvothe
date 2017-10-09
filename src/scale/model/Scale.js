@@ -1,21 +1,25 @@
 // @flow
 
 import Note from '../../note/model/Note'
+import Formula from '../../formula/model/Formula'
 import NoteRepository from '../../note/repository/NoteRepository'
 
 type ScaleParams = {
   tone: Note;
+  formula: Formula;
   intervals: Array<?Note>;
 }
 
 class Scale {
   tone: Note;
+  formula: Formula;
   intervals: Array<?Note>;
 
   constructor(params: ScaleParams) {
-    const {tone, intervals} = params
+    const {tone, formula, intervals} = params
 
     this.tone = tone
+    this.formula = formula
     this.intervals = intervals
   }
 

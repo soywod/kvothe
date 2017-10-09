@@ -2,8 +2,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { browserHistory, Link, Router } from 'react-router'
-import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap'
+import {browserHistory, Link, Router} from 'react-router'
+import {Button, Card, ListGroup, ListGroupItem} from 'reactstrap'
+
+import type {FormulaCategory} from '../../formula/model/Formula'
 
 import Scale from '../model/Scale'
 import Formula from '../../formula/model/Formula'
@@ -20,7 +22,6 @@ type Props = {
 
 type State = {
   scale: Scale;
-  formula: Formula;
   modes: Array<?Scale>;
 }
 
@@ -49,47 +50,36 @@ class ModesView extends Component<Props, State> {
 
     this.state = {
       scale,
-      formula,
       modes,
     }
   }
 
-  // renderMainReferences() {
-  //   return this.state.modes
-  //     .filter(mode => mode && SCALES.includes(mode.formula))
-  //     .map((mode, index) => {
-  //       if (!mode || mode.formula === this.state.scale.formula) {
-  //         return null
-  //       }
+  renderReferences(category: FormulaCategory, color: string) {
+    const formulaIds = formulaRepository
+      .getByCategory(category)
+      .map(f => f.id)
 
-  //       return (
-  //         <ListGroupItem key={index}>
-  //           <ScaleListItem color="warning" mode={mode} />
-  //         </ListGroupItem>
-  //       )
-  //     })
-  //     .filter(mode => !!mode)
-  // }
+    return this.state.modes
+      .filter(scale => scale && formulaIds.includes(scale.formula.id))
+      .map((scale, index) => {
+        if (!scale || scale.formula === this.state.scale.formula) {
+          return null
+        }
 
-  // renderOtherReferences() {
-  //   return this.state.modes
-  //     .filter(mode => mode && !SCALES.includes(mode.formula))
-  //     .map((mode, index) => {
-  //       if (!mode || mode.formula === this.state.scale.formula) {
-  //         return null
-  //       }
-
-  //       return (
-  //         <ListGroupItem key={index}>
-  //           <ScaleListItem color="danger" mode={mode} />
-  //         </ListGroupItem>
-  //       )
-  //     })
-  //     .filter(mode => !!mode)
-  // }
+        return (
+          <ListGroupItem key={index}>
+            <ScaleView
+              color={color}
+              scale={scale}
+            />
+          </ListGroupItem>
+        )
+      })
+      .filter(mode => !!mode)
+  }
 
   render() {
-    const {formula, scale} = this.state
+    const {scale} = this.state
 
     return (
       <div className="animated-container">
@@ -115,8 +105,8 @@ class ModesView extends Component<Props, State> {
               <ScaleView
                 color="primary"
                 scale={scale}
-                formula={formula}
-                expanded />
+                expanded
+              />
             </ListGroupItem>
           </ListGroup>
         </Card>
@@ -128,6 +118,8 @@ class ModesView extends Component<Props, State> {
             <ListGroupItem color="warning">
               <h5>Famous modes reference</h5>
             </ListGroupItem>
+
+            {this.renderReferences('scale', 'warning')}
           </ListGroup>
         </Card>
 
@@ -138,6 +130,8 @@ class ModesView extends Component<Props, State> {
             <ListGroupItem color="danger">
               <h5>Other modes reference</h5>
             </ListGroupItem>
+
+            {this.renderReferences('mode', 'danger')}
           </ListGroup>
         </Card>
       </div>

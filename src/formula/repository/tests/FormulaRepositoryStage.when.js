@@ -13,10 +13,11 @@ class FormulaRepositoryWhenStage extends Stage {
   @State repository: FormulaRepository;
   @State category: FormulaCategory;
   @State id: string;
+  @State value: number;
+  @State slug: string;
 
   @State formulas: Formula[];
   @State formula: ?Formula;
-  @State slug: string;
 
   get_by_category() {
     this.formulas = this.repository.getByCategory(this.category)
@@ -25,6 +26,11 @@ class FormulaRepositoryWhenStage extends Stage {
 
   get_by_id() {
     this.formula = this.repository.getById(this.id)
+    return this
+  }
+
+  get_by_value() {
+    this.formula = this.repository.getByValue(this.value)
     return this
   }
 

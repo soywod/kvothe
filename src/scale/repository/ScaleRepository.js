@@ -44,7 +44,7 @@ class ScaleRepository {
 
     // TODO: optimize intervals
 
-    return new Scale({tone, intervals})
+    return new Scale({tone, formula, intervals})
   }
 
   getModesByScale(scale: Scale): Array<?Scale> {
@@ -62,13 +62,18 @@ class ScaleRepository {
         ...take(scale.intervals, offset),
       ]
 
-      const tone = first(intervals)
+      const formula = formulaRepository.getByValue(
+        intervals.reduce((value, note, index) => (
+          note ? value | (1 << index) : value
+        ), 1)
+      )
 
+      const tone = first(intervals)
       if (! tone) {
         throw new TypeError("First note of intervals can't be null")
       }
 
-      return new Scale({tone, intervals})
+      return new Scale({tone, formula, intervals})
     })
   }
 

@@ -31,6 +31,20 @@ scenarios(
       then().should_have_valid_mapping()
     }),
 
+    should_get_by_id: scenario({}, parametrized2([
+      ['Major', 'Major'],
+      ['Minor harmonic', 'Minor harmonic'],
+      ['Dorian', 'Dorian'],
+      ['Aeolian', 'Aeolian'],
+      ['bad', null],
+    ], (id: string, expectedId: ?string) => {
+      given()
+        .a_formula_repository(repository).and()
+        .a_formula_id(id)
+      when().get_by_id()
+      then().should_have_id_$(expectedId)
+    })),
+
     should_get_by_category: scenario({}, parametrized2([
       ['scale', 4],
       ['mode', 7],
@@ -43,17 +57,15 @@ scenarios(
       then().should_have_$_formulas(count)
     })),
 
-    should_get_by_id: scenario({}, parametrized2([
-      ['Major', 'Major'],
-      ['Minor harmonic', 'Minor harmonic'],
-      ['Dorian', 'Dorian'],
-      ['Aeolian', 'Aeolian'],
-      ['bad', null],
-    ], (id: string, expectedId: ?string) => {
+    should_get_by_value: scenario({}, parametrized2([
+      [2741, 'Major'],
+      [1709, 'Dorian'],
+      [0, null],
+    ], (value: number, expectedId: ?string) => {
       given()
         .a_formula_repository(repository).and()
-        .a_formula_id(id)
-      when().get_by_id()
+        .a_formula_value(value)
+      when().get_by_value()
       then().should_have_id_$(expectedId)
     })),
 
