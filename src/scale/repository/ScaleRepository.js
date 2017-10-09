@@ -8,6 +8,7 @@ import {
 } from 'lodash';
 
 import Note from '../../note/model/Note';
+import Formula from '../../formula/model/Formula';
 import NoteRepository from '../../note/repository/NoteRepository'
 import FormulaRepository from '../../formula/repository/FormulaRepository'
 import Scale from '../model/Scale';
@@ -28,20 +29,10 @@ class ScaleRepository {
     ScaleRepository.instance = this
   }
 
-  getByNoteAndFormulaSlug(
-    noteSlug: string,
-    formulaSlug: string,
+  getByNoteAndFormula(
+    tone: Note,
+    formula: Formula,
   ): Scale {
-    const tone = noteRepository.getBySlug(noteSlug)
-    if (! tone) {
-      throw new TypeError(`Note slug '${noteSlug}' is invalid`)
-    }
-
-    const formula = formulaRepository.getBySlug(formulaSlug)
-    if (! formula) {
-      throw new TypeError(`Formula slug '${formulaSlug}' is invalid`)
-    }
-
     const positions = range(NB_POSITIONS)
     const intervals = positions.map((position: number) => {
       const note = noteRepository.getNext(tone, position)

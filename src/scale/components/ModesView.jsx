@@ -5,8 +5,11 @@ import PropTypes from 'prop-types'
 import { browserHistory, Link, Router } from 'react-router'
 import { Button, Card, ListGroup, ListGroupItem } from 'reactstrap'
 
-import Scale from '../model/Scale';
-import ScaleListItem from './ScaleListItem'
+import Scale from '../model/Scale'
+import Formula from '../../formula/model/Formula'
+import ScaleView from './ScaleView'
+import NoteRepository from '../../note/repository/NoteRepository'
+import FormulaRepository from '../../formula/repository/FormulaRepository'
 import ScaleRepository from '../repository/ScaleRepository'
 
 type Props = {
@@ -17,21 +20,36 @@ type Props = {
 
 type State = {
   scale: Scale;
+  formula: Formula;
   modes: Array<?Scale>;
 }
 
+const noteRepository = new NoteRepository
+const formulaRepository = new FormulaRepository
 const scaleRepository = new ScaleRepository
 
-class ScaleList extends Component<Props, State> {
+class ModesView extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    const { formulaSlug, noteSlug } = props
-    const scale = scaleRepository.getByNoteAndFormulaSlug(formulaSlug, noteSlug)
+    const {formulaSlug, noteSlug} = props
+
+    const note = noteRepository.getBySlug(noteSlug)
+    if (! note) {
+      throw new TypeError(`Note slug '${noteSlug}' is invalid`)
+    }
+
+    const formula = formulaRepository.getBySlug(formulaSlug)
+    if (! formula) {
+      throw new TypeError(`Formula slug '${formulaSlug}' is invalid`)
+    }
+
+    const scale = scaleRepository.getByNoteAndFormula(note, formula)
     const modes = scaleRepository.getModesByScale(scale)
 
     this.state = {
       scale,
+      formula,
       modes,
     }
   }
@@ -71,6 +89,8 @@ class ScaleList extends Component<Props, State> {
   // }
 
   render() {
+    const {formula, scale} = this.state
+
     return (
       <div className="animated-container">
         <div className="lead">
@@ -92,9 +112,10 @@ class ScaleList extends Component<Props, State> {
             </ListGroupItem>
 
             <ListGroupItem>
-              <ScaleListItem
+              <ScaleView
                 color="primary"
-                mode={this.state.scale}
+                scale={scale}
+                formula={formula}
                 expanded />
             </ListGroupItem>
           </ListGroup>
@@ -147,4 +168,4 @@ const styles = {
   },
 }
 
-export default ScaleList
+export default ModesView
