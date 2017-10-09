@@ -8,8 +8,6 @@
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
     "ejs": "^2.5.6",
-    "elm": "^0.18.0",
-    "elm-format": "^0.6.1-alpha",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "prop-types": "^15.5.10",
@@ -35,7 +33,6 @@
     "babel-register": "^6.24.0",
     "css-loader": "^0.26.1",
     "elm-oracle": "^1.1.1",
-    "elm-webpack-loader": "elm-community/elm-webpack-loader",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "flow-bin": "^0.53.1",

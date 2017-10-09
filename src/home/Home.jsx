@@ -38,7 +38,7 @@ function Home() {
 
           <br />
 
-          <Button to="/randomizer" tag={Link} style={styles.tool}>
+          <Button to="/randomizer" tag={Link} style={styles.tool} disabled>
             <h3>
               <span>
                 <i className="fa fa-random icon-left text-danger" />
