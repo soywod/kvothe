@@ -48,16 +48,16 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
+    "postinstall": "flow-typed install",
     "pretest": "jsgiven clean",
     "posttest": "jsgiven report",
-    "postinstall": "flow-typed install",
-    "dev": "webpack-dev-server --config webpack/dev.js",
-    "test": "jest",
     "sitemap": "babel-node sitemap-builder.js",
-    "prod:client:clean": "rm -rf dist/*",
-    "prod:client": "npm run prod:client:clean; cp src/static/* dist/; webpack --config webpack/prod.js",
-    "prod:server": "babel-node src/server",
-    "start": "yarn dev",
-    "deploy": "ssh -p 60021 soywod@soywod.fr \"cd kvothe; ./deploy.sh\""
+    "start": "webpack-dev-server --config webpack/dev.js",
+    "test": "jest",
+    "clean": "rm -rf dist/*",
+    "copy": "cp src/static/* dist/",
+    "build": "yarn clean; yarn copy; webpack --config webpack/prod.js",
+    "deploy": "ssh pi@192.168.1.5 'rm -rf ~/kvothe/*'; scp -r dist/* pi@192.168.1.5:~/kvothe/",
+    "prod": "yarn build; yarn deploy"
   }
 }
