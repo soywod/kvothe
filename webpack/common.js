@@ -2,7 +2,7 @@ const path = require("path")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const common = {
-  entry: "./src/client",
+  entry: "./src/index",
   output: {
     path: path.join(__dirname, "..", "dist"),
     filename: "js/[hash:8].js",
