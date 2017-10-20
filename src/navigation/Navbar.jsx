@@ -66,7 +66,7 @@ class Navbar extends Component<{}, State> {
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem tag={Link} to="/scale-harmonizer">
-                    Harmonizer
+                    Scale harmonizer
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
