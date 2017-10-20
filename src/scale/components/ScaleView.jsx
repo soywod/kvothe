@@ -49,12 +49,13 @@ class ScaleView extends Component<Props, State> {
     return (
       <div style={styles.scaleContainer}>
         <a href="#" className={`text-left no-underline text-${color || 'default'}`} onClick={this.toggleScale} style={styles.link}>
-          <i className={`fa fa-caret-${expanded ? 'down' : 'right'} icon-left`} style={styles.caret}/> 
+          <i className={`fa fa-caret-${expanded ? 'down' : 'right'} mr-2`} style={styles.caret}/> 
           {label(scale.tone.name)}
           <sub>{label(scale.tone.alt)}</sub>
           {' '}
           {label(scale.formula.id)}
         </a>
+
         {this.state.expanded &&
           <div style={styles.scale}>
             {scale.intervals.map((note, index) => (

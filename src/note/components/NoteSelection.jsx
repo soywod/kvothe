@@ -104,13 +104,13 @@ class NoteSelection extends Component<Props, State> {
 
     return (
       <div className="animated-container">
-        <p className="lead">
+        <p className="lead mb-4">
           Pick a note :
         </p>
 
-        <div className="navigation">
+        <div className="mb-4">
           <Button tag={Link} to={previous()}>
-            <i className="fa fa-arrow-left icon-left" />
+            <i className="fa fa-arrow-left mr-2" />
             Back
           </Button>
 
@@ -121,7 +121,7 @@ class NoteSelection extends Component<Props, State> {
             className="float-right"
             disabled={!note || !note.name}>
             Next
-            <i className="fa fa-arrow-right icon-right" />
+            <i className="fa fa-arrow-right ml-2" />
           </Button>
         </div>
 

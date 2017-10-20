@@ -10,7 +10,9 @@ import {
 function Home() {
   return (
     <div>
-      <h1>The composer assistant</h1>
+      <h1 className="mt-4 mb-4">
+        The composer assistant
+      </h1>
 
       <p className="lead">
         Kvothe (pronounce « quote ») is a web app that tries to help composers.

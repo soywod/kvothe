@@ -106,14 +106,15 @@ class ModesView extends Component<Props, State> {
 
     return (
       <div className="animated-container">
-        <div className="lead">
+        <div className="lead mb-4">
           Harmonization result :
         </div>
-        <div className="navigation">
+
+        <div className="mb-4">
           <Button
             tag={Link}
             to={this.props.previous()}>
-            <i className="fa fa-arrow-left icon-left" />
+            <i className="fa fa-arrow-left mr-2" />
             Back
           </Button>
         </div>
