@@ -1,65 +1,51 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require("path")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const common = {
-  entry: './src/client',
+  entry: "./src/client",
   output: {
-    path: path.join(__dirname, '..', 'dist'),
-    filename: 'js/[hash:8].js',
-    publicPath: '/'
+    path: path.join(__dirname, "..", "dist"),
+    filename: "js/[hash:8].js",
+    publicPath: "/",
   },
   resolve: {
     alias: {
-      'bootstrap': 'bootstrap/dist/css/bootstrap.min.css',
-      'font-awesome': 'font-awesome/css/font-awesome.min.css'
+      "bootstrap": "bootstrap/dist/css/bootstrap.min.css",
+      "font-awesome": "font-awesome/css/font-awesome.min.css",
     },
-    extensions: ['.js', '.jsx', '.elm']
+    extensions: [".js", ".jsx"],
   },
   module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: [/elm-stuff/, /node_modules/],
-      },
-      {
-        test: /\.elm$/,
-        exclude: [/elm-stuff/, /node_modules/],
-        loader: 'elm-webpack-loader',
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      },
-      {
-        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]'
-      },
-      {
-        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]'
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=fonts/[hash:8].[ext]'
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?name=fonts/[hash:8].[ext]'
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=fonts/[hash:8].[ext]'
-      }
-    ],
-    noParse: /\.elm$/,
+    rules: [{
+      test: /\.jsx?$/,
+      loader: "babel-loader",
+      exclude: [/elm-stuff/, /node_modules/],
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: "css-loader",
+      }),
+    }, {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]",
+    }, {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[hash:8].[ext]",
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url-loader?limit=10000&mimetype=application/octet-stream&name=fonts/[hash:8].[ext]",
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "file-loader?name=fonts/[hash:8].[ext]",
+    }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url-loader?limit=10000&mimetype=image/svg+xml&name=fonts/[hash:8].[ext]",
+    }],
   },
   plugins: [
-    new ExtractTextPlugin('css/[hash:8].css')
-  ]
-};
+    new ExtractTextPlugin("css/[hash:8].css"),
+  ],
+}
 
-module.exports = common;
+module.exports = common
