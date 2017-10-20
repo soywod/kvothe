@@ -1,7 +1,5 @@
 // @flow
 
-import {FORMULAS} from '../scale/Scale.const';
-
 const labels = {
   'A': 'A',
   'B': 'B',

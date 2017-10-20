@@ -54,32 +54,55 @@ class ModesView extends Component<Props, State> {
     }
   }
 
-  renderReferences(category: FormulaCategory, color: string) {
-    const formulaIds = formulaRepository
-      .getByCategory(category)
-      .map(f => f.id)
+  renderModes({scales, title, color, expanded} : {
+    scales: Array<?Scale>,
+    title: string,
+    color: string,
+    expanded: boolean,
+  }) {
+    if (! scales.length) {
+      return null
+    }
 
-    return this.state.modes
-      .filter(scale => scale && formulaIds.includes(scale.formula.id))
-      .map((scale, index) => {
-        if (!scale || scale.formula === this.state.scale.formula) {
-          return null
-        }
-
-        return (
-          <ListGroupItem key={index}>
-            <ScaleView
-              color={color}
-              scale={scale}
-            />
+    return (
+      <Card className="mb-4">
+        <ListGroup flush>
+          <ListGroupItem color={color}>
+            <h5>{title}</h5>
           </ListGroupItem>
-        )
-      })
-      .filter(mode => !!mode)
+
+          {scales.map((scale, index) => (scale &&
+            <ListGroupItem key={index}>
+              <ScaleView
+                color={color}
+                scale={scale}
+                expanded={expanded}
+              />
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+      </Card>
+    )
   }
 
   render() {
-    const {scale} = this.state
+    const scaleFormulaIds = formulaRepository
+      .getByCategory("scale")
+      .map(f => f.id)
+
+    const famousModes = this.state.modes
+      .filter(scale => (
+        scale &&
+        scale.formula.value !== this.state.scale.formula.value &&
+        scaleFormulaIds.includes(scale.formula.id)
+      ))
+
+    const otherModes = this.state.modes
+      .filter(scale => (
+        scale &&
+        scale.formula.value !== this.state.scale.formula.value &&
+        ! scaleFormulaIds.includes(scale.formula.id)
+      ))
 
     return (
       <div className="animated-container">
@@ -95,71 +118,29 @@ class ModesView extends Component<Props, State> {
           </Button>
         </div>
 
-        <Card style={styles.mode}>
-          <ListGroup flush>
-            <ListGroupItem color="info">
-              <h5>Current scale</h5>
-            </ListGroupItem>
+        {this.renderModes({
+          scales: [this.state.scale],
+          title: "Current scale",
+          color: "info",
+          expanded: true,
+        })}
 
-            <ListGroupItem>
-              <ScaleView
-                color="primary"
-                scale={scale}
-                expanded
-              />
-            </ListGroupItem>
-          </ListGroup>
-        </Card>
+        {this.renderModes({
+          scales: famousModes,
+          title: "Famous modes reference",
+          color: "warning",
+          expanded: false,
+        })}
 
-        <br />
-
-        <Card style={styles.mode}>
-          <ListGroup flush>
-            <ListGroupItem color="warning">
-              <h5>Famous modes reference</h5>
-            </ListGroupItem>
-
-            {this.renderReferences('scale', 'warning')}
-          </ListGroup>
-        </Card>
-
-        <br />
-
-        <Card style={styles.mode}>
-          <ListGroup flush>
-            <ListGroupItem color="danger">
-              <h5>Other modes reference</h5>
-            </ListGroupItem>
-
-            {this.renderReferences('mode', 'danger')}
-          </ListGroup>
-        </Card>
+        {this.renderModes({
+          scales: otherModes,
+          title: "Other modes reference",
+          color: "danger",
+          expanded: false,
+        })}
       </div>
     )
   }
-}
-
-const styles = {
-  container: {
-    display: 'flex',
-  },
-  mode: {
-    marginBottom: 20,
-  },
-  badge: {
-    marginRight: 5,
-  },
-  buttonGroup: {
-    width: '100%',
-    textAlign: 'left',
-    marginBottom: 30,
-  },
-  modeRef: {
-    padding: 0,
-  },
-  caretModeRef: {
-    width: 15,
-  },
 }
 
 export default ModesView

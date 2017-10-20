@@ -60,7 +60,7 @@ scenarios(
     should_get_by_value: scenario({}, parametrized2([
       [2741, 'Major'],
       [1709, 'Dorian'],
-      [0, null],
+      [0, ""],
     ], (value: number, expectedId: ?string) => {
       given()
         .a_formula_repository(repository).and()

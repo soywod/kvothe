@@ -1,6 +1,6 @@
 // @flow
 
-import {
+import _, {
   drop,
   first,
   range,
@@ -34,7 +34,7 @@ class ScaleRepository {
     formula: Formula,
   ): Scale {
     const positions = range(NB_POSITIONS)
-    const intervals = positions.map((position: number) => {
+    const rawIntervals = positions.map((position: number) => {
       const note = noteRepository.getNext(tone, position)
       const value = Math.pow(2, position)
       const doesFormulaContainValue = ((formula.value & value) === value)
@@ -42,7 +42,7 @@ class ScaleRepository {
       return doesFormulaContainValue ? note : null
     })
 
-    // TODO: optimize intervals
+    const intervals = optimize(rawIntervals)
 
     return new Scale({tone, formula, intervals})
   }
@@ -76,71 +76,99 @@ class ScaleRepository {
       return new Scale({tone, formula, intervals})
     })
   }
-
-  // getFormulaByName(name: string): ?number {
-  //   return FORMULAS[name] || null;
-  // }
-
-
-  // getScaleByName(tone: Note, name: string): ?Scale {
-  //   const formula = this.getFormulaByName(name);
-  //   if (! formula) return null;
-
-  //   return this.getScaleByFormula(tone, formula);
-  // }
-
-  // getModesFromScale(scale: Scale): ?Array<Scale|null> {
-  //   if (! scale.intervals) return null;
-
-  //   return scale.intervals.map((degree, index) => {
-  //     if (! degree && degree !== 0) return null;
-  //     if (index === 0) return scale;
-
-  //     const intervals = buildNextIntervals(scale, degree);
-  //     const notes = buildNextNotes(scale, degree);
-  //     const tone = notes && notes.length > 0
-  //       ? notes[0]
-  //       : noteRepository.getNext(scale.tone, degree);
-
-  //     const params = {
-  //       tone,
-  //       intervals,
-  //       notes,
-  //     };
-
-  //     return new Scale(params);
-  //   })
-  // }
 }
 
-// function buildNextIntervals(scale: Scale, offset: number): ?Array<number|null> {
-//   const intervals = [
-//     ...drop(scale.intervals, offset),
-//     ...take(scale.intervals, offset),
-//   ];
+function optimize(intervalsRef: Array<?Note>): Array<?Note> {
+  const maxCombinations = Math.pow(2, intervalsRef.length) + 1
+  const allIntervals = range(maxCombinations)
+    .reduce((allIntervals, intervals) => ([
+      ...allIntervals,
+      intervalsRef.map((note, index) => {
+        if (! note) {
+          return null
+        }
 
-//   return intervals.map((index: ?number) => {
-//     if (! index && index !== 0) {
-//       return null;
-//     }
+        const noteToSwap = Math.pow(2, index);
 
-//     if (! scale.intervals) {
-//       return null;
-//     }
+        return ((intervals & noteToSwap) === noteToSwap
+          ? noteRepository.getTwin(note) || note
+          : note
+        )
+      })
+    ]), [])
+    .filter(byValidAlts)
 
-//     const intervalsLength = scale.intervals.length;
+  return findBestIntervals(allIntervals, intervalsRef)
+}
 
-//     return Math.abs(index - offset + intervalsLength) % intervalsLength;
-//   });
-// }
+function byValidAlts(scale: Array<?Note>): boolean {
+  const scaleWithoutNulls = scale.filter(note => !! note)
 
-// function buildNextNotes(scale: Scale, offset: number): ?Note[] {
-//   return [
-//     ...drop(scale.notes, offset),
-//     ...take(scale.notes, offset),
-//   ];
-// }
+  for (let index = 0; index < scale.length; index ++) {
+    const noteRef = scale[index]
 
-// const scaleRepository = new ScaleRepository;
+    if (! noteRef) {
+      continue
+    }
+
+    const hasInvalidAlts = scaleWithoutNulls
+      .some(note => note && (
+        note.alt === '♭' && noteRef.alt === '♯' ||
+        note.alt === '♯' && noteRef.alt === '♭'
+      ))
+
+    if (hasInvalidAlts) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function findBestIntervals(
+  allIntervals: Array<Array<?Note>>,
+  intervalsRef: Array<?Note>
+): Array<?Note> {
+  let matchingIntervals = []
+
+  for (let intervals of allIntervals) {
+    let hasNoDuplicates = true;
+
+    const hasFirstNoteSame = (
+      intervals[0] &&
+      intervalsRef[0] &&
+      intervals[0].name === intervalsRef[0].name
+    )
+
+    for (let indexRef = 0; indexRef < intervals.length; indexRef ++) {
+      const noteRef = intervals[indexRef]
+
+      if (! noteRef) {
+        continue
+      }
+
+      const hasDuplicates = intervals
+        .some((note, index) => (!! note &&
+          note.name === noteRef.name &&
+          index !== indexRef
+        ))
+
+      if (hasDuplicates) {
+        hasNoDuplicates = false;
+        break;
+      }
+    }
+
+    if (hasFirstNoteSame && hasNoDuplicates) {
+      return intervals
+    } else if (hasNoDuplicates) {
+      matchingIntervals.unshift(intervals);
+    } else if (hasFirstNoteSame) {
+      matchingIntervals.push(intervals);
+    }
+  }
+
+  return matchingIntervals[0] || []
+}
 
 export default ScaleRepository

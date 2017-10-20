@@ -4,7 +4,8 @@ import {assign} from 'lodash'
 
 type FormulaCategory
   = 'scale'
-  | 'mode';
+  | 'mode'
+  | null
 
 type FormulaParams = {
   id: string;

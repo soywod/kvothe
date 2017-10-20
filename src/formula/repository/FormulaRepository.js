@@ -96,10 +96,16 @@ class FormulaRepository {
   }
 
   getByValue(value: number): Formula {
-    return _(this.formulas)
+    const formula = _(this.formulas)
       .filter(f => f.value === value)
       .sort(f => f.category === 'scale' ? -1 : 1)
       .first()
+
+    return formula || new Formula({
+      id: "",
+      value,
+      category: null,
+    })
   }
 
   getBySlug(slug: string): ?Formula {
